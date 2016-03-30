@@ -1,59 +1,46 @@
 package br.com.haircutter.admin.facade;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
 import br.com.haircutter.admin.endpoint.EstablishmentEndpoint;
 import br.com.haircutter.admin.facade.json.EstablishmentJson;
-import br.com.haircutter.admin.utils.LoggedUserUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/api")
 public class EstablishmentFacade {
 
-	@Autowired
-	private EstablishmentEndpoint endpoint;
+    @Autowired
+    private EstablishmentEndpoint endpoint;
 
-	@RequestMapping(value = {"/public/new-establishment-creation-request"}, method = RequestMethod.POST)
-	public ResponseEntity<?> createNewRequest(@RequestBody EstablishmentJson establishmentJson) {
+    @RequestMapping(value = {"/public/new-establishment-creation-request"}, method = RequestMethod.POST)
+    public ResponseEntity<?> createNewRequest(@RequestBody EstablishmentJson establishmentJson) {
 
-		return ResponseEntity.ok(endpoint.createNewRequest(establishmentJson));
-	}
+        return ResponseEntity.ok(endpoint.createNewRequest(establishmentJson));
+    }
 
-	@RequestMapping(value = {"/moderator/establishment-creation-requests"}, method = RequestMethod.GET)
-	public ResponseEntity<?> creationRequests() {
-		
-		return ResponseEntity.ok(endpoint.getCreationRequests());
-	}
+    @RequestMapping(value = {"/moderator/establishment-creation-requests"}, method = RequestMethod.GET)
+    public ResponseEntity<?> creationRequests() {
 
-	@RequestMapping(value = {"/moderator/establishment-creation-request/{cnpj}"}, method = RequestMethod.GET)
-	public ResponseEntity<?> creationRequest(@PathVariable("cnpj") String cnpj) {
+        return ResponseEntity.ok(endpoint.getCreationRequests());
+    }
 
-		return ResponseEntity.ok(endpoint.getCreationRequest(cnpj));
-	}
+    @RequestMapping(value = {"/moderator/establishment-creation-request/{cnpj}"}, method = RequestMethod.GET)
+    public ResponseEntity<?> creationRequest(@PathVariable("cnpj") String cnpj) {
 
-	@RequestMapping(value = "/moderator/approve-establishment-creation-request/{cnpj}", method = RequestMethod.PUT)
-	public ResponseEntity<?> approveCreationRequest(@PathVariable("cnpj") String cnpj) {
+        return ResponseEntity.ok(endpoint.getCreationRequest(cnpj));
+    }
 
-		return ResponseEntity.ok(endpoint.approveCreationRequest(cnpj));
-	}
+    @RequestMapping(value = "/moderator/approve-establishment-creation-request/{cnpj}", method = RequestMethod.PUT)
+    public ResponseEntity<?> approveCreationRequest(@PathVariable("cnpj") String cnpj) {
 
-	@RequestMapping(value = "/moderator/deny-establishment-creation-request/{cnpj}", method = RequestMethod.PUT)
-	public ResponseEntity<?> denyCreationRequest(@PathVariable("cnpj") String cnpj) {
+        return ResponseEntity.ok(endpoint.approveCreationRequest(cnpj));
+    }
 
-		return ResponseEntity.ok(endpoint.denyCreationRequest(cnpj));
-	}
-	
-	@RequestMapping(value = {"/establishment-admin/establishment-audit-logs"}, method = RequestMethod.GET)
-	public ResponseEntity<?> getAuditLogsByCnpj() {
-		
-		String cnpj = LoggedUserUtils.getLoggedUserUsername();
-		
-		return ResponseEntity.ok(endpoint.getAuditLogsByCnpj(cnpj));
-	}
+    @RequestMapping(value = "/moderator/deny-establishment-creation-request/{cnpj}", method = RequestMethod.PUT)
+    public ResponseEntity<?> denyCreationRequest(@PathVariable("cnpj") String cnpj) {
+
+        return ResponseEntity.ok(endpoint.denyCreationRequest(cnpj));
+    }
+
 }

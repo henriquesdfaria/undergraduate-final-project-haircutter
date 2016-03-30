@@ -16,10 +16,10 @@ establishmentAdminControllers.controller('Controller', ['$scope', '$http', '$loc
       });
     }
 
-    $scope.getAuditLogs = function (cnpj) {
+    $scope.getAuditLogs = function () {
       $http({
         method: 'GET',
-        url: '/api/establishment-admin/establishment-audit-logs',
+        url: '/api/establishment-admin/establishment-audit-log/audit-logs',
       }).success(function(data) {
         $scope.auditLogs = data;
       });

@@ -95,13 +95,4 @@ public class EstablishmentFacade {
 		return Response.ok(responseBody).build();
 	}
 
-	@GET
-	@Path("audit-logs/{cnpj}")
-	public Response getAuditLogsByCnpj(@PathParam("cnpj") String cnpj) {
-
-		List<EstablishmentAuditLog> responseBody = service.getAuditLogsByCnpj(cnpj);
-
-		return Response.ok(responseBody).build();
-	}
-
 }

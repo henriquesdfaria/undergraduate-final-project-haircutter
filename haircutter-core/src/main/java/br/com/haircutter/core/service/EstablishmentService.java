@@ -17,6 +17,4 @@ public interface EstablishmentService {
     
     Establishment denyCreationRequest(String cnpj);
 
-	List<EstablishmentAuditLog> getAuditLogsByCnpj(String cnpj);
-
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- ESTABLISHMENT EMPLOYEE TABLE -->
+    <changeSet author="henrique" id="1">
+        <createTable tableName="establishment_employee">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="establishment_cnpj" type="VARCHAR(14)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creation_time" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_date" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="establishment_employee_establishment_fk"
+                                 referencedTableName="establishment" baseColumnNames="establishment_cnpj"
+                                 baseTableName="establishment_employee" referencedColumnNames="cnpj"/>
+
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="establishment_employee"
+                                      constraintName="establishment_employee_establishment_fk"/>
+            <dropTable tableName="establishment_employee"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

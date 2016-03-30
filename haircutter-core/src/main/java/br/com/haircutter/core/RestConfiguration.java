@@ -1,19 +1,19 @@
 package br.com.haircutter.core;
 
-import javax.ws.rs.ApplicationPath;
-
+import br.com.haircutter.core.facade.EstablishmentAuditLogFacade;
+import br.com.haircutter.core.facade.EstablishmentFacade;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.context.annotation.Configuration;
 
-import br.com.haircutter.core.facade.EstablishmentFacade;
+import javax.ws.rs.ApplicationPath;
 
 @Configuration
 @ApplicationPath("/api")
 public class RestConfiguration extends ResourceConfig {
 
-	public RestConfiguration() {
-		register(EstablishmentFacade.class);
-
-	}
+    public RestConfiguration() {
+        register(EstablishmentFacade.class);
+        register(EstablishmentAuditLogFacade.class);
+    }
 
 }
