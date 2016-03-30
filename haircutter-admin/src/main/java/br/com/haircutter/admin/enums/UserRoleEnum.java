@@ -1,0 +1,5 @@
+package br.com.haircutter.admin.enums;
+
+public enum UserRoleEnum {
+    ROLE_CLIENT, ROLE_MODERATOR, ROLE_ESTABLISHMENT_ADMIN, ROLE_PROFFESSIONAL, ROLE_MANAGER, ROLE_ATTENDANT
+}

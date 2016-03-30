@@ -1,0 +1,54 @@
+<div ng-include="'/establishment-admin/partials/menu.html'"></div>
+<div class="col-sm-9 page-content">
+  <div class="inner-box">
+    <h2 class="title-2">
+      <i class="icon-hourglass"></i>
+      Logs De Auditoria
+    </h2>
+    
+    <label>Pesquisar: <input ng-model="searchText"></label>
+
+    <div class="table-responsive">
+      <table id="addManageTable" class="table table-striped table-bordered add-manage-table table demo footable-loaded footable" data-filter="#filter" data-filter-text-only="true">
+        <thead>
+          <tr>
+            <th data-sort-ignore="true">
+              Autor
+            </th>
+            <th data-type="numeric">
+              Ação
+            </th>
+            <th>
+              Data
+            </th>
+          </tr>
+        </thead>
+        <tbody ng-repeat="al in auditLogs | filter:searchText">
+          <tr>
+            <td style="width:20%" class="ads-details-td">
+              <div>
+                <p>
+                  {{al.author}}
+                </p>
+              </div>
+            </td>
+            <td style="width:50%" class="ads-details-td">
+              <div>
+                <p>
+                  {{al.action}}
+                </p>
+              </div>
+            </td>
+            <td style="width:25%" class="action-td">
+              <div>
+                <p>
+                  {{al.date}}
+                </p>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

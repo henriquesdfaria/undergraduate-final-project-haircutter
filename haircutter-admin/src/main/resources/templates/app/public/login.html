@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Haircutter</title>
+    <!-- vandors css -->
+    <link rel="stylesheet" href="/vendors/bower_components/bootstrap/dist/css/bootstrap.min.css"></link>
+
+    <!-- application css -->
+    <link rel="stylesheet" href="/vendors/assets/css/style.css"></link>
+
+    <!-- angular and jquery resources -->
+    <script src="/vendors/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/vendors/bower_components/angular/angular.min.js"></script>
+    <script src="/vendors/bower_components/angular-route/angular-route.js"></script>
+    <script src="/vendors/bower_components/angular-resource/angular-resource.js"></script>
+
+    <!-- masks -->
+    <script src="/vendors/bower_components/angular-input-masks/angular-input-masks-standalone.min.js"></script>
+
+    <!-- validators -->
+    <script src="/vendors/bower_components/cpf_cnpj/build/cpf.js"></script>
+    <script src="/vendors/bower_components/cpf_cnpj/build/cnpj.js"></script>
+    <script src="/vendors/bower_components/ng-cpf-cnpj/lib/ngCpfCnpj.js"></script>
+
+    <!-- application js -->
+    <script src="/public/js/app.js"></script>
+    <script src="/public/js/controllers.js"></script>
+  </head>
+  <body ng-controller="Controller" class="pace-done">
+
+    <div id="wrapper">
+
+      <!-- Start Header -->
+      <div class="header">
+        <nav class="navbar   navbar-site navbar-default" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a href="/" class="navbar-brand logo logo-title">
+
+                <span class="logo-icon">
+                  <i class="fa fa-scissors ln-shadow-logo shape-0"></i>
+                </span>
+                HAIR<span>CUTTER
+                </span>
+              </a>
+            </div>
+            <div class="navbar-collapse collapse">
+              <ul class="nav navbar-nav navbar-right">
+                <li>
+                  <a href="/login">Entrar</a>
+                </li>
+                <li>
+                  <a href="#">Registrar</a>
+                </li>
+
+              </ul>
+            </div>
+
+          </div>
+
+        </nav>
+      </div>
+      <!-- End Header -->
+      <div class="main-container container">
+        <div class="col-sm-5 login-box">
+          <div class="panel panel-default">
+            <div class="panel-intro text-center">
+              <h2 class="logo-title">
+
+                <span class="logo-icon">
+                  <i class="fa fa-scissors ln-shadow-logo shape-0"></i>
+                </span>
+                HAIR<span>CUTTER
+                </span>
+              </h2>
+            </div>
+            <div class="panel-body">
+              <form th:action="@{/login}" method="post" role="form">
+                <div class="form-group">
+                  <label for="sender-email" class="control-label">Usuário:</label>
+                  <div class="input-icon">
+                    <i class="icon-user fa"></i>
+                    <input id="username" type="text" name="username" placeholder="Usuário" class="form-control email"></input>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="user-pass" class="control-label">Senha:</label>
+                  <div class="input-icon">
+                    <i class="icon-lock fa"></i>
+                    <input id="password" type="password" name="password" class="form-control" placeholder="Senha"></input>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input type="submit" class="btn btn-primary  btn-block" value="Entrar"></input>
+                </div>
+              </form>
+            </div>
+            <div class="panel-footer">
+              <div style=" clear:both"></div>
+              <div th:if="${param.error}">
+                Usuário ou Senha inválidos.
+              </div>
+              <div th:if="${param.logout}">
+                Você realizou logout.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Start Footer -->
+      <div class="footer" id="footer">
+        <div class="container">
+          <ul class=" pull-left navbar-link footer-nav">
+            <li>
+              <a href="#">
+                Início
+              </a>
+              <a href="#">
+                Sobre Nós
+              </a>
+              <a href="#">
+                Termos e Condições
+              </a>
+              <a href="#">
+                Política de Privacidade
+              </a>
+              <a href="#">
+                Contato
+              </a>
+              <a href="#">
+                FAQ
+              </a>
+            </li>
+          </ul>
+          <ul class=" pull-right navbar-link footer-nav">
+            <li>
+              © 2016 Haircutter
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- End Footer -->
+    </div>
+  </body>
+</html>

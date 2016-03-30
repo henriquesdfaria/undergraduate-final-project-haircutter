@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/base.xml" />
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
+			by default -->
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="JSON-FORMATTER-STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
+			<jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
+				<prettyPrint>true</prettyPrint>
+			</jsonFormatter>
+			<timestampFormat>yyyy-MM-dd HH:mm:ss</timestampFormat>
+		</layout>
+
+	</appender>
+
+	<appender name="JSON-STASH-FORMATTER-FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>info</level>
+		</filter>
+		<file>logs/haircutter-core/logFile.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>logs/haircutter-core/log-%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder
+			class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp />
+				<message />
+				<arguments />
+			</providers>
+		</encoder>
+	</appender>
+
+	<logger name="br.com.haircutter.core" level="DEBUG">
+		<appender-ref ref="JSON-FORMATTER-STDOUT" />
+	</logger>
+
+
+	<!-- Setting the root level of logging to INFO -->
+	<root level="INFO">
+		<appender-ref ref="JSON-STASH-FORMATTER-FILE" />
+	</root>
+
+
+</configuration>
