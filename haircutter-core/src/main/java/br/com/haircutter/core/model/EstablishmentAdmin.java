@@ -1,13 +1,8 @@
 package br.com.haircutter.core.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
 @Table(name = "establishment_admin")
@@ -23,19 +18,31 @@ public class EstablishmentAdmin implements Serializable {
 	@Column(name = "establishment_cnpj")
 	private String establishmentCnpj;
 
-	@Column(name = "username")
-	private String username;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "username", referencedColumnName = "username")
+    private User user;
+
+    @Column(name = "creation_time")
+    private Date creationTime;
+
+    @Column(name = "last_modified_date")
+    private Date lastModifiedDate;
+
+    @Column(name = "deleted")
+    private Boolean deleted;
 
 	public EstablishmentAdmin() {
 
 	}
 
-	public EstablishmentAdmin(Long id, String establishmentCnpj, String username) {
-		super();
-		this.id = id;
-		this.establishmentCnpj = establishmentCnpj;
-		this.username = username;
-	}
+    public EstablishmentAdmin(String establishmentCnpj, User user, Date creationTime, Date lastModifiedDate,
+                              Boolean deleted) {
+        this.establishmentCnpj = establishmentCnpj;
+        this.user = user;
+        this.creationTime = creationTime;
+        this.lastModifiedDate = lastModifiedDate;
+        this.deleted = deleted;
+    }
 
 	public Long getId() {
 		return id;
@@ -53,16 +60,35 @@ public class EstablishmentAdmin implements Serializable {
 		this.establishmentCnpj = establishmentCnpj;
 	}
 
-	public String getUsername() {
-		return username;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+    public Date getCreationTime() {
+        return creationTime;
+    }
 
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public Date getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public void setLastModifiedDate(Date lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
+
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
+    }
 }

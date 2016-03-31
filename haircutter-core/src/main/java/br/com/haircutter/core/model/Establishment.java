@@ -1,185 +1,175 @@
 package br.com.haircutter.core.model;
 
-import java.io.Serializable;
-import java.util.Date;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 import br.com.haircutter.core.enums.EstablishmentStatusEnum;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "establishment")
 public class Establishment implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "cnpj")
-	private String cnpj;
+    @Id
+    @Column(name = "cnpj")
+    private String cnpj;
 
-	@Column(name = "name")
-	private String name;
+    @Column(name = "name")
+    private String name;
 
-	@Column(name = "description")
-	private String description;
+    @Column(name = "description")
+    private String description;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "address_id", referencedColumnName = "id")
-	private Address address;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
 
-	@Column(name = "phone")
-	private String phone;
+    @Column(name = "phone")
+    private String phone;
 
-	@Enumerated(EnumType.STRING)
-	@Column(name = "status")
-	private EstablishmentStatusEnum status;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private EstablishmentStatusEnum status;
 
-	@Column(name = "owner_name")
-	private String ownerName;
+    @Column(name = "owner_name")
+    private String ownerName;
 
-	@Column(name = "owner_cpf")
-	private String ownerCpf;
+    @Column(name = "owner_cpf")
+    private String ownerCpf;
 
-	@Column(name = "owner_email")
-	private String ownerEmail;
+    @Column(name = "owner_email")
+    private String ownerEmail;
 
-	@Column(name = "owner_phone")
-	private String ownerPhone;
+    @Column(name = "owner_phone")
+    private String ownerPhone;
 
-	@Column(name = "creation_time")
-	private Date creationTime;
+    @Column(name = "creation_time")
+    private Date creationTime;
 
-	@Column(name = "last_modified_date")
-	private Date lastModifiedDate;
+    @Column(name = "last_modified_date")
+    private Date lastModifiedDate;
 
-	public Establishment() {
+    public Establishment() {
 
-	}
+    }
 
-	public Establishment(String cnpj, String name, String description, Address address, String phone,
-			EstablishmentStatusEnum status, String ownerName, String ownerCpf, String ownerEmail, String ownerPhone,
-			Date creationTime, Date lastModifiedDate) {
-		super();
-		this.cnpj = cnpj;
-		this.name = name;
-		this.description = description;
-		this.address = address;
-		this.phone = phone;
-		this.status = status;
-		this.ownerName = ownerName;
-		this.ownerCpf = ownerCpf;
-		this.ownerEmail = ownerEmail;
-		this.ownerPhone = ownerPhone;
-		this.creationTime = creationTime;
-		this.lastModifiedDate = lastModifiedDate;
-	}
+    public Establishment(String cnpj, String name, String description, Address address, String phone,
+                         EstablishmentStatusEnum status, String ownerName, String ownerCpf, String ownerEmail,
+                         String ownerPhone, Date creationTime, Date lastModifiedDate) {
+        this.cnpj = cnpj;
+        this.name = name;
+        this.description = description;
+        this.address = address;
+        this.phone = phone;
+        this.status = status;
+        this.ownerName = ownerName;
+        this.ownerCpf = ownerCpf;
+        this.ownerEmail = ownerEmail;
+        this.ownerPhone = ownerPhone;
+        this.creationTime = creationTime;
+        this.lastModifiedDate = lastModifiedDate;
+    }
 
-	public String getCnpj() {
-		return cnpj;
-	}
+    public EstablishmentStatusEnum getStatus() {
+        return status;
+    }
 
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
+    public void setStatus(EstablishmentStatusEnum status) {
+        this.status = status;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getCnpj() {
+        return cnpj;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public Address getAddress() {
-		return address;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setAddress(Address address) {
-		this.address = address;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public String getPhone() {
-		return phone;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    public Address getAddress() {
+        return address;
+    }
 
-	public EstablishmentStatusEnum getStatus() {
-		return status;
-	}
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
-	public void setStatus(EstablishmentStatusEnum status) {
-		this.status = status;
-	}
+    public String getPhone() {
+        return phone;
+    }
 
-	public String getOwnerName() {
-		return ownerName;
-	}
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-	public void setOwnerName(String ownerName) {
-		this.ownerName = ownerName;
-	}
+    public String getOwnerName() {
+        return ownerName;
+    }
 
-	public String getOwnerCpf() {
-		return ownerCpf;
-	}
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
 
-	public void setOwnerCpf(String ownerCpf) {
-		this.ownerCpf = ownerCpf;
-	}
+    public String getOwnerCpf() {
+        return ownerCpf;
+    }
 
-	public String getOwnerEmail() {
-		return ownerEmail;
-	}
+    public void setOwnerCpf(String ownerCpf) {
+        this.ownerCpf = ownerCpf;
+    }
 
-	public void setOwnerEmail(String ownerEmail) {
-		this.ownerEmail = ownerEmail;
-	}
+    public String getOwnerEmail() {
+        return ownerEmail;
+    }
 
-	public String getOwnerPhone() {
-		return ownerPhone;
-	}
+    public void setOwnerEmail(String ownerEmail) {
+        this.ownerEmail = ownerEmail;
+    }
 
-	public void setOwnerPhone(String ownerPhone) {
-		this.ownerPhone = ownerPhone;
-	}
+    public String getOwnerPhone() {
+        return ownerPhone;
+    }
 
-	public Date getCreationTime() {
-		return creationTime;
-	}
+    public void setOwnerPhone(String ownerPhone) {
+        this.ownerPhone = ownerPhone;
+    }
 
-	public void setCreationTime(Date creationTime) {
-		this.creationTime = creationTime;
-	}
+    public Date getCreationTime() {
+        return creationTime;
+    }
 
-	public Date getLastModifiedDate() {
-		return lastModifiedDate;
-	}
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
 
-	public void setLastModifiedDate(Date lastModifiedDate) {
-		this.lastModifiedDate = lastModifiedDate;
-	}
+    public Date getLastModifiedDate() {
+        return lastModifiedDate;
+    }
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
+    public void setLastModifiedDate(Date lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
 }

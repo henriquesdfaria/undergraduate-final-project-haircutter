@@ -1,25 +1,16 @@
 package br.com.haircutter.core.facade;
 
-import java.util.List;
-
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Response;
-
+import br.com.haircutter.core.model.Establishment;
+import br.com.haircutter.core.service.EstablishmentService;
+import net.logstash.logback.argument.StructuredArguments;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.haircutter.core.model.Establishment;
-import br.com.haircutter.core.model.EstablishmentAuditLog;
-import br.com.haircutter.core.service.EstablishmentService;
-import net.logstash.logback.argument.StructuredArguments;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Component
 @Path("/establishment")
@@ -71,13 +62,13 @@ public class EstablishmentFacade {
 
 		LOGGER.info("Started - Approve Creation Request",
 				StructuredArguments.value("payload", cnpj));
-		
-		Establishment responseBody = service.approveCreationRequest(cnpj);
+
+		service.approveCreationRequest(cnpj);
 		
 		LOGGER.info("Ended - Approve Creation Request",
-				StructuredArguments.value("payload", responseBody));
+				StructuredArguments.value("payload", null));
 
-		return Response.ok(responseBody).build();
+		return Response.ok().build();
 	}
 
 	@PUT
@@ -86,13 +77,13 @@ public class EstablishmentFacade {
 
 		LOGGER.info("Started - Deny Creation Request",
 				StructuredArguments.value("payload", cnpj));
-		
-		Establishment responseBody = service.denyCreationRequest(cnpj);
+
+		service.denyCreationRequest(cnpj);
 		
 		LOGGER.info("Ended - Deny Creation Request",
-				StructuredArguments.value("payload", responseBody));
+				StructuredArguments.value("payload", null));
 
-		return Response.ok(responseBody).build();
+		return Response.ok().build();
 	}
 
 }

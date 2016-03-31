@@ -1,150 +1,160 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-	<!-- ADDRESS TABLE -->
-	<changeSet author="henrique" id="1">
-		<createTable tableName="address">
-			<column name="id" type="BIGINT" autoIncrement="true">
-				<constraints nullable="false" primaryKey="true" />
-			</column>
-			<column name="street" type="VARCHAR(255)">
-				<constraints nullable="false" />
-			</column>
-			<column name="neighborhood" type="VARCHAR(80)">
-				<constraints nullable="false" />
-			</column>
-			<column name="city" type="VARCHAR(20)">
-				<constraints nullable="false" />
-			</column>
-			<column name="state" type="VARCHAR(20)">
-				<constraints nullable="false" />
-			</column>
-			<column name="country" type="VARCHAR(20)">
-				<constraints nullable="false" />
-			</column>
-			<column name="zip_code" type="VARCHAR(20)">
-				<constraints nullable="false" />
-			</column>
-		</createTable>
+    <!-- ADDRESS TABLE -->
+    <changeSet author="henrique" id="1">
+        <createTable tableName="address">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="street" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="neighborhood" type="VARCHAR(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="city" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="state" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="country" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="zip_code" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
 
-		<rollback>
-			<dropTable tableName="address" />
-		</rollback>
-	</changeSet>
+        <rollback>
+            <dropTable tableName="address"/>
+        </rollback>
+    </changeSet>
 
-	<!-- ESTABLISHMENT TABLE -->
-	<changeSet author="henrique" id="2">
-		<createTable tableName="establishment">
-			<column name="cnpj" type="VARCHAR(14)">
-				<constraints nullable="false" primaryKey="true" />
-			</column>
-			<column name="name" type="VARCHAR(255)">
-				<constraints nullable="false" />
-			</column>
-			<column name="description" type="VARCHAR(355)">
-				<constraints nullable="false" />
-			</column>
-			<column name="address_id" type="BIGINT">
-				<constraints nullable="false" />
-			</column>
-			<column name="phone" type="VARCHAR(20)">
-				<constraints nullable="false" />
-			</column>
-			<column name="status" type="VARCHAR(25)">
-				<constraints nullable="false" />
-			</column>
-			<column name="owner_name" type="VARCHAR(255)">
-				<constraints nullable="false" />
-			</column>
-			<column name="owner_cpf" type="VARCHAR(11)">
-				<constraints nullable="false" />
-			</column>
-			<column name="owner_email" type="VARCHAR(80)">
-				<constraints nullable="false" />
-			</column>
-			<column name="owner_phone" type="VARCHAR(20)">
-				<constraints nullable="false" />
-			</column>
-			<column name="creation_time" type="DATETIME">
-				<constraints nullable="false" />
-			</column>
-			<column name="last_modified_date" type="DATETIME">
-				<constraints nullable="false" />
-			</column>
-		</createTable>
-		<addForeignKeyConstraint constraintName="establishment_address_fk"
-			referencedTableName="address" baseColumnNames="address_id"
-			baseTableName="establishment" referencedColumnNames="id" />
+    <!-- ESTABLISHMENT TABLE -->
+    <changeSet author="henrique" id="2">
+        <createTable tableName="establishment">
+            <column name="cnpj" type="VARCHAR(14)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(355)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="owner_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="owner_cpf" type="VARCHAR(11)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="owner_email" type="VARCHAR(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="owner_phone" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creation_time" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_date" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint constraintName="establishment_address_fk"
+                                 referencedTableName="address" baseColumnNames="address_id"
+                                 baseTableName="establishment" referencedColumnNames="id"/>
 
-		<rollback>
-			<dropForeignKeyConstraint baseTableName="establishment"
-				constraintName="establishment_address_fk" />
-			<dropTable tableName="establishment" />
-		</rollback>
-	</changeSet>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="establishment"
+                                      constraintName="establishment_address_fk"/>
+            <dropTable tableName="establishment"/>
+        </rollback>
+    </changeSet>
 
-	<!-- ESTABLISHMENT_ADMIN TABLE -->
-	<changeSet author="henrique" id="3">
-		<createTable tableName="establishment_admin">
-			<column name="id" type="BIGINT" autoIncrement="true">
-				<constraints nullable="false" primaryKey="true" />
-			</column>
-			<column name="establishment_cnpj" type="VARCHAR(14)">
-				<constraints nullable="false" />
-			</column>
-			<column name="username" type="VARCHAR(255)">
-				<constraints nullable="false" />
-			</column>
-		</createTable>
+    <!-- ESTABLISHMENT_ADMIN TABLE -->
+    <changeSet author="henrique" id="3">
+        <createTable tableName="establishment_admin">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="establishment_cnpj" type="VARCHAR(14)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creation_time" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_date" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="deleted" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
 
-		<addForeignKeyConstraint constraintName="establishment_admin_user_fk"
-			referencedTableName="user" baseColumnNames="username" baseTableName="establishment_admin"
-			referencedColumnNames="username" />
+        <addForeignKeyConstraint constraintName="establishment_admin_user_fk"
+                                 referencedTableName="user" baseColumnNames="username"
+                                 baseTableName="establishment_admin"
+                                 referencedColumnNames="username"/>
 
-		<addForeignKeyConstraint constraintName="establishment_admin_establishment_fk"
-			referencedTableName="establishment" baseColumnNames="establishment_cnpj"
-			baseTableName="establishment_admin" referencedColumnNames="cnpj" />
+        <addForeignKeyConstraint constraintName="establishment_admin_establishment_fk"
+                                 referencedTableName="establishment" baseColumnNames="establishment_cnpj"
+                                 baseTableName="establishment_admin" referencedColumnNames="cnpj"/>
 
-		<rollback>
-			<dropForeignKeyConstraint baseTableName="establishment_admin"
-				constraintName="establishment_admin_user_fk" />
-			<dropForeignKeyConstraint baseTableName="establishment_admin"
-				constraintName="establishment_admin_establishment_fk" />
-			<dropTable tableName="establishment_admin" />
-		</rollback>
-	</changeSet>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="establishment_admin"
+                                      constraintName="establishment_admin_user_fk"/>
+            <dropForeignKeyConstraint baseTableName="establishment_admin"
+                                      constraintName="establishment_admin_establishment_fk"/>
+            <dropTable tableName="establishment_admin"/>
+        </rollback>
+    </changeSet>
 
-	<changeSet author="giovanni" id="4">
-		<createTable tableName="establishment_audit_log">
-			<column name="id" type="BIGINT" autoIncrement="true">
-				<constraints nullable="false" primaryKey="true" />
-			</column>
-			<column name="establishment_cnpj" type="VARCHAR(14)">
-				<constraints nullable="false" />
-			</column>
-			<column name="author" type="VARCHAR(50)">
-				<constraints nullable="false" />
-			</column>
-			<column name="action" type="VARCHAR(50)">
-				<constraints nullable="false" />
-			</column>
-			<column name="date" type="DATETIME">
-				<constraints nullable="false" />
-			</column>
-		</createTable>
+    <changeSet author="giovanni" id="4">
+        <createTable tableName="establishment_audit_log">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="establishment_cnpj" type="VARCHAR(14)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="action" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
 
-		<addForeignKeyConstraint constraintName="establishment_audit_log_establishment_fk"
-			baseTableName="establishment_audit_log" baseColumnNames="establishment_cnpj"
-			referencedTableName="establishment" referencedColumnNames="cnpj" />
+        <addForeignKeyConstraint constraintName="establishment_audit_log_establishment_fk"
+                                 baseTableName="establishment_audit_log" baseColumnNames="establishment_cnpj"
+                                 referencedTableName="establishment" referencedColumnNames="cnpj"/>
 
-		<rollback>
-			<dropForeignKeyConstraint baseTableName="establishment_audit_log"
-				constraintName="establishment_audit_log_establishment_fk" />
-			<dropTable tableName="establishment_audit_log" />
-		</rollback>
-	</changeSet>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="establishment_audit_log"
+                                      constraintName="establishment_audit_log_establishment_fk"/>
+            <dropTable tableName="establishment_audit_log"/>
+        </rollback>
+    </changeSet>
 
 </databaseChangeLog>

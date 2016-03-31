@@ -3,14 +3,12 @@ package br.com.haircutter.core.service.impl;
 import br.com.haircutter.core.model.EstablishmentAuditLog;
 import br.com.haircutter.core.model.repository.EstablishmentAuditLogRespository;
 import br.com.haircutter.core.service.EstablishmentAuditLogService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service
 public class EstablishmentAuditLogServiceImpl implements EstablishmentAuditLogService {
 
     @Autowired
