@@ -2,11 +2,10 @@ package br.com.haircutter.core.service.impl;
 
 
 import br.com.haircutter.core.enums.EstablishmentStatusEnum;
-import br.com.haircutter.core.exception.CustomInvalidException;
 import br.com.haircutter.core.model.Establishment;
 import br.com.haircutter.core.model.repository.EstablishmentRespository;
 import br.com.haircutter.core.service.EstablishmentAdminService;
-import br.com.haircutter.core.service.EstablishmentService;
+import br.com.haircutter.core.service.EstablishmentCreationRequestService;
 import br.com.haircutter.core.utils.HaircutterMailSender;
 import br.com.haircutter.core.validator.EstablishmentServiceValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class EstablishmentServiceImpl implements EstablishmentService {
+public class EstablishmentCreationRequestServiceImpl implements EstablishmentCreationRequestService {
 
     @Autowired
     private EstablishmentRespository establishmentRepository;
@@ -32,7 +31,7 @@ public class EstablishmentServiceImpl implements EstablishmentService {
     private EstablishmentAdminService establishmentAdminService;
 
     @Override
-    public Establishment createNewRequest(final Establishment establishment) {
+    public Establishment create(final Establishment establishment) {
 
         validator.validateNewCreationRequest(establishment);
 
@@ -49,7 +48,7 @@ public class EstablishmentServiceImpl implements EstablishmentService {
     }
 
     @Override
-    public List<Establishment> getCreationRequests() {
+    public List<Establishment> getAll() {
 
         establishmentRepository.findByStatus(EstablishmentStatusEnum.WAITING);
 
@@ -57,21 +56,7 @@ public class EstablishmentServiceImpl implements EstablishmentService {
     }
 
     @Override
-    public Establishment getCreationRequestByCnpj(final String cnpj) {
-
-        Establishment creationRequest;
-
-        try {
-            creationRequest = establishmentRepository.findOneByCnpj(cnpj);
-        } catch (Exception e) {
-            throw new CustomInvalidException(e.getMessage(), "id");
-        }
-
-        return creationRequest;
-    }
-
-    @Override
-    public void approveCreationRequest(final String cnpj) {
+    public void approve(final String cnpj) {
 
         final Establishment creationRequest = establishmentRepository.findOneByCnpj(cnpj);
 
@@ -86,7 +71,7 @@ public class EstablishmentServiceImpl implements EstablishmentService {
     }
 
     @Override
-    public void denyCreationRequest(final String cnpj) {
+    public void deny(final String cnpj) {
 
         Establishment creationRequest = establishmentRepository.findOneByCnpj(cnpj);
 

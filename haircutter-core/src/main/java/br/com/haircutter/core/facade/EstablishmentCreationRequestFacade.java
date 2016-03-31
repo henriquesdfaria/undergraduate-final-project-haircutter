@@ -1,7 +1,7 @@
 package br.com.haircutter.core.facade;
 
 import br.com.haircutter.core.model.Establishment;
-import br.com.haircutter.core.service.EstablishmentService;
+import br.com.haircutter.core.service.EstablishmentCreationRequestService;
 import net.logstash.logback.argument.StructuredArguments;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +21,7 @@ public class EstablishmentCreationRequestFacade {
 	Logger LOGGER = LoggerFactory.getLogger(EstablishmentCreationRequestFacade.class);
 
 	@Autowired
-	EstablishmentService service;
+	EstablishmentCreationRequestService service;
 
 	@POST
 	@Path("/creation-request")
@@ -30,7 +30,7 @@ public class EstablishmentCreationRequestFacade {
 		LOGGER.info("Started - New Establishment Creation Request",
 				StructuredArguments.value("payload", establishment));
 
-		Establishment responseBody = service.createNewRequest(establishment);
+		Establishment responseBody = service.create(establishment);
 
 		LOGGER.info("Ended - New Establishment Creation Request",
 				StructuredArguments.value("payload", responseBody));
@@ -42,7 +42,7 @@ public class EstablishmentCreationRequestFacade {
 	@Path("/creation-requests")
 	public Response getAll() {
 
-		List<Establishment> responseBody = service.getCreationRequests();
+		List<Establishment> responseBody = service.getAll();
 
 		return Response.ok(responseBody).build();
 	}
@@ -54,7 +54,7 @@ public class EstablishmentCreationRequestFacade {
 		LOGGER.info("Started - Approve Creation Request",
 				StructuredArguments.value("payload", cnpj));
 
-		service.approveCreationRequest(cnpj);
+		service.approve(cnpj);
 		
 		LOGGER.info("Ended - Approve Creation Request",
 				StructuredArguments.value("payload", null));
@@ -69,7 +69,7 @@ public class EstablishmentCreationRequestFacade {
 		LOGGER.info("Started - Deny Creation Request",
 				StructuredArguments.value("payload", cnpj));
 
-		service.denyCreationRequest(cnpj);
+		service.deny(cnpj);
 		
 		LOGGER.info("Ended - Deny Creation Request",
 				StructuredArguments.value("payload", null));
