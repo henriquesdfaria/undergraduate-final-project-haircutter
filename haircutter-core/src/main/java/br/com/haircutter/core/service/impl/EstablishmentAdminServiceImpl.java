@@ -50,7 +50,7 @@ public class EstablishmentAdminServiceImpl implements EstablishmentAdminService 
 
         String text = "Olá " + user.getName() + ",\n\n"
                 + "Seu estabelecimento foi aprovado!\n\n" + "Usuário: " + user.getUsername() + "\n\n"
-                + "Senha: " + user.getPassword() + "\n\n" + "Seja bem-vindo!\n\nEquipe Haircutter";
+                + "Senha: " + user.getPassword() + "\n\n\n\nEquipe Haircutter";
 
         haircutterMailSender.sendEmail(ownerEmail, subject, text);
     }
