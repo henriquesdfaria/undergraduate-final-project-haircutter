@@ -5,6 +5,7 @@ import br.com.haircutter.core.enums.EstablishmentStatusEnum;
 import br.com.haircutter.core.model.Establishment;
 import br.com.haircutter.core.model.repository.EstablishmentRespository;
 import br.com.haircutter.core.service.EstablishmentAdminService;
+import br.com.haircutter.core.service.EstablishmentAuditLogService;
 import br.com.haircutter.core.service.EstablishmentCreationRequestService;
 import br.com.haircutter.core.utils.HaircutterMailSender;
 import br.com.haircutter.core.validator.EstablishmentCreationRequestServiceValidator;
@@ -30,6 +31,9 @@ public class EstablishmentCreationRequestServiceImpl implements EstablishmentCre
     @Autowired
     private EstablishmentAdminService establishmentAdminService;
 
+    @Autowired
+    private EstablishmentAuditLogService establishmentAuditLogService;
+
     @Override
     public Establishment create(final Establishment establishment) {
 
@@ -42,6 +46,9 @@ public class EstablishmentCreationRequestServiceImpl implements EstablishmentCre
         Establishment createdRequest = establishmentRepository.save(establishment);
 
         sendCreationRequestEmail(createdRequest);
+
+        establishmentAuditLogService.registerLog(createdRequest.getCnpj(), createdRequest.getOwnerName(),
+                "Solicitou criação do estabelecimento");
 
         return createdRequest;
 
@@ -67,7 +74,13 @@ public class EstablishmentCreationRequestServiceImpl implements EstablishmentCre
 
         Establishment establishment = establishmentRepository.save(creationRequest);
 
+        establishmentAuditLogService.registerLog(establishment.getCnpj(), "Moderador",
+                "Aprovou a criação do estabelecimento");
+
         establishmentAdminService.createEstablishmentAdmin(establishment);
+
+        establishmentAuditLogService.registerLog(establishment.getCnpj(), "Moderador",
+                "Criou o usuário de administrador do estabelecimento");
     }
 
     @Override

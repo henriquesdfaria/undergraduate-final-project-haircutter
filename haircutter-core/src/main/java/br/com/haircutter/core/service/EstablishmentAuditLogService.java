@@ -8,4 +8,6 @@ public interface EstablishmentAuditLogService {
 
 	List<EstablishmentAuditLog> getAuditLogsByCnpj(String cnpj);
 
+    void registerLog(String cnpj, String author, String action);
+
 }

@@ -135,10 +135,10 @@
             <column name="establishment_cnpj" type="VARCHAR(14)">
                 <constraints nullable="false"/>
             </column>
-            <column name="author" type="VARCHAR(50)">
+            <column name="author" type="VARCHAR(80)">
                 <constraints nullable="false"/>
             </column>
-            <column name="action" type="VARCHAR(50)">
+            <column name="action" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="date" type="DATETIME">
