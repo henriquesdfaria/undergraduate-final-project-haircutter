@@ -39,6 +39,8 @@
         <rollback>
             <dropForeignKeyConstraint baseTableName="establishment_employee"
                                       constraintName="establishment_employee_establishment_fk"/>
+            <dropForeignKeyConstraint baseTableName="establishment_employee"
+                                      constraintName="establishment_employee_user_fk"/>
             <dropTable tableName="establishment_employee"/>
         </rollback>
     </changeSet>

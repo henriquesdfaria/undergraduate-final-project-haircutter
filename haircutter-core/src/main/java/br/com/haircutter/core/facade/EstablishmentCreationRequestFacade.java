@@ -16,16 +16,16 @@ import java.util.List;
 @Path("/establishment")
 @Consumes("application/json")
 @Produces("application/json")
-public class EstablishmentFacade {
+public class EstablishmentCreationRequestFacade {
 
-	Logger LOGGER = LoggerFactory.getLogger(EstablishmentFacade.class);
+	Logger LOGGER = LoggerFactory.getLogger(EstablishmentCreationRequestFacade.class);
 
 	@Autowired
 	EstablishmentService service;
 
 	@POST
-	@Path("/create-new-request")
-	public Response submitToCreation(Establishment establishment) {
+	@Path("/creation-request")
+	public Response create(Establishment establishment) {
 
 		LOGGER.info("Started - New Establishment Creation Request",
 				StructuredArguments.value("payload", establishment));
@@ -40,25 +40,16 @@ public class EstablishmentFacade {
 
 	@GET
 	@Path("/creation-requests")
-	public Response getCreationRequests() {
+	public Response getAll() {
 
 		List<Establishment> responseBody = service.getCreationRequests();
 
 		return Response.ok(responseBody).build();
 	}
 
-	@GET
-	@Path("/creation-request/{cnpj}")
-	public Response getEstablishmentByCnpj(@PathParam("cnpj") String cnpj) {
-
-		Establishment responseBody = service.getCreationRequestByCnpj(cnpj);
-
-		return Response.ok(responseBody).build();
-	}
-
 	@PUT
-	@Path("/approve-creation-request/{cnpj}")
-	public Response approveCreationRequest(@PathParam("cnpj") String cnpj) {
+	@Path("/creation-request/approve/{cnpj}")
+	public Response approve(@PathParam("cnpj") String cnpj) {
 
 		LOGGER.info("Started - Approve Creation Request",
 				StructuredArguments.value("payload", cnpj));
@@ -72,8 +63,8 @@ public class EstablishmentFacade {
 	}
 
 	@PUT
-	@Path("/deny-creation-request/{cnpj}")
-	public Response denyCreationRequest(@PathParam("cnpj") String cnpj) {
+	@Path("/creation-request/deny/{cnpj}")
+	public Response deny(@PathParam("cnpj") String cnpj) {
 
 		LOGGER.info("Started - Deny Creation Request",
 				StructuredArguments.value("payload", cnpj));

@@ -7,38 +7,33 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 @Component
-public class EstablishmentEndpoint {
+public class EstablishmentCreationRequestEndpoint {
 
     @Value("${endpoint.haircutter.core.api.url}")
     private String API_URL;
 
     private RestTemplate restTemplate = new RestTemplate();
 
-    public Object createNewRequest(final EstablishmentJson establishmentJson) {
+    public Object create(final EstablishmentJson establishmentJson) {
 
-        return restTemplate.postForObject(API_URL + "/establishment/create-new-request", establishmentJson,
+        return restTemplate.postForObject(API_URL + "/establishment/creation-request", establishmentJson,
                 Object.class);
     }
 
-    public Object getCreationRequests() {
+    public Object getAll() {
 
         return restTemplate.getForObject(API_URL + "/establishment/creation-requests", Object.class);
     }
 
-    public Object getCreationRequest(final String cnpj) {
-
-        return restTemplate.getForObject(API_URL + "/establishment/creation-request/" + cnpj, Object.class);
-    }
-
     public Object approveCreationRequest(final String cnpj) {
 
-        return restTemplate.exchange(API_URL + "/establishment/approve-creation-request/" + cnpj, HttpMethod.PUT, null,
+        return restTemplate.exchange(API_URL + "/establishment/creation-request/approve/" + cnpj, HttpMethod.PUT, null,
                 Object.class);
     }
 
     public Object denyCreationRequest(final String cnpj) {
 
-        return restTemplate.exchange(API_URL + "/establishment/deny-creation-request/" + cnpj, HttpMethod.PUT, null,
+        return restTemplate.exchange(API_URL + "/establishment/creation-request/deny/" + cnpj, HttpMethod.PUT, null,
                 Object.class);
     }
 

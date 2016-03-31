@@ -1,7 +1,7 @@
 package br.com.haircutter.core;
 
 import br.com.haircutter.core.facade.EstablishmentAuditLogFacade;
-import br.com.haircutter.core.facade.EstablishmentFacade;
+import br.com.haircutter.core.facade.EstablishmentCreationRequestFacade;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,7 +12,7 @@ import javax.ws.rs.ApplicationPath;
 public class RestConfiguration extends ResourceConfig {
 
     public RestConfiguration() {
-        register(EstablishmentFacade.class);
+        register(EstablishmentCreationRequestFacade.class);
         register(EstablishmentAuditLogFacade.class);
     }
 

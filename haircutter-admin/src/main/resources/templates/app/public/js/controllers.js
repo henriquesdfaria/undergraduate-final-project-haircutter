@@ -46,12 +46,12 @@ publicControllers.controller('Controller', ['$scope', '$http', '$location',
 
       $http({
         method: 'POST',
-        url: '/api/public/new-establishment-creation-request',
+        url: '/api/public/establishment/creation-request',
         data: $scope.establishment,
         headers: {
           'Content-Type': 'application/json; charset=utf-8'
         }
-      }).then(function(data) {
+      }).then(function() {
         $scope.showSuccess = true;
       }, function() {
         $scope.internalError = true;

@@ -21,7 +21,7 @@ moderatorControllers.controller('Controller', ['$scope', '$http', '$location',
     $scope.getCreationRequests = function () {
       $http({
         method: 'GET',
-        url: '/api/moderator/establishment-creation-requests',
+        url: '/api/moderator/establishment/creation-requests',
         data: $scope.establishmentCreationRequests,
         headers: {
           'Content-Type': 'application/json; charset=utf-8'
@@ -36,7 +36,7 @@ moderatorControllers.controller('Controller', ['$scope', '$http', '$location',
 
       $http({
         method: 'PUT',
-        url: '/api/moderator/approve-establishment-creation-request/' + cnpj,
+        url: '/api/moderator/establishment/creation-request/approve/' + cnpj,
       }).success(function() {
         $scope.getCreationRequests();
       });
@@ -47,7 +47,7 @@ moderatorControllers.controller('Controller', ['$scope', '$http', '$location',
     $scope.repproveCreation = function (cnpj) {
       $http({
         method: 'PUT',
-        url: 'http://localhost:8050/api/moderator/deny-establishment-creation-request/' + cnpj,
+        url: 'http://localhost:8050/api/moderator/establishment/creation-request/deny/' + cnpj,
       }).success(function() {
         $scope.getCreationRequests();
       });
