@@ -7,7 +7,7 @@ import br.com.haircutter.core.model.repository.EstablishmentRespository;
 import br.com.haircutter.core.service.EstablishmentAdminService;
 import br.com.haircutter.core.service.EstablishmentCreationRequestService;
 import br.com.haircutter.core.utils.HaircutterMailSender;
-import br.com.haircutter.core.validator.EstablishmentServiceValidator;
+import br.com.haircutter.core.validator.EstablishmentCreationRequestServiceValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +22,7 @@ public class EstablishmentCreationRequestServiceImpl implements EstablishmentCre
     private EstablishmentRespository establishmentRepository;
 
     @Autowired
-    private EstablishmentServiceValidator validator;
+    private EstablishmentCreationRequestServiceValidator validator;
 
     @Autowired
     private HaircutterMailSender mailSender;
@@ -33,7 +33,7 @@ public class EstablishmentCreationRequestServiceImpl implements EstablishmentCre
     @Override
     public Establishment create(final Establishment establishment) {
 
-        validator.validateNewCreationRequest(establishment);
+        validator.validateCreate(establishment);
 
         establishment.setStatus(EstablishmentStatusEnum.WAITING);
         establishment.setCreationTime(new Date(ZonedDateTime.now().toInstant().toEpochMilli()));
@@ -60,7 +60,7 @@ public class EstablishmentCreationRequestServiceImpl implements EstablishmentCre
 
         final Establishment creationRequest = establishmentRepository.findOneByCnpj(cnpj);
 
-        validator.validateApproveOrDenyCreationRequest(creationRequest);
+        validator.validateApproveOrDeny(creationRequest);
 
         creationRequest.setStatus(EstablishmentStatusEnum.ACTIVE);
         creationRequest.setLastModifiedDate(new Date(ZonedDateTime.now().toInstant().toEpochMilli()));
@@ -75,7 +75,7 @@ public class EstablishmentCreationRequestServiceImpl implements EstablishmentCre
 
         Establishment creationRequest = establishmentRepository.findOneByCnpj(cnpj);
 
-        validator.validateApproveOrDenyCreationRequest(creationRequest);
+        validator.validateApproveOrDeny(creationRequest);
 
         creationRequest.setStatus(EstablishmentStatusEnum.DENIED);
         creationRequest.setLastModifiedDate(new Date(ZonedDateTime.now().toInstant().toEpochMilli()));
