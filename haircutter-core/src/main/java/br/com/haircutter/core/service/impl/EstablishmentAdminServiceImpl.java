@@ -49,7 +49,7 @@ public class EstablishmentAdminServiceImpl implements EstablishmentAdminService 
         String subject = "Aprovação de Estabelecimento";
 
         String text = "Olá " + user.getName() + ",\n\n"
-                + "Finalmente seu estabelecimento foi aprovado!\n\n" + "Usuário: " + user.getUsername() + "\n\n"
+                + "Seu estabelecimento foi aprovado!\n\n" + "Usuário: " + user.getUsername() + "\n\n"
                 + "Senha: " + user.getPassword() + "\n\n" + "Aguarde a sua aprovação.\n\nEquipe Haircutter";
 
         haircutterMailSender.sendEmail(ownerEmail, subject, text);
