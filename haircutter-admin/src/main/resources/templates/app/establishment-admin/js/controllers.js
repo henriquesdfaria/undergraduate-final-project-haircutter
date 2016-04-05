@@ -22,6 +22,9 @@ establishmentAdminControllers.controller('Controller', ['$scope', '$http', '$loc
         url: '/api/establishment-admin/establishment-audit-log/audit-logs',
       }).success(function(data) {
         $scope.auditLogs = data;
+        _.forEach($scope.auditLogs,function(auditLog) {
+            auditLog.date = new moment(auditLog.date).format('DD/MM/YYYY hh:mm');
+        });
       });
     }
 
