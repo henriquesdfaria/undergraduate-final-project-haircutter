@@ -27,13 +27,18 @@ public class EstablishmentCreationRequestEndpoint {
 
     public Object approveCreationRequest(final String cnpj) {
 
-        return restTemplate.exchange(API_URL + "/establishment/creation-request/approve/" + cnpj, HttpMethod.PUT, null,
+        return restTemplate.exchange(
+                API_URL + "/establishment/creation-request/approve/" + cnpj,
+                HttpMethod.PUT,
+                null,
                 Object.class);
     }
 
     public Object denyCreationRequest(final String cnpj) {
 
-        return restTemplate.exchange(API_URL + "/establishment/creation-request/deny/" + cnpj, HttpMethod.PUT, null,
+        return restTemplate.exchange(
+                API_URL + "/establishment/creation-request/deny/" + cnpj,
+                HttpMethod.PUT, null,
                 Object.class);
     }
 

@@ -2,6 +2,7 @@ package br.com.haircutter.core.service.impl;
 
 import br.com.haircutter.core.model.Establishment;
 import br.com.haircutter.core.model.repository.EstablishmentRespository;
+import br.com.haircutter.core.service.EstablishmentAuditLogService;
 import br.com.haircutter.core.service.EstablishmentService;
 import br.com.haircutter.core.validator.EstablishmentServiceValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +23,20 @@ public class EstablishmentServiceImpl implements EstablishmentService {
     @Autowired
     EstablishmentServiceValidator validator;
 
+    @Autowired
+    EstablishmentAuditLogService auditLogService;
+
     @Override
-    public Establishment edit(Establishment establishment) {
+    public Establishment edit(Establishment establishment, String username) {
 
         validator.validateEdit(establishment);
 
         establishment.setLastModifiedDate(new Date(ZonedDateTime.now().toInstant().toEpochMilli()));
 
-        return establishmentRespository.save(establishment);
+        Establishment editedEstablishment = establishmentRespository.save(establishment);
+
+        auditLogService.registerLog(editedEstablishment.getCnpj(), username, "Editou perfil do estabelecimento");
+
+        return editedEstablishment;
     }
 }

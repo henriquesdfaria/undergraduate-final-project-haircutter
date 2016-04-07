@@ -74,12 +74,12 @@ public class EstablishmentCreationRequestServiceImpl implements EstablishmentCre
 
         Establishment establishment = establishmentRepository.save(creationRequest);
 
-        establishmentAuditLogService.registerLog(establishment.getCnpj(), "Moderador",
+        establishmentAuditLogService.registerLog(establishment.getCnpj(), "moderador",
                 "Aprovou a criação do estabelecimento");
 
         establishmentAdminService.createEstablishmentAdmin(establishment);
 
-        establishmentAuditLogService.registerLog(establishment.getCnpj(), "Moderador",
+        establishmentAuditLogService.registerLog(establishment.getCnpj(), "moderador",
                 "Criou o usuário de administrador do estabelecimento");
     }
 

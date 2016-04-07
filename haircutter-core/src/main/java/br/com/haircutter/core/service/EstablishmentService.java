@@ -7,6 +7,6 @@ import br.com.haircutter.core.model.Establishment;
  */
 public interface EstablishmentService {
 
-    Establishment edit(Establishment establishment);
+    Establishment edit(Establishment establishment, String username);
 
 }
