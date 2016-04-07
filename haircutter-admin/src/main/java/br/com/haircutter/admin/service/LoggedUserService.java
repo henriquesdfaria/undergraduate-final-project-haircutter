@@ -8,7 +8,7 @@ import br.com.haircutter.admin.model.repository.UserRespository;
 import br.com.haircutter.admin.utils.LoggedUserUtils;
 
 @Service
-public class UserService {
+public class LoggedUserService {
 
 	@Autowired
 	private UserRespository userRepository;
