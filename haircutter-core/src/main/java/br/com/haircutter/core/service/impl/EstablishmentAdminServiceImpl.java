@@ -31,7 +31,8 @@ public class EstablishmentAdminServiceImpl implements EstablishmentAdminService 
         List<UserRole> userRoles = new ArrayList<>();
         userRoles.add(new UserRole(establishment.getCnpj(), UserRoleEnum.ROLE_ESTABLISHMENT_ADMIN));
 
-        User user = new User(establishment.getCnpj(), establishment.getName(), "haircutter", userRoles, true,
+        User user = new User(establishment.getCnpj(), establishment.getName(),
+                "haircutter", userRoles, true,
                 new Date(ZonedDateTime.now().toInstant().toEpochMilli()),
                 new Date(ZonedDateTime.now().toInstant().toEpochMilli()));
 
