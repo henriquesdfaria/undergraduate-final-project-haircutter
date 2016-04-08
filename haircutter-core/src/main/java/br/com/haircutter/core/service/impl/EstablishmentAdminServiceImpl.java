@@ -10,6 +10,7 @@ import br.com.haircutter.core.model.repository.EstablishmentAdminRespository;
 import br.com.haircutter.core.service.EstablishmentAdminService;
 import br.com.haircutter.core.utils.HaircutterMailSender;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;
@@ -32,7 +33,7 @@ public class EstablishmentAdminServiceImpl implements EstablishmentAdminService 
         userRoles.add(new UserRole(establishment.getCnpj(), UserRoleEnum.ROLE_ESTABLISHMENT_ADMIN));
 
         User user = new User(establishment.getCnpj(), establishment.getName(),
-                "haircutter", userRoles, true,
+                BCrypt.hashpw("haircutter", BCrypt.gensalt(10)), userRoles, true,
                 new Date(ZonedDateTime.now().toInstant().toEpochMilli()),
                 new Date(ZonedDateTime.now().toInstant().toEpochMilli()));
 

@@ -23,7 +23,7 @@ establishmentAdminControllers.controller('Controller', ['$scope', '$http', '$loc
       }).success(function(data) {
         $scope.auditLogs = data;
         _.forEach($scope.auditLogs,function(auditLog) {
-            auditLog.date = new moment(auditLog.date).format('DD/MM/YYYY hh:mm');
+            auditLog.date = new moment(auditLog.date).format('DD/MM/YYYY HH:mm');
         });
       });
     }

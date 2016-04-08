@@ -1,14 +1,8 @@
 package br.com.haircutter.admin.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 @Entity
 @Table(name = "user")
@@ -23,6 +17,9 @@ public class User implements Serializable {
 	@Column(name = "name")
 	private String name;
 
+	@Column(name = "password")
+	private String password;
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private List<UserRole> userRoles;
 
@@ -30,11 +27,16 @@ public class User implements Serializable {
 
 	}
 
-	public User(String username, String name, List<UserRole> userRoles) {
-		super();
+	public User(String username, String name, String password,
+				List<UserRole> userRoles) {
 		this.username = username;
 		this.name = name;
+		this.password = password;
 		this.userRoles = userRoles;
+	}
+
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
 	}
 
 	public String getUsername() {
@@ -53,6 +55,14 @@ public class User implements Serializable {
 		this.name = name;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public List<UserRole> getUserRoles() {
 		return userRoles;
 	}
@@ -60,5 +70,4 @@ public class User implements Serializable {
 	public void setUserRoles(List<UserRole> userRoles) {
 		this.userRoles = userRoles;
 	}
-
 }
