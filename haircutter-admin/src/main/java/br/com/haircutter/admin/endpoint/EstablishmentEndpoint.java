@@ -16,7 +16,7 @@ public class EstablishmentEndpoint {
 
     public Object get(String cnpj) {
 
-        return restTemplate.getForObject(API_URL + "/establishment/" + cnpj + "/profile" + LoggedUserUtils.getLoggedUserUsername(), Object.class);
+        return restTemplate.getForObject(API_URL + "/establishment/" + cnpj + "/profile", Object.class);
     }
 
     public void edit(final EstablishmentJson establishmentJson) {

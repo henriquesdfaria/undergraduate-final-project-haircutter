@@ -68,8 +68,20 @@ establishmentAdminControllers.controller('EstablishmentProfileController', ['$sc
                 );
             }
 
+            $scope.editProfileSettings = function () {
+
+                var est = $scope.establishment;
+
+                $http({
+                        method: 'PUT',
+                        url: '/api/establishment-admin/establishment/profile',
+                        data: $scope.establishment,
+                    }
+                )
+            }
 
             $scope.getLoggedUser();
+            $scope.getProfileSettings();
         }
     ]
 );

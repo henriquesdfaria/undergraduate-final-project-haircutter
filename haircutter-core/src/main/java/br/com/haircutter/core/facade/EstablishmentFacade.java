@@ -26,7 +26,7 @@ public class EstablishmentFacade {
     EstablishmentService service;
 
     @GET
-    @Path("{cnpj}/profile")
+    @Path("/{cnpj}/profile")
     public Response get(@PathParam("cnpj") String cnpj) {
 
         LOGGER.info("Started - Edit establishment", StructuredArguments.value("cnpj", cnpj));

@@ -14,21 +14,6 @@
                       class="form-horizontal" novalidate>
                     <fieldset>
                         <div class="form-group required">
-                            <label class="col-md-4 control-label">Razão Social
-                                <sup>*</sup>
-                            </label>
-                            <div class="col-md-6">
-                                <input name="establishmentName" ng-model="establishment.name" ng-required="true"
-                                       placeholder="Razão Social" class="form-control input-md" required="" type="text">
-                                <div class="text-danger"
-                                     ng-show="establishmentForm.$submitted || establishmentForm.establishmentName.$touched">
-                                    <p ng-show="establishmentForm.establishmentName.$error.required">Razão Social é um
-                                        campo obrigatório.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group required">
                             <label class="col-md-4 control-label" for="textarea">Descrição
                                 <sup>*</sup>
                             </label>
@@ -234,8 +219,7 @@
                             <div class="col-md-8">
                                 <div class="termbox mb10"></div>
                                 <div style="clear:both"></div>
-                                <a class="btn btn-default" ng-click="cancel()">Cancelar</a>
-                                <button type="submit" class="btn btn-success">Enviar</button>
+                                <a type="submit" ng-click="editProfileSettings()" class="btn btn-success">Salvar</a>
                             </div>
                         </div>
                     </fieldset>
