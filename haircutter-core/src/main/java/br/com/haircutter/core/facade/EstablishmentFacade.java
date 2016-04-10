@@ -25,19 +25,32 @@ public class EstablishmentFacade {
     @Autowired
     EstablishmentService service;
 
-    @PUT
-    @Path("/edit")
-    public Response edit(Establishment establishment, @QueryParam("username") String username) {
+    @GET
+    @Path("{cnpj}/profile")
+    public Response get(@PathParam("cnpj") String cnpj) {
 
-        LOGGER.info("Started - Edit establishment",
-                StructuredArguments.value("payload", establishment));
+        LOGGER.info("Started - Edit establishment", StructuredArguments.value("cnpj", cnpj));
 
-        Establishment responseBody = service.edit(establishment, username);
+        Establishment responseBody = service.get(cnpj);
 
         LOGGER.info("Ended - Edit establishment",
                 StructuredArguments.value("payload", responseBody));
 
         return Response.ok(responseBody).build();
+    }
+
+    @PUT
+    @Path("/profile")
+    public Response edit(Establishment establishment, @QueryParam("username") String username) {
+
+        LOGGER.info("Started - Edit establishment",
+                StructuredArguments.value("payload", establishment));
+
+        service.edit(establishment, username);
+
+        LOGGER.info("Ended - Edit establishment");
+
+        return Response.ok().build();
     }
 
 }

@@ -27,7 +27,13 @@ public class EstablishmentServiceImpl implements EstablishmentService {
     EstablishmentAuditLogService auditLogService;
 
     @Override
-    public Establishment edit(Establishment establishment, String username) {
+    public Establishment get(String cnpj) {
+
+        return establishmentRespository.findOneByCnpj(cnpj);
+    }
+
+    @Override
+    public void edit(Establishment establishment, String username) {
 
         validator.validateEdit(establishment);
 
@@ -36,7 +42,5 @@ public class EstablishmentServiceImpl implements EstablishmentService {
         Establishment editedEstablishment = establishmentRespository.save(establishment);
 
         auditLogService.registerLog(editedEstablishment.getCnpj(), username, "Editou perfil do estabelecimento");
-
-        return editedEstablishment;
     }
 }
