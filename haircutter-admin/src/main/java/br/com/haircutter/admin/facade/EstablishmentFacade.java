@@ -2,7 +2,7 @@ package br.com.haircutter.admin.facade;
 
 import br.com.haircutter.admin.endpoint.EstablishmentEndpoint;
 import br.com.haircutter.admin.facade.json.EstablishmentJson;
-import br.com.haircutter.admin.utils.LoggedUserUtils;
+import br.com.haircutter.admin.service.EstablishmentUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,9 +20,22 @@ public class EstablishmentFacade {
     @Autowired
     private EstablishmentEndpoint endpoint;
 
-    @RequestMapping(value = {"/establishment-admin/establishment/edit"}, method = RequestMethod.POST)
-    public ResponseEntity<?> createNewRequest(@RequestBody EstablishmentJson establishmentJson) {
 
-        return ResponseEntity.ok(endpoint.edit(establishmentJson));
+    @Autowired
+    private EstablishmentUserService service;
+
+
+    @RequestMapping(value = {"/establishment-admin/establishment/profile"}, method = RequestMethod.GET)
+    public ResponseEntity<?> get() {
+
+        String cnpj = service.getCnpjByLoggedUserUsername();
+
+        return ResponseEntity.ok(endpoint.get(cnpj));
+    }
+
+    @RequestMapping(value = {"/establishment-admin/establishment/profile"}, method = RequestMethod.PUT)
+    public void edit(@RequestBody EstablishmentJson establishmentJson) {
+
+        endpoint.edit(establishmentJson);
     }
 }

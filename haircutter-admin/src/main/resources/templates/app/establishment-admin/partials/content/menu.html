@@ -11,10 +11,16 @@
           </h5>
           <div id="MyAds" class="panel-collapse collapse in">
             <ul class="acc-list">
-              <li class="active">
-                <a href="#/establishment-creation-requests">
+              <li ng-class="auditLogsActiveMenu">
+                <a href="#/audit-logs">
                   <i class="icon-hourglass"></i>
                   Logs Auditoria
+                </a>
+              </li>
+              <li ng-class="establishmentProfileActiveMenu">
+                <a href="#/establishment/profile">
+                  <i class="icon-hourglass"></i>
+                  Perfil
                 </a>
               </li>
             </ul>
