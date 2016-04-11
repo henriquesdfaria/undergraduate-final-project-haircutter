@@ -85,3 +85,59 @@ establishmentAdminControllers.controller('EstablishmentProfileController', ['$sc
         }
     ]
 );
+
+/* ESTABLISHMENT EMPLOYEES CONTROLLER*/
+establishmentAdminControllers.controller('EstablishmentEmployeesController', ['$scope', '$http',
+        function ($scope, $http) {
+            $scope.establishmentEmployeesActiveMenu = 'active';
+
+            $scope.getLoggedUser = function () {
+                $http({
+                        method: 'GET',
+                        url: '/api/public/get-logged-user',
+                    }
+                ).success(function (data) {
+                        $scope.loggedUser = data;
+                    }
+                );
+            }
+
+            $scope.getEmployees = function () {
+                $http({
+                        method: 'GET',
+                        url: '/api/establishment-admin/employees',
+                    }
+                ).success(function (data) {
+                        $scope.establishment = data;
+                    }
+                );
+            }
+
+
+            $scope.getLoggedUser();
+            $scope.getEmployees();
+        }
+    ]
+);
+
+/* ESTABLISHMENT EMPLOYEE CONTROLLER*/
+establishmentAdminControllers.controller('EstablishmentEmployeeController', ['$scope', '$routeParams', '$http',
+        function ($scope, $routeParams, $http) {
+            $scope.establishmentEmployeesActiveMenu = 'active';
+
+            $scope.getLoggedUser = function () {
+                $http({
+                        method: 'GET',
+                        url: '/api/public/get-logged-user',
+                    }
+                ).success(function (data) {
+                        $scope.loggedUser = data;
+                    }
+                );
+            }
+
+
+            $scope.getLoggedUser();
+        }
+    ]
+);

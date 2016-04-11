@@ -40,8 +40,11 @@ public class EstablishmentCreationRequestServiceImpl implements EstablishmentCre
         validator.validateCreate(establishment);
 
         establishment.setStatus(EstablishmentStatusEnum.WAITING);
-        establishment.setCreationTime(new Date(ZonedDateTime.now().toInstant().toEpochMilli()));
-        establishment.setLastModifiedDate(new Date(ZonedDateTime.now().toInstant().toEpochMilli()));
+
+        Date now =  new Date(ZonedDateTime.now().toInstant().toEpochMilli());
+
+        establishment.setCreationTime(now);
+        establishment.setLastModifiedDate(now);
 
         Establishment createdRequest = establishmentRepository.save(establishment);
 

@@ -6,18 +6,14 @@ import net.logstash.logback.argument.StructuredArguments;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import javax.ws.rs.*;
-import javax.ws.rs.core.Response;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by hfaria on 31/03/16.
  */
-@Component
-@Path("/establishment")
-@Consumes("application/json")
-@Produces("application/json")
+@RestController
+@RequestMapping(value = "/api/establishment")
 public class EstablishmentFacade {
 
     Logger LOGGER = LoggerFactory.getLogger(EstablishmentFacade.class);
@@ -25,23 +21,21 @@ public class EstablishmentFacade {
     @Autowired
     EstablishmentService service;
 
-    @GET
-    @Path("/{cnpj}/profile")
-    public Response get(@PathParam("cnpj") String cnpj) {
+    @RequestMapping(value = {"/{cnpj}/profile"}, method = RequestMethod.GET)
+    public ResponseEntity<?> get(@PathVariable("cnpj") String cnpj) {
 
         LOGGER.info("Started - Edit establishment", StructuredArguments.value("cnpj", cnpj));
 
-        Establishment responseBody = service.get(cnpj);
+        Establishment establishment = service.get(cnpj);
 
         LOGGER.info("Ended - Edit establishment",
-                StructuredArguments.value("payload", responseBody));
+                StructuredArguments.value("payload", establishment));
 
-        return Response.ok(responseBody).build();
+        return ResponseEntity.ok(establishment);
     }
 
-    @PUT
-    @Path("/profile")
-    public Response edit(Establishment establishment, @QueryParam("username") String username) {
+    @RequestMapping(value = {"/profile"}, method = RequestMethod.PUT)
+    public ResponseEntity<?> edit(Establishment establishment, @RequestParam("username") String username) {
 
         LOGGER.info("Started - Edit establishment",
                 StructuredArguments.value("payload", establishment));
@@ -50,7 +44,7 @@ public class EstablishmentFacade {
 
         LOGGER.info("Ended - Edit establishment");
 
-        return Response.ok().build();
+        return ResponseEntity.ok().build();
     }
 
 }

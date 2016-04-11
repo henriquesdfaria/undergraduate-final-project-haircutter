@@ -6,16 +6,16 @@ import net.logstash.logback.argument.StructuredArguments;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Component
-@Path("/establishment")
-@Consumes("application/json")
-@Produces("application/json")
+@RestController
+@RequestMapping(value = "/api/establishment")
 public class EstablishmentCreationRequestFacade {
 
 	Logger LOGGER = LoggerFactory.getLogger(EstablishmentCreationRequestFacade.class);
@@ -23,33 +23,30 @@ public class EstablishmentCreationRequestFacade {
 	@Autowired
 	EstablishmentCreationRequestService service;
 
-	@POST
-	@Path("/creation-request")
-	public Response create(Establishment establishment) {
+	@RequestMapping(value = {"/creation-request"}, method = RequestMethod.POST)
+	public ResponseEntity<?> create(Establishment establishment) {
 
 		LOGGER.info("Started - New Establishment Creation Request",
 				StructuredArguments.value("payload", establishment));
 
-		Establishment responseBody = service.create(establishment);
+		Establishment createdEstablishment = service.create(establishment);
 
 		LOGGER.info("Ended - New Establishment Creation Request",
-				StructuredArguments.value("payload", responseBody));
-		
-		return Response.ok(responseBody).build();
+				StructuredArguments.value("payload", createdEstablishment));
+
+        return ResponseEntity.ok(createdEstablishment);
 	}
 
-	@GET
-	@Path("/creation-requests")
-	public Response getAll() {
+	@RequestMapping(value = {"/creation-requests"}, method = RequestMethod.GET)
+	public ResponseEntity<?> getAll() {
 
-		List<Establishment> responseBody = service.getAll();
+		List<Establishment> establishments = service.getAll();
 
-		return Response.ok(responseBody).build();
+        return ResponseEntity.ok(establishments);
 	}
 
-	@PUT
-	@Path("/creation-request/approve/{cnpj}")
-	public Response approve(@PathParam("cnpj") String cnpj) {
+	@RequestMapping(value = {"/creation-request/approve/{cnpj}"}, method = RequestMethod.PUT)
+	public ResponseEntity<?> approve(@PathVariable("cnpj") String cnpj) {
 
 		LOGGER.info("Started - Approve Creation Request",
 				StructuredArguments.value("payload", cnpj));
@@ -59,12 +56,11 @@ public class EstablishmentCreationRequestFacade {
 		LOGGER.info("Ended - Approve Creation Request",
 				StructuredArguments.value("payload", null));
 
-		return Response.ok().build();
+        return ResponseEntity.ok().build();
 	}
 
-	@PUT
-	@Path("/creation-request/deny/{cnpj}")
-	public Response deny(@PathParam("cnpj") String cnpj) {
+	@RequestMapping(value = {"/creation-request/deny/{cnpj}"}, method = RequestMethod.PUT)
+	public ResponseEntity<?> deny(@PathVariable("cnpj") String cnpj) {
 
 		LOGGER.info("Started - Deny Creation Request",
 				StructuredArguments.value("payload", cnpj));
@@ -74,7 +70,7 @@ public class EstablishmentCreationRequestFacade {
 		LOGGER.info("Ended - Deny Creation Request",
 				StructuredArguments.value("payload", null));
 
-		return Response.ok().build();
+        return ResponseEntity.ok().build();
 	}
 
 }
