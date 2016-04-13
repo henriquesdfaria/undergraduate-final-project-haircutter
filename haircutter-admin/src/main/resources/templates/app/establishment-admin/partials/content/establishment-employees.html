@@ -19,10 +19,13 @@
                    data-filter="#filter" data-filter-text-only="true">
                 <thead>
                 <tr>
-                    <th data-sort-ignore="true">
+                    <th>
                         Nome
                     </th>
-                    <th data-type="numeric">
+                    <th>
+                        Usuário
+                    </th>
+                    <th>
                         Função
                     </th>
                     <th>
@@ -39,14 +42,21 @@
                             </p>
                         </div>
                     </td>
-                    <td style="width:50%" class="ads-details-td">
+                    <td style="width:30%" class="ads-details-td">
+                        <div>
+                            <p>
+                                {{employee.user.username}}
+                            </p>
+                        </div>
+                    </td>
+                    <td style="width:30%" class="ads-details-td">
                         <div>
                             <p>
                                 {{employee.user.role}}
                             </p>
                         </div>
                     </td>
-                    <td style="width:25%" class="action-td">
+                    <td style="width:20%" class="action-td">
                         <div>
                             <a>
                                 Editar
