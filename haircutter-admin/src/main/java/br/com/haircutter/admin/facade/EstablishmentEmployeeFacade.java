@@ -22,7 +22,6 @@ public class EstablishmentEmployeeFacade {
     @Autowired
     private EstablishmentAdminUserService establishmentAdminUserService;
 
-
     @Autowired
     private EstablishmentUserService establishmentUserService;
 
@@ -48,9 +47,7 @@ public class EstablishmentEmployeeFacade {
     @RequestMapping(value = {"/establishment-admin/employee"}, method = RequestMethod.POST)
     public ResponseEntity<?> create(@RequestBody EstablishmentEmployeeJson establishmentEmployeeJson) {
 
-        if (!establishmentAdminUserService.verifyEmployeeIsInOwnEstablishment(establishmentEmployeeJson.getId())) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
+        establishmentEmployeeJson.setEstablishmentCnpj(establishmentUserService.getCnpjByLoggedUserUsername());
 
         return ResponseEntity.ok(endpoint.create(establishmentEmployeeJson));
     }
