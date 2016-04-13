@@ -1,7 +1,8 @@
 package br.com.haircutter.admin.facade.json;
 
+import br.com.haircutter.admin.enums.UserRoleEnum;
+
 import java.util.Date;
-import java.util.List;
 
 
 public class UserJson {
@@ -12,7 +13,7 @@ public class UserJson {
 
     private String password;
 
-    private List<UserRoleJson> userRoles;
+    private UserRoleEnum role;
 
     private Boolean enabled;
 
@@ -24,11 +25,11 @@ public class UserJson {
 
     }
 
-    public UserJson(String username, String name, String password, List<UserRoleJson> userRoles, Boolean enabled, Date creationTime, Date lastModifiedDate) {
+    public UserJson(String username, String name, String password, UserRoleEnum role, Boolean enabled, Date creationTime, Date lastModifiedDate) {
         this.username = username;
         this.name = name;
         this.password = password;
-        this.userRoles = userRoles;
+        this.role = role;
         this.enabled = enabled;
         this.creationTime = creationTime;
         this.lastModifiedDate = lastModifiedDate;
@@ -58,12 +59,12 @@ public class UserJson {
         this.password = password;
     }
 
-    public List<UserRoleJson> getUserRoles() {
-        return userRoles;
+    public UserRoleEnum getRole() {
+        return role;
     }
 
-    public void setUserRoles(List<UserRoleJson> userRoles) {
-        this.userRoles = userRoles;
+    public void setRole(UserRoleEnum role) {
+        this.role = role;
     }
 
     public Boolean getEnabled() {

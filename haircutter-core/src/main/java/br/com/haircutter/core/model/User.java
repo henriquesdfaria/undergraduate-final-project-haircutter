@@ -1,9 +1,10 @@
 package br.com.haircutter.core.model;
 
+import br.com.haircutter.core.enums.UserRoleEnum;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -21,8 +22,9 @@ public class User implements Serializable {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<UserRole> userRoles;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private UserRoleEnum role;
 
     @Column(name = "enabled")
     private Boolean enabled;
@@ -37,12 +39,11 @@ public class User implements Serializable {
 
     }
 
-    public User(String username, String name, String password, List<UserRole> userRoles, Boolean enabled,
-                Date creationTime, Date lastModifiedDate) {
+    public User(String username, String name, String password, UserRoleEnum role, Boolean enabled, Date creationTime, Date lastModifiedDate) {
         this.username = username;
         this.name = name;
         this.password = password;
-        this.userRoles = userRoles;
+        this.role = role;
         this.enabled = enabled;
         this.creationTime = creationTime;
         this.lastModifiedDate = lastModifiedDate;
@@ -72,12 +73,12 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public List<UserRole> getUserRoles() {
-        return userRoles;
+    public UserRoleEnum getRole() {
+        return role;
     }
 
-    public void setUserRoles(List<UserRole> userRoles) {
-        this.userRoles = userRoles;
+    public void setRole(UserRoleEnum role) {
+        this.role = role;
     }
 
     public Boolean getEnabled() {

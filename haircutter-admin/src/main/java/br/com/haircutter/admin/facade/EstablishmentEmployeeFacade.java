@@ -45,7 +45,7 @@ public class EstablishmentEmployeeFacade {
         return ResponseEntity.ok(endpoint.get(employeeId));
     }
 
-    @RequestMapping(value = {"/establishment-admin/employees/profile"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/establishment-admin/employee"}, method = RequestMethod.POST)
     public ResponseEntity<?> create(@RequestBody EstablishmentEmployeeJson establishmentEmployeeJson) {
 
         if (!establishmentAdminUserService.verifyEmployeeIsInOwnEstablishment(establishmentEmployeeJson.getId())) {
@@ -55,7 +55,7 @@ public class EstablishmentEmployeeFacade {
         return ResponseEntity.ok(endpoint.create(establishmentEmployeeJson));
     }
 
-    @RequestMapping(value = {"/establishment-admin/employees/profile"}, method = RequestMethod.PUT)
+    @RequestMapping(value = {"/establishment-admin/employee"}, method = RequestMethod.PUT)
     public ResponseEntity<?> edit(@RequestBody EstablishmentEmployeeJson establishmentEmployeeJson) {
 
         if (!establishmentAdminUserService.verifyEmployeeIsInOwnEstablishment(establishmentEmployeeJson.getId())) {

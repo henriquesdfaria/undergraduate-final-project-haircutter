@@ -3,7 +3,6 @@ package br.com.haircutter.core.validator;
 import br.com.haircutter.core.enums.UserRoleEnum;
 import br.com.haircutter.core.exception.CustomInvalidException;
 import br.com.haircutter.core.model.EstablishmentEmployee;
-import br.com.haircutter.core.model.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,9 +14,6 @@ public class EstablishmentEmployeeValidator {
 
     @Autowired
     UserValidator userValidator;
-
-    @Autowired
-    UserRoleValidator userRoleValidator;
 
     public void validateCreate(final EstablishmentEmployee establishmentEmployee) {
 
@@ -35,15 +31,15 @@ public class EstablishmentEmployeeValidator {
 
         userValidator.validate(establishmentEmployee.getUser());
 
-        UserRole userRole = establishmentEmployee.getUser().getUserRoles().get(0);
+        if (establishmentEmployee.getUser().getRole() == null) {
+            throw new CustomInvalidException("Should not be null", "role");
+        }
 
-        userRoleValidator.validate(userRole);
+        if (!(UserRoleEnum.ROLE_ATTENDANT.equals(establishmentEmployee.getUser().getRole())
+                || UserRoleEnum.ROLE_MANAGER.equals(establishmentEmployee.getUser().getRole())
+                || UserRoleEnum.ROLE_PROFFESSIONAL.equals(establishmentEmployee.getUser().getRole()))) {
 
-        if (!(UserRoleEnum.ROLE_ATTENDANT.equals(userRole.getRole())
-                || UserRoleEnum.ROLE_MANAGER.equals(userRole.getRole())
-                || UserRoleEnum.ROLE_PROFFESSIONAL.equals(userRole.getRole()))) {
-
-            throw new CustomInvalidException("Invalid role", "userRole.role");
+            throw new CustomInvalidException("Invalid role", "role");
         }
 
     }
@@ -64,15 +60,15 @@ public class EstablishmentEmployeeValidator {
 
         userValidator.validate(establishmentEmployee.getUser());
 
-        UserRole userRole = establishmentEmployee.getUser().getUserRoles().get(0);
+        if (establishmentEmployee.getUser().getRole() == null) {
+            throw new CustomInvalidException("Should not be null", "role");
+        }
 
-        userRoleValidator.validate(userRole);
+        if (!(UserRoleEnum.ROLE_ATTENDANT.equals(establishmentEmployee.getUser().getRole())
+                || UserRoleEnum.ROLE_MANAGER.equals(establishmentEmployee.getUser().getRole())
+                || UserRoleEnum.ROLE_PROFFESSIONAL.equals(establishmentEmployee.getUser().getRole()))) {
 
-        if (!(UserRoleEnum.ROLE_ATTENDANT.equals(userRole.getRole())
-                || UserRoleEnum.ROLE_MANAGER.equals(userRole.getRole())
-                || UserRoleEnum.ROLE_PROFFESSIONAL.equals(userRole.getRole()))) {
-
-            throw new CustomInvalidException("Invalid role", "userRole.role");
+            throw new CustomInvalidException("Invalid role", "role");
         }
     }
 }

@@ -42,13 +42,16 @@ public class EstablishmentEmployeeServiceImpl implements EstablishmentEmployeeSe
 
         validator.validateCreate(establishmentEmployee);
 
-        establishmentEmployee.setDeleted(false);
-
         Date now = new Date(ZonedDateTime.now().toInstant().toEpochMilli());
 
+        establishmentEmployee.setDeleted(false);
         establishmentEmployee.setCreationTime(now);
         establishmentEmployee.setLastModifiedDate(now);
+
         establishmentEmployee.getUser().setPassword(BCrypt.hashpw("haircutter", BCrypt.gensalt(10)));
+        establishmentEmployee.getUser().setLastModifiedDate(now);
+        establishmentEmployee.getUser().setCreationTime(now);
+        establishmentEmployee.getUser().setEnabled(true);
 
         EstablishmentEmployee createdEstablishmentEmployee = repository.save(establishmentEmployee);
 

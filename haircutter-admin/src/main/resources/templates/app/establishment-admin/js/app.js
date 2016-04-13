@@ -32,6 +32,11 @@ establishmentAdminApp.config(['$routeProvider',
                         controller: 'EstablishmentEmployeeController'
                     }
                 )
+                .when('/establishment/employees/create', {
+                        templateUrl: 'establishment-admin/partials/create-establishment-employee-content.html',
+                        controller: 'CreateEstablishmentEmployeeController'
+                    }
+                )
                 .otherwise(
                     {redirectTo: '/audit-logs'}
                 );

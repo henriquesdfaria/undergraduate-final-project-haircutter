@@ -33,11 +33,11 @@ publicControllers.controller('Controller', ['$scope', '$http', '$location',
                 ).success(function (data) {
                         $scope.menu = [];
 
-                        if (data.userRoles && data.userRoles[0].role === 'ROLE_MODERATOR') {
+                        if (data && data.role === 'ROLE_MODERATOR') {
                             $scope.menu = moderator_menu;
                         }
 
-                        if (data.userRoles && data.userRoles[0].role === 'ROLE_ESTABLISHMENT_ADMIN') {
+                        if (data && data.role === 'ROLE_ESTABLISHMENT_ADMIN') {
                             $scope.menu = establishment_menu;
                         }
 

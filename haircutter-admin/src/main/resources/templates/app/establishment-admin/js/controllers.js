@@ -41,6 +41,7 @@ establishmentAdminControllers.controller('AuditLogsController', ['$scope', '$htt
     ]
 );
 
+
 /* ESTABLISHMENT PROFILE CONTROLLER*/
 establishmentAdminControllers.controller('EstablishmentProfileController', ['$scope', '$http',
         function ($scope, $http) {
@@ -116,6 +117,40 @@ establishmentAdminControllers.controller('EstablishmentEmployeesController', ['$
 
             $scope.getLoggedUser();
             $scope.getEmployees();
+        }
+    ]
+);
+
+/* CREATE ESTABLISHMENT PROFILE CONTROLLER*/
+establishmentAdminControllers.controller('CreateEstablishmentEmployeeController', ['$scope', '$http', '$location',
+        function ($scope, $http, $location) {
+
+            $scope.establishmentProfileActiveMenu = 'active';
+
+            $scope.getLoggedUser = function () {
+                $http({
+                        method: 'GET',
+                        url: '/api/public/get-logged-user',
+                    }
+                ).success(function (data) {
+                        $scope.loggedUser = data;
+                    }
+                );
+            }
+
+            $scope.create = function (employee) {
+                $http({
+                        method: 'POST',
+                        url: '/api/establishment-admin/employee',
+                        data: employee,
+                    }
+                ).success(function () {
+                        $location.path('#/employees');
+                    }
+                );
+            }
+
+            $scope.getLoggedUser();
         }
     ]
 );

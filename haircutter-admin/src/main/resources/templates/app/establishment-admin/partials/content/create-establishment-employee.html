@@ -10,14 +10,9 @@
         <div class="alert alert-danger" ng-show="internalError">
           Não foi possivel criar o funcionário, tente novamente mais tarde.
         </div>
-        <form name="employeeForm" ng-submit="employeeForm.$valid && createNewRequest(employee)"
+        <form name="employeeForm" ng-submit="employeeForm.$valid && create(employee)"
               class="form-horizontal" novalidate>
           <fieldset>
-            <div class="content-subheading">
-              <i class="icon-user fa"></i>
-              Informações do Proprietário
-            </div>
-
             <div class="form-group required">
               <label class="col-md-4 control-label">Nome
                 <sup>*</sup>
@@ -41,12 +36,11 @@
               <div class="col-md-6">
                 <input name="employeeUsername" ng-model="employee.user.username"
                        ng-required="true" placeholder="Username" class="form-control input-md" required=""
-                       type="email">
+                       type="text">
                 <div class="text-danger"
                      ng-show="employeeForm.$submitted || employeeForm.employeeUsername.$touched">
                   <p ng-show="employeeForm.employeeUsername.$error.required">Usuário é um
                     campo obrigatório.</p>
-                  <p ng-show="employeeForm.employeeUsername.$error.email">Usuário inválido.</p>
                 </div>
               </div>
             </div>
@@ -57,7 +51,7 @@
               </label>
               <div class="col-md-6">
                 <select id="employeeRole" name="employeeRole"
-                        ng-model="employee.user.userRoles[0]" ng-required="true" class="form-control">
+                        ng-model="employee.user.role" ng-required="true" class="form-control">
                   <option value="" disabled selected>Selecione</option>
                   <option value="ROLE_MANAGER">Gerente</option>
                   <option value="ROLE_PROFESSIONAL">Profissional</option>
@@ -76,7 +70,7 @@
               <div class="col-md-8">
                 <div class="termbox mb10"></div>
                 <div style="clear:both"></div>
-                <a type="submit" ng-click="save()" class="btn btn-success">Salvar</a>
+                <button type="submit" class="btn btn-success">Criar</button>
               </div>
             </div>
           </fieldset>
