@@ -54,7 +54,7 @@ public class EstablishmentEmployeeValidator {
             throw new CustomInvalidException("Should not be null", "establishmentEmployee.id");
         }
 
-        if (establishmentEmployee.getEstablishmentCnpj() != null) {
+        if (establishmentEmployee.getEstablishmentCnpj() == null) {
             throw new CustomInvalidException("Should not be null", "establishmentEmployee.establishmentCnpj");
         }
 
