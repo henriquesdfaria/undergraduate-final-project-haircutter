@@ -49,7 +49,7 @@ public class EstablishmentEmployeeFacade {
     }
 
     @RequestMapping(value = {"/employee"}, method = RequestMethod.POST)
-    public ResponseEntity<?> create(EstablishmentEmployee establishmentEmployee, @RequestParam("username") String username) {
+    public ResponseEntity<?> create(@RequestBody EstablishmentEmployee establishmentEmployee, @RequestParam("username") String username) {
 
         LOGGER.info("Started - Create employee", StructuredArguments.value("payload", establishmentEmployee));
 
@@ -61,7 +61,7 @@ public class EstablishmentEmployeeFacade {
     }
 
     @RequestMapping(value = {"/employee"}, method = RequestMethod.PUT)
-    public ResponseEntity<?> edit(EstablishmentEmployee establishmentEmployee, @RequestParam("username") String username) {
+    public ResponseEntity<?> edit(@RequestBody EstablishmentEmployee establishmentEmployee, @RequestParam("username") String username) {
 
         LOGGER.info("Started - Edit employee", StructuredArguments.value("payload", establishmentEmployee));
 
