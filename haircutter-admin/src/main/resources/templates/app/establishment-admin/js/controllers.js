@@ -109,7 +109,7 @@ establishmentAdminControllers.controller('EstablishmentEmployeesController', ['$
                         url: '/api/establishment-admin/employees',
                     }
                 ).success(function (data) {
-                        $scope.establishment = data;
+                        $scope.employees = data;
                     }
                 );
             }
@@ -145,7 +145,7 @@ establishmentAdminControllers.controller('CreateEstablishmentEmployeeController'
                         data: employee,
                     }
                 ).success(function () {
-                        $location.path('#/employees');
+                        $location.path('#/establishment/employees');
                     }
                 );
             }
