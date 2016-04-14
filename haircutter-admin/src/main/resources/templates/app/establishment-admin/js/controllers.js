@@ -125,7 +125,7 @@ establishmentAdminControllers.controller('EstablishmentEmployeesController', ['$
 establishmentAdminControllers.controller('CreateEstablishmentEmployeeController', ['$scope', '$http', '$location',
         function ($scope, $http, $location) {
 
-            $scope.establishmentProfileActiveMenu = 'active';
+            $scope.establishmentEmployeesActiveMenu = 'active';
 
             $scope.getLoggedUser = function () {
                 $http({
@@ -187,7 +187,7 @@ establishmentAdminControllers.controller('EstablishmentEmployeeController', ['$s
                 $http({
                         method: 'PUT',
                         url: '/api/establishment-admin/employee',
-                        data: $scope.employee
+                        data: employee
                     }
                 ).success(function () {
                         $location.path('#/establishment/employees');

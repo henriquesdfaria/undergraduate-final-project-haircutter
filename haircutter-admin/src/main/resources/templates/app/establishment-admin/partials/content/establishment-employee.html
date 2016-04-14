@@ -10,7 +10,7 @@
         <div class="alert alert-danger" ng-show="internalError">
           Não foi possivel criar o funcionário, tente novamente mais tarde.
         </div>
-        <form name="employeeForm" ng-submit="employeeForm.$valid"
+        <form name="employeeForm" ng-submit="employeeForm.$valid && save(employee)"
               class="form-horizontal" novalidate>
           <fieldset>
             <div class="form-group required">
@@ -69,7 +69,7 @@
               <div class="col-md-8">
                 <div class="termbox mb10"></div>
                 <div style="clear:both"></div>
-                <a type="submit" ng-click="save()" class="btn btn-success">Salvar</a>
+                <button type="submit" class="btn btn-success">Salvar</button>
               </div>
             </div>
           </fieldset>
