@@ -88,8 +88,8 @@ establishmentAdminControllers.controller('EstablishmentProfileController', ['$sc
 );
 
 /* ESTABLISHMENT EMPLOYEES CONTROLLER*/
-establishmentAdminControllers.controller('EstablishmentEmployeesController', ['$scope', '$http',
-        function ($scope, $http) {
+establishmentAdminControllers.controller('EstablishmentEmployeesController', ['$scope', '$http', '$location',
+        function ($scope, $http, $location) {
             $scope.establishmentEmployeesActiveMenu = 'active';
 
             $scope.getLoggedUser = function () {
@@ -114,7 +114,17 @@ establishmentAdminControllers.controller('EstablishmentEmployeesController', ['$
                 );
             }
 
-
+            $scope.removeEmployee = function (employee) {
+                $http({
+                        method: 'DELETE',
+                        url: '/api/establishment-admin/employee/' + employee.id
+                    }
+                ).success(function () {
+                        $location.path('/establishment/employees');
+                    }
+                );
+            }
+            
             $scope.getLoggedUser();
             $scope.getEmployees();
         }
@@ -145,7 +155,7 @@ establishmentAdminControllers.controller('CreateEstablishmentEmployeeController'
                         data: employee
                     }
                 ).success(function () {
-                        $location.path('#/establishment/employees');
+                        $location.path('/establishment/employees');
                     }
                 ).error(function () {
                     $scope.internalError = true;
@@ -190,7 +200,7 @@ establishmentAdminControllers.controller('EstablishmentEmployeeController', ['$s
                         data: employee
                     }
                 ).success(function () {
-                        $location.path('#/establishment/employees');
+                        $location.path('/establishment/employees');
                     }
                 ).error(function () {
                     $scope.internalError = true;
