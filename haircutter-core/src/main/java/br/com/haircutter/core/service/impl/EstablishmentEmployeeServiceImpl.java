@@ -77,10 +77,12 @@ public class EstablishmentEmployeeServiceImpl implements EstablishmentEmployeeSe
 
         EstablishmentEmployee establishmentEmployee = repository.findOne(id);
 
-        establishmentEmployee.setDeleted(true);
+        repository.delete(id);
+
+       /* establishmentEmployee.setDeleted(true);
         establishmentEmployee.setLastModifiedDate(new Date(ZonedDateTime.now().toInstant().toEpochMilli()));
 
-        repository.save(establishmentEmployee);
+        repository.save(establishmentEmployee);*/
 
         auditLogService.registerLog(establishmentEmployee.getEstablishmentCnpj(), username, "Removeu usuário " + establishmentEmployee.getUser().getUsername());
     }

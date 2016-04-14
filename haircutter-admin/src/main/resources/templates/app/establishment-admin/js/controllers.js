@@ -70,9 +70,6 @@ establishmentAdminControllers.controller('EstablishmentProfileController', ['$sc
             }
 
             $scope.editProfileSettings = function () {
-
-                var est = $scope.establishment;
-
                 $http({
                         method: 'PUT',
                         url: '/api/establishment-admin/establishment/profile',
@@ -120,6 +117,7 @@ establishmentAdminControllers.controller('EstablishmentEmployeesController', ['$
                         url: '/api/establishment-admin/employee/' + employee.id
                     }
                 ).success(function () {
+                        $scope.getEmployees();
                         $location.path('/establishment/employees');
                     }
                 );
