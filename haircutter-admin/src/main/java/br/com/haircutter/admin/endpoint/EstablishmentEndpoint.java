@@ -3,7 +3,6 @@ package br.com.haircutter.admin.endpoint;
 import br.com.haircutter.admin.facade.json.EstablishmentJson;
 import br.com.haircutter.admin.utils.LoggedUserUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,12 +14,15 @@ public class EstablishmentEndpoint {
 
     private RestTemplate restTemplate = new RestTemplate();
 
-    public Object edit(final EstablishmentJson establishmentJson) {
+    public Object get(String cnpj) {
 
-        return restTemplate.exchange(
-                API_URL + "/establishment/edit?username=" + LoggedUserUtils.getLoggedUserUsername(), HttpMethod.PUT,
-                null,
-                Object.class, establishmentJson);
+        return restTemplate.getForObject(API_URL + "/establishment/" + cnpj + "/profile", Object.class);
+    }
+
+    public void edit(final EstablishmentJson establishmentJson) {
+
+        restTemplate.put(API_URL + "/establishment/profile?username=" + LoggedUserUtils.getLoggedUserUsername(),
+                establishmentJson);
     }
 
 }

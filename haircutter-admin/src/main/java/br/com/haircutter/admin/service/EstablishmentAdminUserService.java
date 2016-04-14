@@ -9,19 +9,27 @@ import org.springframework.stereotype.Service;
  * Created by hfaria on 07/04/16.
  */
 @Service
-public class EstablishmentUserService {
+public class EstablishmentAdminUserService {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public String getCnpjByLoggedUserUsername() {
+    public Boolean verifyEmployeeIsInOwnEstablishment(Long employeeId) {
 
         String cnpj = jdbcTemplate.queryForObject(
                 "SELECT ea.establishment_cnpj FROM establishment_admin ea WHERE ea.username = ?;",
                 new Object[]{LoggedUserUtils.getLoggedUserUsername()},
                 String.class);
 
-        return cnpj;
-    }
+        String foundEmployeeId = jdbcTemplate.queryForObject(
+                "SELECT ee.id FROM establishment_employee ee WHERE ee.establishment_cnpj = ? AND ee.id = ?",
+                new Object[]{cnpj, employeeId},
+                String.class);
 
+        if (foundEmployeeId == null || foundEmployeeId == "") {
+            return false;
+        }
+
+        return true;
+    }
 }

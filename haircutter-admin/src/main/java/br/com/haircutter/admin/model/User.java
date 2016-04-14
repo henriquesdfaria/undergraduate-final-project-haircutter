@@ -1,8 +1,9 @@
 package br.com.haircutter.admin.model;
 
+import br.com.haircutter.admin.enums.UserRoleEnum;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -20,23 +21,12 @@ public class User implements Serializable {
 	@Column(name = "password")
 	private String password;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-	private List<UserRole> userRoles;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "role")
+	private UserRoleEnum role;
 
 	public User() {
 
-	}
-
-	public User(String username, String name, String password,
-				List<UserRole> userRoles) {
-		this.username = username;
-		this.name = name;
-		this.password = password;
-		this.userRoles = userRoles;
-	}
-
-	public static long getSerialVersionUID() {
-		return serialVersionUID;
 	}
 
 	public String getUsername() {
@@ -63,11 +53,11 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public List<UserRole> getUserRoles() {
-		return userRoles;
+	public UserRoleEnum getRole() {
+		return role;
 	}
 
-	public void setUserRoles(List<UserRole> userRoles) {
-		this.userRoles = userRoles;
+	public void setRole(UserRoleEnum role) {
+		this.role = role;
 	}
 }

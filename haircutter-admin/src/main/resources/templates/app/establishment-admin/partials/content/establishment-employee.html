@@ -1,0 +1,81 @@
+<div class="col-sm-9 page-content">
+
+  <div class="inner-box category-content">
+    <h2 class="title-2">
+      <i class="fa fa-file-text-o"></i>
+      <strong>Funcionário</strong>
+    </h2>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="alert alert-danger" ng-show="internalError">
+          Não foi possivel criar o funcionário, tente novamente mais tarde.
+        </div>
+        <form name="employeeForm" ng-submit="employeeForm.$valid && save(employee)"
+              class="form-horizontal" novalidate>
+          <fieldset>
+            <div class="form-group required">
+              <label class="col-md-4 control-label">Nome
+                <sup>*</sup>
+              </label>
+              <div class="col-md-6">
+                <input name="employeeName" ng-model="employee.user.name"
+                       ng-required="true" placeholder="Nome do Funcionário"
+                       class="form-control input-md" required="" type="text">
+                <div class="text-danger"
+                     ng-show="employeeForm.$submitted || employeeForm.employeeName.$touched">
+                  <p ng-show="employeeForm.employeeName.$error.required">Nome é um campo obrigatório.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group required">
+              <label class="col-md-4 control-label">Usuário
+                <sup>*</sup>
+              </label>
+              <div class="col-md-6">
+                <input name="employeeUsername" ng-model="employee.user.username"
+                       ng-required="true" placeholder="Username" class="form-control input-md" required=""
+                       type="text">
+                <div class="text-danger"
+                     ng-show="employeeForm.$submitted || employeeForm.employeeUsername.$touched">
+                  <p ng-show="employeeForm.employeeUsername.$error.required">Usuário é um
+                    campo obrigatório.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group required">
+              <label class="col-md-4 control-label" for="employeeRole">Função
+                <sup>*</sup>
+              </label>
+              <div class="col-md-6">
+                <select id="employeeRole" name="employeeRole"
+                        ng-model="employee.user.role" ng-required="true" class="form-control">
+                  <option value="" disabled selected>Selecione</option>
+                  <option value="ROLE_MANAGER">Gerente</option>
+                  <option value="ROLE_PROFESSIONAL">Profissional</option>
+                  <option value="ROLE_ATTENDANT">Atendente</option>
+                </select>
+                <div class="text-danger"
+                     ng-show="employeeForm.$submitted || employeeForm.employeeRole.$touched">
+                  <p ng-show="employeeForm.employeeRole.$error.required">Selecione
+                    uma função.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label"></label>
+              <div class="col-md-8">
+                <div class="termbox mb10"></div>
+                <div style="clear:both"></div>
+                <button type="submit" class="btn btn-success">Salvar</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>

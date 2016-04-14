@@ -15,6 +15,9 @@
 			<column name="password" type="VARCHAR(255)">
 				<constraints nullable="false" />
 			</column>
+			<column name="role" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
 			<column name="enabled" type="BIT">
 				<constraints nullable="false" />
 			</column>
@@ -27,27 +30,6 @@
 		</createTable>
 		<rollback>
 			<dropTable tableName="user" />
-		</rollback>
-	</changeSet>
-
-	<changeSet author="henrique" id="2">
-		<createTable tableName="user_role">
-			<column name="username" type="VARCHAR(255)">
-				<constraints nullable="false" primaryKey="true" />
-			</column>
-			<column name="role" type="VARCHAR(255)">
-				<constraints nullable="false" />
-			</column>
-		</createTable>
-
-		<addForeignKeyConstraint baseColumnNames="username"
-			baseTableName="user_role" constraintName="user_role_user_fk"
-			referencedColumnNames="username" referencedTableName="user" />
-
-		<rollback>
-			<dropForeignKeyConstraint baseTableName="user_role"
-				constraintName="user_role_user_fk" />
-			<dropTable tableName="user_role" />
 		</rollback>
 	</changeSet>
 

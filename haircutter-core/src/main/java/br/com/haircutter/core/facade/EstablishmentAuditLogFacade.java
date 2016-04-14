@@ -5,16 +5,16 @@ import br.com.haircutter.core.service.EstablishmentAuditLogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Component
-@Path("/establishment-audit-log")
-@Consumes("application/json")
-@Produces("application/json")
+@RestController
+@RequestMapping(value = "/api/establishment-audit-log")
 public class EstablishmentAuditLogFacade {
 
 	Logger LOGGER = LoggerFactory.getLogger(EstablishmentAuditLogFacade.class);
@@ -22,17 +22,16 @@ public class EstablishmentAuditLogFacade {
 	@Autowired
 	EstablishmentAuditLogService service;
 
-	@GET
-	@Path("/audit-logs/{cnpj}")
-	public Response getAuditLogsByCnpj(@PathParam("cnpj") String cnpj) {
+	@RequestMapping(value = {"/audit-logs/{cnpj}"}, method = RequestMethod.GET)
+	public ResponseEntity<?> getAuditLogsByCnpj(@PathVariable("cnpj") String cnpj) {
 
 		LOGGER.info("Started - Get Audit Logs By CNPJ", cnpj);
 
-		List<EstablishmentAuditLog> responseBody = service.getAuditLogsByCnpj(cnpj);
+		List<EstablishmentAuditLog> auditLogs = service.getAuditLogsByCnpj(cnpj);
 
-		LOGGER.info("Ended - Get Audit Logs By CNPJ", responseBody);
+		LOGGER.info("Ended - Get Audit Logs By CNPJ", auditLogs);
 
-		return Response.ok(responseBody).build();
+        return ResponseEntity.ok(auditLogs);
 	}
 
 }

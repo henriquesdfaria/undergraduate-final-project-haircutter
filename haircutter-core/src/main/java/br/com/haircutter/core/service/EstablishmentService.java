@@ -7,6 +7,8 @@ import br.com.haircutter.core.model.Establishment;
  */
 public interface EstablishmentService {
 
-    Establishment edit(Establishment establishment, String username);
+    Establishment get(String cnpj);
+
+    void edit(Establishment establishment, String username);
 
 }

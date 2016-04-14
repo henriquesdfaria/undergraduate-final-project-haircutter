@@ -1,45 +1,31 @@
-package br.com.haircutter.core.model;
+package br.com.haircutter.admin.facade.json;
 
-import br.com.haircutter.core.enums.UserRoleEnum;
+import br.com.haircutter.admin.enums.UserRoleEnum;
 
-import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
-@Entity
-@Table(name = "user")
-public class User implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+public class UserJson {
 
-    @Id
-    @Column(name = "username")
     private String username;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "password")
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role")
     private UserRoleEnum role;
 
-    @Column(name = "enabled")
     private Boolean enabled;
 
-    @Column(name = "creation_time")
     private Date creationTime;
 
-    @Column(name = "last_modified_date")
     private Date lastModifiedDate;
 
-    public User() {
+    public UserJson() {
 
     }
 
-    public User(String username, String name, String password, UserRoleEnum role, Boolean enabled, Date creationTime, Date lastModifiedDate) {
+    public UserJson(String username, String name, String password, UserRoleEnum role, Boolean enabled, Date creationTime, Date lastModifiedDate) {
         this.username = username;
         this.name = name;
         this.password = password;
