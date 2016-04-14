@@ -10,14 +10,9 @@
         <div class="alert alert-danger" ng-show="internalError">
           Não foi possivel criar o funcionário, tente novamente mais tarde.
         </div>
-        <form name="employeeForm" ng-submit="employeeForm.$valid && createNewRequest(employee)"
+        <form name="employeeForm" ng-submit="employeeForm.$valid"
               class="form-horizontal" novalidate>
           <fieldset>
-            <div class="content-subheading">
-              <i class="icon-user fa"></i>
-              Informações do Proprietário
-            </div>
-
             <div class="form-group required">
               <label class="col-md-4 control-label">Nome
                 <sup>*</sup>
@@ -28,8 +23,7 @@
                        class="form-control input-md" required="" type="text">
                 <div class="text-danger"
                      ng-show="employeeForm.$submitted || employeeForm.employeeName.$touched">
-                  <p ng-show="employeeForm.employeeName.$error.required">Nome do
-                    Nome é um campo obrigatório.</p>
+                  <p ng-show="employeeForm.employeeName.$error.required">Nome é um campo obrigatório.</p>
                 </div>
               </div>
             </div>
@@ -41,12 +35,11 @@
               <div class="col-md-6">
                 <input name="employeeUsername" ng-model="employee.user.username"
                        ng-required="true" placeholder="Username" class="form-control input-md" required=""
-                       type="email">
+                       type="text">
                 <div class="text-danger"
                      ng-show="employeeForm.$submitted || employeeForm.employeeUsername.$touched">
                   <p ng-show="employeeForm.employeeUsername.$error.required">Usuário é um
                     campo obrigatório.</p>
-                  <p ng-show="employeeForm.employeeUsername.$error.email">Usuário inválido.</p>
                 </div>
               </div>
             </div>
@@ -57,7 +50,7 @@
               </label>
               <div class="col-md-6">
                 <select id="employeeRole" name="employeeRole"
-                        ng-model="employee.user.userRoles[0]" ng-required="true" class="form-control">
+                        ng-model="employee.user.role" ng-required="true" class="form-control">
                   <option value="" disabled selected>Selecione</option>
                   <option value="ROLE_MANAGER">Gerente</option>
                   <option value="ROLE_PROFESSIONAL">Profissional</option>

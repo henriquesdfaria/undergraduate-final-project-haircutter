@@ -12,7 +12,7 @@ establishmentAdminControllers.controller('AuditLogsController', ['$scope', '$htt
             $scope.getLoggedUser = function () {
                 $http({
                         method: 'GET',
-                        url: '/api/public/get-logged-user',
+                        url: '/api/public/get-logged-user'
                     }
                 ).success(function (data) {
                         $scope.loggedUser = data;
@@ -50,7 +50,7 @@ establishmentAdminControllers.controller('EstablishmentProfileController', ['$sc
             $scope.getLoggedUser = function () {
                 $http({
                         method: 'GET',
-                        url: '/api/public/get-logged-user',
+                        url: '/api/public/get-logged-user'
                     }
                 ).success(function (data) {
                         $scope.loggedUser = data;
@@ -76,7 +76,7 @@ establishmentAdminControllers.controller('EstablishmentProfileController', ['$sc
                 $http({
                         method: 'PUT',
                         url: '/api/establishment-admin/establishment/profile',
-                        data: $scope.establishment,
+                        data: $scope.establishment
                     }
                 )
             }
@@ -95,7 +95,7 @@ establishmentAdminControllers.controller('EstablishmentEmployeesController', ['$
             $scope.getLoggedUser = function () {
                 $http({
                         method: 'GET',
-                        url: '/api/public/get-logged-user',
+                        url: '/api/public/get-logged-user'
                     }
                 ).success(function (data) {
                         $scope.loggedUser = data;
@@ -130,7 +130,7 @@ establishmentAdminControllers.controller('CreateEstablishmentEmployeeController'
             $scope.getLoggedUser = function () {
                 $http({
                         method: 'GET',
-                        url: '/api/public/get-logged-user',
+                        url: '/api/public/get-logged-user'
                     }
                 ).success(function (data) {
                         $scope.loggedUser = data;
@@ -142,12 +142,14 @@ establishmentAdminControllers.controller('CreateEstablishmentEmployeeController'
                 $http({
                         method: 'POST',
                         url: '/api/establishment-admin/employee',
-                        data: employee,
+                        data: employee
                     }
                 ).success(function () {
                         $location.path('#/establishment/employees');
                     }
-                );
+                ).error(function () {
+                    $scope.internalError = true;
+                });
             }
 
             $scope.getLoggedUser();
@@ -156,14 +158,14 @@ establishmentAdminControllers.controller('CreateEstablishmentEmployeeController'
 );
 
 /* ESTABLISHMENT EMPLOYEE CONTROLLER*/
-establishmentAdminControllers.controller('EstablishmentEmployeeController', ['$scope', '$routeParams', '$http',
-        function ($scope, $routeParams, $http) {
+establishmentAdminControllers.controller('EstablishmentEmployeeController', ['$scope', '$routeParams', '$http', '$location',
+        function ($scope, $routeParams, $http, $location) {
             $scope.establishmentEmployeesActiveMenu = 'active';
 
             $scope.getLoggedUser = function () {
                 $http({
                         method: 'GET',
-                        url: '/api/public/get-logged-user',
+                        url: '/api/public/get-logged-user'
                     }
                 ).success(function (data) {
                         $scope.loggedUser = data;
@@ -172,7 +174,31 @@ establishmentAdminControllers.controller('EstablishmentEmployeeController', ['$s
             }
 
 
+            $scope.getEmployee = function () {
+                $http({
+                    method: 'GET',
+                    url: '/api/establishment-admin/employee/' + $routeParams.employeeId
+                }).success(function (data) {
+                    $scope.employee = data;
+                });
+            }
+
+            $scope.save = function (employee) {
+                $http({
+                        method: 'PUT',
+                        url: '/api/establishment-admin/employee',
+                        data: $scope.employee
+                    }
+                ).success(function () {
+                        $location.path('#/establishment/employees');
+                    }
+                ).error(function () {
+                    $scope.internalError = true;
+                });
+            }
+
             $scope.getLoggedUser();
+            $scope.getEmployee();
         }
     ]
 );

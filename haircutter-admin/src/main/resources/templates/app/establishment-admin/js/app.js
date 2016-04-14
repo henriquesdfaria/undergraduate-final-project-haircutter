@@ -27,7 +27,7 @@ establishmentAdminApp.config(['$routeProvider',
                         controller: 'EstablishmentEmployeesController'
                     }
                 )
-                .when('/establishment/employees/employee', {
+                .when('/establishment/employees/employee/:employeeId', {
                         templateUrl: 'establishment-admin/partials/establishment-employee-content.html',
                         controller: 'EstablishmentEmployeeController'
                     }
