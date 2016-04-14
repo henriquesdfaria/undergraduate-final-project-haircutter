@@ -18,7 +18,7 @@ public class EstablishmentServiceValidator {
 		if (establishment.getCnpj() == null) {
 			throw new CustomInvalidException("The field is required", "cnpj");
 		}
-		
+
 		if (!BrazilCNPValidator.isValidCNPJ(establishment.getCnpj())) {
 			throw new CustomInvalidException("The CNPJ is invalid", "cnpj");
 		}
@@ -50,7 +50,7 @@ public class EstablishmentServiceValidator {
 		if (establishment.getOwnerCpf() == null) {
 			throw new CustomInvalidException("The field is required", "ownerCpf");
 		}
-		
+
 		if (!BrazilCNPValidator.isValidCPF(establishment.getOwnerCpf())) {
 			throw new CustomInvalidException("The CPF is invalid", "ownerCpf");
 		}
@@ -66,5 +66,11 @@ public class EstablishmentServiceValidator {
 		addressValidator.validate(establishment.getAddress());
 
 	}
-	
+
+	public void validateInactivate(Establishment establishment) {	
+		if (establishment == null) {
+			throw new CustomInvalidException("Establishment not found", "cnpj");
+		}
+		
+	}
 }
