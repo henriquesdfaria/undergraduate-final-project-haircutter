@@ -37,7 +37,7 @@ public class EstablishmentEmployeeValidator {
 
         if (!(UserRoleEnum.ROLE_ATTENDANT.equals(establishmentEmployee.getUser().getRole())
                 || UserRoleEnum.ROLE_MANAGER.equals(establishmentEmployee.getUser().getRole())
-                || UserRoleEnum.ROLE_PROFFESSIONAL.equals(establishmentEmployee.getUser().getRole()))) {
+                || UserRoleEnum.ROLE_PROFESSIONAL.equals(establishmentEmployee.getUser().getRole()))) {
 
             throw new CustomInvalidException("Invalid role", "role");
         }
@@ -66,7 +66,7 @@ public class EstablishmentEmployeeValidator {
 
         if (!(UserRoleEnum.ROLE_ATTENDANT.equals(establishmentEmployee.getUser().getRole())
                 || UserRoleEnum.ROLE_MANAGER.equals(establishmentEmployee.getUser().getRole())
-                || UserRoleEnum.ROLE_PROFFESSIONAL.equals(establishmentEmployee.getUser().getRole()))) {
+                || UserRoleEnum.ROLE_PROFESSIONAL.equals(establishmentEmployee.getUser().getRole()))) {
 
             throw new CustomInvalidException("Invalid role", "role");
         }
