@@ -35,7 +35,7 @@ public class EstablishmentFacade {
     }
 
     @RequestMapping(value = {"/profile"}, method = RequestMethod.PUT)
-    public ResponseEntity<?> edit(Establishment establishment, @RequestParam("username") String username) {
+    public ResponseEntity<?> edit(@RequestBody Establishment establishment, @RequestParam("username") String username) {
 
         LOGGER.info("Started - Edit establishment",
                 StructuredArguments.value("payload", establishment));

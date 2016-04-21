@@ -41,7 +41,7 @@ public class EstablishmentCreationRequestServiceImpl implements EstablishmentCre
 
         establishment.setStatus(EstablishmentStatusEnum.WAITING);
 
-        Date now =  new Date(ZonedDateTime.now().toInstant().toEpochMilli());
+        Date now = new Date(ZonedDateTime.now().toInstant().toEpochMilli());
 
         establishment.setCreationTime(now);
         establishment.setLastModifiedDate(now);
@@ -87,12 +87,13 @@ public class EstablishmentCreationRequestServiceImpl implements EstablishmentCre
     }
 
     @Override
-    public void deny(final String cnpj) {
+    public void deny(final Establishment establishment) {
 
-        Establishment creationRequest = establishmentRepository.findOneByCnpj(cnpj);
+        Establishment creationRequest = establishmentRepository.findOneByCnpj(establishment.getCnpj());
 
         validator.validateApproveOrDeny(creationRequest);
 
+        creationRequest.setDisapproveCause(establishment.getDisapproveCause());
         creationRequest.setStatus(EstablishmentStatusEnum.DENIED);
         creationRequest.setLastModifiedDate(new Date(ZonedDateTime.now().toInstant().toEpochMilli()));
 
@@ -120,7 +121,9 @@ public class EstablishmentCreationRequestServiceImpl implements EstablishmentCre
         String subject = "Estabelecimento não aprovado";
 
         String text = "Olá " + establishment.getOwnerName() + ",\n\n"
-                + "Infelizmente sua solicitação não foi aprovada!\n\n" + "\n\nEquipe Haircutter";
+                + "Infelizmente sua solicitação não foi aprovada!\n\n"
+                + (establishment.getDisapproveCause() != null ? establishment.getDisapproveCause() : "")
+                + "\n\nEquipe Haircutter";
 
         mailSender.sendEmail(establishment.getOwnerEmail(), subject, text);
     }

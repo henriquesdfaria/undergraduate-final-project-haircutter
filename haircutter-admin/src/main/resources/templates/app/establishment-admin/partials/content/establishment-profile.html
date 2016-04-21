@@ -10,7 +10,7 @@
                 <div class="alert alert-danger" ng-show="internalError">
                     Não foi possivel realizar a edição do perfil, tente novamente mais tarde.
                 </div>
-                <form name="establishmentForm" ng-submit="establishmentForm.$valid && editProfileSettings()"
+                <form name="establishmentForm" ng-submit="establishmentForm.$valid && editProfileSettings(establishment)"
                       class="form-horizontal" novalidate>
                     <fieldset>
                         <div class="form-group required">
@@ -219,7 +219,7 @@
                             <div class="col-md-8">
                                 <div class="termbox mb10"></div>
                                 <div style="clear:both"></div>
-                                <a type="submit" class="btn btn-success">Salvar</a>
+                                <button type="submit" class="btn btn-success">Salvar</button>
                             </div>
                         </div>
                     </fieldset>

@@ -1,0 +1,36 @@
+<div class="modal fade" id="denyModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title"><i class=" icon-mail-2"></i> Reprovar criação de estabelecimento </h4>
+      </div>
+      <div class="modal-body">
+        <form name="disapproveForm" ng-submit="disapproveForm.$valid && denyECR(selectedECR)" novalidate>
+          <div class="form-group">
+            <p class="control-label"><strong>Razão Social</strong>: {{selectedECR.name}}</p>
+          </div>
+          <div class="form-group">
+            <p class="control-label"><strong>CNPJ:</strong> {{selectedECR.cnpj}}</p>
+          </div>
+          <div class="form-group">
+            <label for="selectedECRdisapproveCause" class="control-label">Motivo:<sup>*</sup></label>
+                        <textarea class="form-control" name="selectedECRdisapproveCause" id="selectedECRdisapproveCause"
+                                  ng-model="selectedECR.disapproveCause" ng-required="true" placeholder="Mensagem" data-placement="top"
+                                  data-trigger="manual">
+                        </textarea>
+            <div class="text-danger"
+                 ng-show="disapproveForm.$submitted || disapproveForm.selectedECRdisapproveCause.$touched">
+              <p ng-show="disapproveForm.selectedECRdisapproveCause.$error.required">Motivo é um campo obrigatório.</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-danger pull-right">Reprovar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

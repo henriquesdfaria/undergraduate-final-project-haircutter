@@ -5,110 +5,115 @@
       Solicitações para cadastro de Estabelecimento
     </h2>
     <div class="table-responsive">
-      <table id="addManageTable" class="table table-striped table-bordered add-manage-table table demo footable-loaded footable" data-filter="#filter" data-filter-text-only="true">
+      <table id="addManageTable"
+             class="table table-striped table-bordered add-manage-table table demo footable-loaded footable"
+             data-filter="#filter" data-filter-text-only="true">
         <thead>
-          <tr>
-            <th data-sort-ignore="true">
-              Detalhes
-            </th>
-            <th data-type="numeric">
-              Contato
-            </th>
-            <th>
-              Ação
-            </th>
-          </tr>
+        <tr>
+          <th data-sort-ignore="true">
+            Detalhes
+          </th>
+          <th data-type="numeric">
+            Contato
+          </th>
+          <th>
+            Ação
+          </th>
+        </tr>
         </thead>
         <tbody ng-repeat="ecr in establishmentCreationRequests">
-          <tr>
-            <td style="width:56%" class="ads-details-td">
-              <div>
-                <p>
-                  <strong>
-                    Razão Social:
-                  </strong>
-                  {{ecr.name}}
-                </p>
-                <p>
-                  <strong>
-                    CNPJ:
-                  </strong>
-                  {{ecr.cnpj}}
-                </p>
-                <p>
-                  <strong>
-                    Descrição:
-                  </strong>
-                  {{ecr.description}}
-                </p>
-                <p>
-                  <strong>
-                    Proprietário:
-                  </strong>
-                  {{ecr.ownerName}}
-                </p>
-                <p>
-                  <strong>
-                    CPF:
-                  </strong>
-                  {{ecr.ownerCpf}}
-                </p>
-                <p>
-                  <strong>
-                    Endereço:
-                  </strong>
-                  {{ecr.address.street}} - {{ecr.address.neighborhood}} - {{ecr.address.city}} - {{ecr.address.state}}
-                </p>
-              </div>
-            </td>
-            <td style="width:20%" class="ads-details-td">
-              <div>
-                <p>
-                  <strong>
-                    Telefone Pessoal:
-                  </strong>
-                </p>
-                <p>
-                  {{ecr.ownerPhone}}
-                </p>
-                <p>
-                  <strong>
-                    Telefone Comercial:
-                  </strong>
-                </p>
-                <p>
-                  {{ecr.phone}}
-                </p>
-                <p>
-                  <strong>
-                    E-mail:
-                  </strong>
-                </p>
-                <p>
-                  {{ecr.ownerEmail}}
-                </p>
-              </div>
-            </td>
-            <td style="width:8%" class="action-td">
-              <div>
-                <p>
-                  <a ng-click="approveCreation(ecr.cnpj)" class="btn btn-primary btn-xs">
-                    <i class="fa fa-check"></i>
-                    Aprovar
-                  </a>
-                </p>
-                <p>
-                  <a ng-click="repproveCreation(ecr.cnpj)" class="btn btn-danger btn-xs">
-                    <i class=" fa fa-close"></i>
-                    Reprovar
-                  </a>
-                </p>
-              </div>
-            </td>
-          </tr>
+        <tr>
+          <td style="width:56%" class="ads-details-td">
+            <div>
+              <p>
+                <strong>
+                  Razão Social:
+                </strong>
+                {{ecr.name}}
+              </p>
+              <p>
+                <strong>
+                  CNPJ:
+                </strong>
+                {{ecr.cnpj}}
+              </p>
+              <p>
+                <strong>
+                  Descrição:
+                </strong>
+                {{ecr.description}}
+              </p>
+              <p>
+                <strong>
+                  Proprietário:
+                </strong>
+                {{ecr.ownerName}}
+              </p>
+              <p>
+                <strong>
+                  CPF:
+                </strong>
+                {{ecr.ownerCpf}}
+              </p>
+              <p>
+                <strong>
+                  Endereço:
+                </strong>
+                {{ecr.address.street}} - {{ecr.address.neighborhood}} - {{ecr.address.city}} -
+                {{ecr.address.state}}
+              </p>
+            </div>
+          </td>
+          <td style="width:20%" class="ads-details-td">
+            <div>
+              <p>
+                <strong>
+                  Telefone Pessoal:
+                </strong>
+              </p>
+              <p>
+                {{ecr.ownerPhone}}
+              </p>
+              <p>
+                <strong>
+                  Telefone Comercial:
+                </strong>
+              </p>
+              <p>
+                {{ecr.phone}}
+              </p>
+              <p>
+                <strong>
+                  E-mail:
+                </strong>
+              </p>
+              <p>
+                {{ecr.ownerEmail}}
+              </p>
+            </div>
+          </td>
+          <td style="width:8%" class="action-td">
+            <div>
+              <p>
+                <a ng-click="approveCreation(ecr.cnpj)" class="btn btn-primary btn-xs">
+                  <i class="fa fa-check"></i>
+                  Aprovar
+                </a>
+              </p>
+              <p>
+                <a data-target="#denyModal" class="btn btn-danger btn-xs"
+                   ng-click="getSelectedECR(ecr)" data-toggle="modal"
+                   class="btn btn-default btn-block">
+                  <i class=" fa fa-close"></i>
+                  Reprovar
+                </a>
+              </p>
+            </div>
+          </td>
+        </tr>
         </tbody>
       </table>
     </div>
-
+    <div ng-include="'/moderator/partials/content/establishment-deny-modal.html'"></div>
   </div>
 </div>

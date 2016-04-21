@@ -2,7 +2,6 @@ package br.com.haircutter.admin.endpoint;
 
 import br.com.haircutter.admin.facade.json.EstablishmentJson;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -25,21 +24,12 @@ public class EstablishmentCreationRequestEndpoint {
         return restTemplate.getForObject(API_URL + "/establishment/creation-requests", Object.class);
     }
 
-    public Object approveCreationRequest(final String cnpj) {
-
-        return restTemplate.exchange(
-                API_URL + "/establishment/creation-request/approve/" + cnpj,
-                HttpMethod.PUT,
-                null,
-                Object.class);
+    public void approveCreationRequest(final String cnpj) {
+        restTemplate.put(API_URL + "/establishment/creation-request/approve/" + cnpj, null);
     }
 
-    public Object denyCreationRequest(final String cnpj) {
-
-        return restTemplate.exchange(
-                API_URL + "/establishment/creation-request/deny/" + cnpj,
-                HttpMethod.PUT, null,
-                Object.class);
+    public void denyCreationRequest(final EstablishmentJson establishmentJson) {
+        restTemplate.put(API_URL + "/establishment/creation-request/deny", establishmentJson);
     }
 
 }

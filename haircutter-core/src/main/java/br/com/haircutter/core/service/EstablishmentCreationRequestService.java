@@ -12,6 +12,6 @@ public interface EstablishmentCreationRequestService {
 
     void approve(String cnpj);
 
-    void deny(String cnpj);
+    void deny(Establishment establishment);
 
 }

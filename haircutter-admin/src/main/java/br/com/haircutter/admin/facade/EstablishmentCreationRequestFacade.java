@@ -26,15 +26,13 @@ public class EstablishmentCreationRequestFacade {
     }
 
     @RequestMapping(value = "/moderator/establishment/creation-request/approve/{cnpj}", method = RequestMethod.PUT)
-    public ResponseEntity<?> approveCreationRequest(@PathVariable("cnpj") String cnpj) {
-
-        return ResponseEntity.ok(endpoint.approveCreationRequest(cnpj));
+    public void approveCreationRequest(@PathVariable("cnpj") String cnpj) {
+        endpoint.approveCreationRequest(cnpj);
     }
 
-    @RequestMapping(value = "/moderator/establishment/creation-request/deny/{cnpj}", method = RequestMethod.PUT)
-    public ResponseEntity<?> denyCreationRequest(@PathVariable("cnpj") String cnpj) {
-
-        return ResponseEntity.ok(endpoint.denyCreationRequest(cnpj));
+    @RequestMapping(value = "/moderator/establishment/creation-request/deny", method = RequestMethod.PUT)
+    public void denyCreationRequest(@RequestBody EstablishmentJson establishmentJson) {
+        endpoint.denyCreationRequest(establishmentJson);
     }
 
 }

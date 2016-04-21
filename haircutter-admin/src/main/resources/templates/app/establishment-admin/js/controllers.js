@@ -69,11 +69,11 @@ establishmentAdminControllers.controller('EstablishmentProfileController', ['$sc
                 );
             }
 
-            $scope.editProfileSettings = function () {
+            $scope.editProfileSettings = function (establishment) {
                 $http({
                         method: 'PUT',
                         url: '/api/establishment-admin/establishment/profile',
-                        data: $scope.establishment
+                        data: establishment
                     }
                 )
             }

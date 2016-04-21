@@ -34,6 +34,9 @@ public class Establishment implements Serializable {
     @Column(name = "status")
     private EstablishmentStatusEnum status;
 
+    @Column(name = "disapprove_cause")
+    private String disapproveCause;
+
     @Column(name = "owner_name")
     private String ownerName;
 
@@ -56,33 +59,20 @@ public class Establishment implements Serializable {
 
     }
 
-    public Establishment(String cnpj, String name, String description, Address address, String phone,
-                         EstablishmentStatusEnum status, String ownerName, String ownerCpf, String ownerEmail,
-                         String ownerPhone, Date creationTime, Date lastModifiedDate) {
+    public Establishment(String cnpj, String name, String description, Address address, String phone, EstablishmentStatusEnum status, String disapproveCause, String ownerName, String ownerCpf, String ownerEmail, String ownerPhone, Date creationTime, Date lastModifiedDate) {
         this.cnpj = cnpj;
         this.name = name;
         this.description = description;
         this.address = address;
         this.phone = phone;
         this.status = status;
+        this.disapproveCause = disapproveCause;
         this.ownerName = ownerName;
         this.ownerCpf = ownerCpf;
         this.ownerEmail = ownerEmail;
         this.ownerPhone = ownerPhone;
         this.creationTime = creationTime;
         this.lastModifiedDate = lastModifiedDate;
-    }
-
-    public EstablishmentStatusEnum getStatus() {
-        return status;
-    }
-
-    public void setStatus(EstablishmentStatusEnum status) {
-        this.status = status;
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
     }
 
     public String getCnpj() {
@@ -123,6 +113,22 @@ public class Establishment implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public EstablishmentStatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(EstablishmentStatusEnum status) {
+        this.status = status;
+    }
+
+    public String getDisapproveCause() {
+        return disapproveCause;
+    }
+
+    public void setDisapproveCause(String disapproveCause) {
+        this.disapproveCause = disapproveCause;
     }
 
     public String getOwnerName() {

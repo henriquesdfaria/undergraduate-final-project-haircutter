@@ -43,7 +43,7 @@ public class EstablishmentCreationRequestFacade {
 	}
 
 	@RequestMapping(value = {"/creation-request/approve/{cnpj}"}, method = RequestMethod.PUT)
-	public ResponseEntity<?> approve(@PathVariable("cnpj") String cnpj) {
+	public void approve(@PathVariable("cnpj") String cnpj) {
 
 		LOGGER.info("Started - Approve Creation Request",
 				StructuredArguments.value("payload", cnpj));
@@ -52,22 +52,18 @@ public class EstablishmentCreationRequestFacade {
 		
 		LOGGER.info("Ended - Approve Creation Request",
 				StructuredArguments.value("payload", null));
-
-        return ResponseEntity.ok().build();
 	}
 
-	@RequestMapping(value = {"/creation-request/deny/{cnpj}"}, method = RequestMethod.PUT)
-	public ResponseEntity<?> deny(@PathVariable("cnpj") String cnpj) {
+	@RequestMapping(value = {"/creation-request/deny"}, method = RequestMethod.PUT)
+	public void deny(@RequestBody Establishment establishment) {
 
 		LOGGER.info("Started - Deny Creation Request",
-				StructuredArguments.value("payload", cnpj));
+				StructuredArguments.value("payload", establishment));
 
-		service.deny(cnpj);
+		service.deny(establishment);
 		
 		LOGGER.info("Ended - Deny Creation Request",
 				StructuredArguments.value("payload", null));
-
-        return ResponseEntity.ok().build();
 	}
 
 }

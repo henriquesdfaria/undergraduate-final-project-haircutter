@@ -1,151 +1,158 @@
 package br.com.haircutter.admin.facade.json;
 
-import java.util.Date;
-
 import br.com.haircutter.admin.enums.EstablishmentStatusEnum;
+
+import java.util.Date;
 
 public class EstablishmentJson {
 
-	private String cnpj;
+    private String cnpj;
 
-	private String name;
+    private String name;
 
-	private String description;
+    private String description;
 
-	private AddressJson address;
+    private AddressJson address;
 
-	private String phone;
+    private String phone;
 
-	private EstablishmentStatusEnum status;
+    private EstablishmentStatusEnum status;
 
-	private String ownerName;
+    private String disapproveCause;
 
-	private String ownerCpf;
+    private String ownerName;
 
-	private String ownerEmail;
+    private String ownerCpf;
 
-	private String ownerPhone;
+    private String ownerEmail;
 
-	private Date creationTime;
+    private String ownerPhone;
 
-	private Date lastModifiedDate;
+    private Date creationTime;
 
-	public EstablishmentJson() {
+    private Date lastModifiedDate;
 
-	}
+    public EstablishmentJson() {
 
-	public EstablishmentJson(String cnpj, String name, String description, AddressJson address, String phone,
-			EstablishmentStatusEnum status, String ownerName, String ownerCpf, String ownerEmail, String ownerPhone,
-			Date creationTime, Date lastModifiedDate) {
-		super();
-		this.cnpj = cnpj;
-		this.name = name;
-		this.description = description;
-		this.address = address;
-		this.phone = phone;
-		this.status = status;
-		this.ownerName = ownerName;
-		this.ownerCpf = ownerCpf;
-		this.ownerEmail = ownerEmail;
-		this.ownerPhone = ownerPhone;
-		this.creationTime = creationTime;
-		this.lastModifiedDate = lastModifiedDate;
-	}
+    }
 
-	public String getCnpj() {
-		return cnpj;
-	}
+    public EstablishmentJson(String cnpj, String name, String description, AddressJson address, String phone, EstablishmentStatusEnum status, String disapproveCause, String ownerName, String ownerCpf, String ownerEmail, String ownerPhone, Date creationTime, Date lastModifiedDate) {
+        this.cnpj = cnpj;
+        this.name = name;
+        this.description = description;
+        this.address = address;
+        this.phone = phone;
+        this.status = status;
+        this.disapproveCause = disapproveCause;
+        this.ownerName = ownerName;
+        this.ownerCpf = ownerCpf;
+        this.ownerEmail = ownerEmail;
+        this.ownerPhone = ownerPhone;
+        this.creationTime = creationTime;
+        this.lastModifiedDate = lastModifiedDate;
+    }
 
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
+    public String getCnpj() {
+        return cnpj;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public AddressJson getAddress() {
-		return address;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setAddress(AddressJson address) {
-		this.address = address;
-	}
+    public AddressJson getAddress() {
+        return address;
+    }
 
-	public String getPhone() {
-		return phone;
-	}
+    public void setAddress(AddressJson address) {
+        this.address = address;
+    }
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    public String getPhone() {
+        return phone;
+    }
 
-	public EstablishmentStatusEnum getStatus() {
-		return status;
-	}
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-	public void setStatus(EstablishmentStatusEnum status) {
-		this.status = status;
-	}
+    public EstablishmentStatusEnum getStatus() {
+        return status;
+    }
 
-	public String getOwnerName() {
-		return ownerName;
-	}
+    public void setStatus(EstablishmentStatusEnum status) {
+        this.status = status;
+    }
 
-	public void setOwnerName(String ownerName) {
-		this.ownerName = ownerName;
-	}
+    public String getDisapproveCause() {
+        return disapproveCause;
+    }
 
-	public String getOwnerCpf() {
-		return ownerCpf;
-	}
+    public void setDisapproveCause(String disapproveCause) {
+        this.disapproveCause = disapproveCause;
+    }
 
-	public void setOwnerCpf(String ownerCpf) {
-		this.ownerCpf = ownerCpf;
-	}
+    public String getOwnerName() {
+        return ownerName;
+    }
 
-	public String getOwnerEmail() {
-		return ownerEmail;
-	}
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
 
-	public void setOwnerEmail(String ownerEmail) {
-		this.ownerEmail = ownerEmail;
-	}
+    public String getOwnerCpf() {
+        return ownerCpf;
+    }
 
-	public String getOwnerPhone() {
-		return ownerPhone;
-	}
+    public void setOwnerCpf(String ownerCpf) {
+        this.ownerCpf = ownerCpf;
+    }
 
-	public void setOwnerPhone(String ownerPhone) {
-		this.ownerPhone = ownerPhone;
-	}
+    public String getOwnerEmail() {
+        return ownerEmail;
+    }
 
-	public Date getCreationTime() {
-		return creationTime;
-	}
+    public void setOwnerEmail(String ownerEmail) {
+        this.ownerEmail = ownerEmail;
+    }
 
-	public void setCreationTime(Date creationTime) {
-		this.creationTime = creationTime;
-	}
+    public String getOwnerPhone() {
+        return ownerPhone;
+    }
 
-	public Date getLastModifiedDate() {
-		return lastModifiedDate;
-	}
+    public void setOwnerPhone(String ownerPhone) {
+        this.ownerPhone = ownerPhone;
+    }
 
-	public void setLastModifiedDate(Date lastModifiedDate) {
-		this.lastModifiedDate = lastModifiedDate;
-	}
+    public Date getCreationTime() {
+        return creationTime;
+    }
 
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public Date getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public void setLastModifiedDate(Date lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
 }

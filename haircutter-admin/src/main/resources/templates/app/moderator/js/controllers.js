@@ -43,14 +43,21 @@ moderatorControllers.controller('Controller', ['$scope', '$http', '$location',
 
     }
 
-    // APPROVE CREATION REQUESTS
-    $scope.repproveCreation = function (cnpj) {
+    // DENY CREATION REQUEST
+    $scope.denyECR = function (ecr) {
       $http({
         method: 'PUT',
-        url: 'http://localhost:8050/api/moderator/establishment/creation-request/deny/' + cnpj,
+        url: 'http://localhost:8050/api/moderator/establishment/creation-request/deny',
+        data: ecr
       }).success(function() {
         $scope.getCreationRequests();
+        window.location.reload();
       });
+    }
+
+    // GET THE SELECTED ESTABLISHMENT CREATION REQUEST
+    $scope.getSelectedECR = function(ecr) {
+      $scope.selectedECR = ecr;
     }
 
     $scope.getLoggedUser();
