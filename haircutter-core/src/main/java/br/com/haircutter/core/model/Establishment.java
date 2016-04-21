@@ -34,8 +34,8 @@ public class Establishment implements Serializable {
     @Column(name = "status")
     private EstablishmentStatusEnum status;
 
-    @Column(name = "disapprove_cause")
-    private String disapproveCause;
+    @Column(name = "deny_cause")
+    private String denyCause;
 
     @Column(name = "owner_name")
     private String ownerName;
@@ -59,14 +59,14 @@ public class Establishment implements Serializable {
 
     }
 
-    public Establishment(String cnpj, String name, String description, Address address, String phone, EstablishmentStatusEnum status, String disapproveCause, String ownerName, String ownerCpf, String ownerEmail, String ownerPhone, Date creationTime, Date lastModifiedDate) {
+    public Establishment(String cnpj, String name, String description, Address address, String phone, EstablishmentStatusEnum status, String denyCause, String ownerName, String ownerCpf, String ownerEmail, String ownerPhone, Date creationTime, Date lastModifiedDate) {
         this.cnpj = cnpj;
         this.name = name;
         this.description = description;
         this.address = address;
         this.phone = phone;
         this.status = status;
-        this.disapproveCause = disapproveCause;
+        this.denyCause = denyCause;
         this.ownerName = ownerName;
         this.ownerCpf = ownerCpf;
         this.ownerEmail = ownerEmail;
@@ -123,12 +123,12 @@ public class Establishment implements Serializable {
         this.status = status;
     }
 
-    public String getDisapproveCause() {
-        return disapproveCause;
+    public String getDenyCause() {
+        return denyCause;
     }
 
-    public void setDisapproveCause(String disapproveCause) {
-        this.disapproveCause = disapproveCause;
+    public void setDenyCause(String denyCause) {
+        this.denyCause = denyCause;
     }
 
     public String getOwnerName() {

@@ -15,14 +15,14 @@
             <p class="control-label"><strong>CNPJ:</strong> {{selectedECR.cnpj}}</p>
           </div>
           <div class="form-group">
-            <label for="selectedECRdisapproveCause" class="control-label">Motivo:<sup>*</sup></label>
-                        <textarea class="form-control" name="selectedECRdisapproveCause" id="selectedECRdisapproveCause"
-                                  ng-model="selectedECR.disapproveCause" ng-required="true" placeholder="Mensagem" data-placement="top"
+            <label for="selectedECRdenyCause" class="control-label">Motivo:<sup>*</sup></label>
+                        <textarea class="form-control" name="selectedECRdenyCause" id="selectedECRdenyCause"
+                                  ng-model="selectedECR.denyCause" ng-required="true" placeholder="Mensagem" data-placement="top"
                                   data-trigger="manual">
                         </textarea>
             <div class="text-danger"
-                 ng-show="disapproveForm.$submitted || disapproveForm.selectedECRdisapproveCause.$touched">
-              <p ng-show="disapproveForm.selectedECRdisapproveCause.$error.required">Motivo é um campo obrigatório.</p>
+                 ng-show="disapproveForm.$submitted || disapproveForm.selectedECRdenyCause.$touched">
+              <p ng-show="disapproveForm.selectedECRdenyCause.$error.required">Motivo é um campo obrigatório.</p>
             </div>
           </div>
           <div class="modal-footer">

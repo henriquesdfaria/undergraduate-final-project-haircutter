@@ -18,7 +18,7 @@ public class EstablishmentJson {
 
     private EstablishmentStatusEnum status;
 
-    private String disapproveCause;
+    private String denyCause;
 
     private String ownerName;
 
@@ -36,14 +36,14 @@ public class EstablishmentJson {
 
     }
 
-    public EstablishmentJson(String cnpj, String name, String description, AddressJson address, String phone, EstablishmentStatusEnum status, String disapproveCause, String ownerName, String ownerCpf, String ownerEmail, String ownerPhone, Date creationTime, Date lastModifiedDate) {
+    public EstablishmentJson(String cnpj, String name, String description, AddressJson address, String phone, EstablishmentStatusEnum status, String denyCause, String ownerName, String ownerCpf, String ownerEmail, String ownerPhone, Date creationTime, Date lastModifiedDate) {
         this.cnpj = cnpj;
         this.name = name;
         this.description = description;
         this.address = address;
         this.phone = phone;
         this.status = status;
-        this.disapproveCause = disapproveCause;
+        this.denyCause = denyCause;
         this.ownerName = ownerName;
         this.ownerCpf = ownerCpf;
         this.ownerEmail = ownerEmail;
@@ -100,12 +100,12 @@ public class EstablishmentJson {
         this.status = status;
     }
 
-    public String getDisapproveCause() {
-        return disapproveCause;
+    public String getDenyCause() {
+        return denyCause;
     }
 
-    public void setDisapproveCause(String disapproveCause) {
-        this.disapproveCause = disapproveCause;
+    public void setDenyCause(String denyCause) {
+        this.denyCause = denyCause;
     }
 
     public String getOwnerName() {

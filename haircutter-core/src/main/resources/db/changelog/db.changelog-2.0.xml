@@ -56,7 +56,7 @@
             <column name="status" type="VARCHAR(25)">
                 <constraints nullable="false"/>
             </column>
-            <column name="disapprove_cause" type="VARCHAR(255)">
+            <column name="deny_cause" type="VARCHAR(255)">
                 <constraints nullable="true"/>
             </column>
             <column name="owner_name" type="VARCHAR(255)">

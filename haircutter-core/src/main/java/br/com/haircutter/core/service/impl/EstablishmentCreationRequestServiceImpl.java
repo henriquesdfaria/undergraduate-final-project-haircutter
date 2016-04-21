@@ -93,7 +93,7 @@ public class EstablishmentCreationRequestServiceImpl implements EstablishmentCre
 
         validator.validateApproveOrDeny(creationRequest);
 
-        creationRequest.setDisapproveCause(establishment.getDisapproveCause());
+        creationRequest.setDenyCause(establishment.getDenyCause());
         creationRequest.setStatus(EstablishmentStatusEnum.DENIED);
         creationRequest.setLastModifiedDate(new Date(ZonedDateTime.now().toInstant().toEpochMilli()));
 
@@ -122,7 +122,7 @@ public class EstablishmentCreationRequestServiceImpl implements EstablishmentCre
 
         String text = "Olá " + establishment.getOwnerName() + ",\n\n"
                 + "Infelizmente sua solicitação não foi aprovada!\n\n"
-                + (establishment.getDisapproveCause() != null ? establishment.getDisapproveCause() : "")
+                + (establishment.getDenyCause() != null ? establishment.getDenyCause() : "")
                 + "\n\nEquipe Haircutter";
 
         mailSender.sendEmail(establishment.getOwnerEmail(), subject, text);
