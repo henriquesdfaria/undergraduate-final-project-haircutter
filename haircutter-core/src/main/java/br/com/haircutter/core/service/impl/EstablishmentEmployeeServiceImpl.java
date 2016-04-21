@@ -63,7 +63,9 @@ public class EstablishmentEmployeeServiceImpl implements EstablishmentEmployeeSe
     @Override
     public void edit(EstablishmentEmployee establishmentEmployee, String username) {
 
-        validator.validateEdit(establishmentEmployee);
+        EstablishmentEmployee foundEmployee = repository.findOne(establishmentEmployee.getId());
+
+        validator.validateEdit(establishmentEmployee, foundEmployee.getUser().getUsername());
 
         establishmentEmployee.setLastModifiedDate(new Date(ZonedDateTime.now().toInstant().toEpochMilli()));
 
@@ -77,12 +79,12 @@ public class EstablishmentEmployeeServiceImpl implements EstablishmentEmployeeSe
 
         EstablishmentEmployee establishmentEmployee = repository.findOne(id);
 
-        repository.delete(id);
+        //repository.delete(id);
 
-       /* establishmentEmployee.setDeleted(true);
+        establishmentEmployee.setDeleted(true);
         establishmentEmployee.setLastModifiedDate(new Date(ZonedDateTime.now().toInstant().toEpochMilli()));
 
-        repository.save(establishmentEmployee);*/
+        repository.save(establishmentEmployee);
 
         auditLogService.registerLog(establishmentEmployee.getEstablishmentCnpj(), username, "Removeu usuário " + establishmentEmployee.getUser().getUsername());
     }

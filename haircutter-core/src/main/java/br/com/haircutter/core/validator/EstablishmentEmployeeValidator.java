@@ -44,7 +44,8 @@ public class EstablishmentEmployeeValidator {
 
     }
 
-    public void validateEdit(EstablishmentEmployee establishmentEmployee) {
+    public void validateEdit(EstablishmentEmployee establishmentEmployee, String foundUsername) {
+
 
         if (establishmentEmployee == null) {
             throw new CustomInvalidException("Should not be null", "establishmentEmployee");
@@ -59,6 +60,10 @@ public class EstablishmentEmployeeValidator {
         }
 
         userValidator.validate(establishmentEmployee.getUser());
+
+        if (!establishmentEmployee.getUser().getUsername().equals(foundUsername)) {
+            throw new CustomInvalidException("Should not change the username", "establishmentEmployee.user.username");
+        }
 
         if (establishmentEmployee.getUser().getRole() == null) {
             throw new CustomInvalidException("Should not be null", "role");
