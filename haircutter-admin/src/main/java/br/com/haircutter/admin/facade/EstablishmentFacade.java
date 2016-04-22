@@ -38,4 +38,11 @@ public class EstablishmentFacade {
 
         endpoint.edit(establishmentJson);
     }
+
+    @RequestMapping(value = "/establishment-admin/establishment/deactivate", method = RequestMethod.DELETE)
+    public void deactivate() {
+        String cnpj = service.getCnpjByLoggedUserUsername();
+
+        endpoint.deactivate(cnpj);
+    }
 }

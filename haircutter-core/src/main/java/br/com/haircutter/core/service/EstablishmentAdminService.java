@@ -5,4 +5,6 @@ import br.com.haircutter.core.model.Establishment;
 public interface EstablishmentAdminService {
 
     void createEstablishmentAdmin(Establishment establishment);
+
+    void disableEstablishmentAdmins(String cnpj);
 }

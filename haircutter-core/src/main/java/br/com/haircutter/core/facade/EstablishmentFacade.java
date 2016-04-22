@@ -35,7 +35,7 @@ public class EstablishmentFacade {
     }
 
     @RequestMapping(value = {"/profile"}, method = RequestMethod.PUT)
-    public ResponseEntity<?> edit(@RequestBody Establishment establishment, @RequestParam("username") String username) {
+    public void edit(@RequestBody Establishment establishment, @RequestParam("username") String username) {
 
         LOGGER.info("Started - Edit establishment",
                 StructuredArguments.value("payload", establishment));
@@ -43,8 +43,16 @@ public class EstablishmentFacade {
         service.edit(establishment, username);
 
         LOGGER.info("Ended - Edit establishment");
+    }
 
-        return ResponseEntity.ok().build();
+    @RequestMapping(value = "/{cnpj}/deactivate", method = RequestMethod.DELETE)
+    public void deactivate(@PathVariable String cnpj, @RequestParam("username") String username) {
+        LOGGER.info("Started - Deactivate establishment",
+                StructuredArguments.value("payload", cnpj));
+
+        service.deactivate(cnpj, username);
+
+        LOGGER.info("Ended - Deactivate establishment");
     }
 
 }

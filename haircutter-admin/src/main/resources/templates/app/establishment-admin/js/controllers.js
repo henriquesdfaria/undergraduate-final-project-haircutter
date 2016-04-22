@@ -75,7 +75,17 @@ establishmentAdminControllers.controller('EstablishmentProfileController', ['$sc
             url: '/api/establishment-admin/establishment/profile',
             data: establishment
           }
-        )
+        );
+      }
+
+      $scope.deactivateEstablishment = function () {
+        $http({
+            method: 'DELETE',
+            url: '/api/establishment-admin/establishment/deactivate'
+          }
+        ).success(function() {
+          window.location.href='logout';
+        });
       }
 
       $scope.getLoggedUser();

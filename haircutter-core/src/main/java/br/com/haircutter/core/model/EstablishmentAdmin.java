@@ -28,20 +28,15 @@ public class EstablishmentAdmin implements Serializable {
     @Column(name = "last_modified_date")
     private Date lastModifiedDate;
 
-    @Column(name = "deleted")
-    private Boolean deleted;
-
 	public EstablishmentAdmin() {
 
 	}
 
-    public EstablishmentAdmin(String establishmentCnpj, User user, Date creationTime, Date lastModifiedDate,
-                              Boolean deleted) {
+    public EstablishmentAdmin(String establishmentCnpj, User user, Date creationTime, Date lastModifiedDate) {
         this.establishmentCnpj = establishmentCnpj;
         this.user = user;
         this.creationTime = creationTime;
         this.lastModifiedDate = lastModifiedDate;
-        this.deleted = deleted;
     }
 
 	public Long getId() {
@@ -84,11 +79,4 @@ public class EstablishmentAdmin implements Serializable {
         this.lastModifiedDate = lastModifiedDate;
     }
 
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        this.deleted = deleted;
-    }
 }

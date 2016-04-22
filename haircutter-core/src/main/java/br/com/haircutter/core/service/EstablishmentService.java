@@ -11,4 +11,5 @@ public interface EstablishmentService {
 
     void edit(Establishment establishment, String username);
 
+    void deactivate(String cnpj, String username);
 }

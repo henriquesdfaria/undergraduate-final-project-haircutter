@@ -25,4 +25,7 @@ public class EstablishmentEndpoint {
                 establishmentJson);
     }
 
+    public void deactivate(String cnpj) {
+        restTemplate.delete(API_URL + "/establishment/" + cnpj + "/deactivate?username=" + LoggedUserUtils.getLoggedUserUsername());
+    }
 }

@@ -107,9 +107,6 @@
             <column name="last_modified_date" type="DATETIME">
                 <constraints nullable="false"/>
             </column>
-            <column name="deleted" type="BIT">
-                <constraints nullable="false"/>
-            </column>
         </createTable>
 
         <addForeignKeyConstraint constraintName="establishment_admin_user_fk"

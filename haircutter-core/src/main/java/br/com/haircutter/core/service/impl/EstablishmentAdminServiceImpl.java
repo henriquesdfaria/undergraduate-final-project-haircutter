@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class EstablishmentAdminServiceImpl implements EstablishmentAdminService {
@@ -27,7 +28,6 @@ public class EstablishmentAdminServiceImpl implements EstablishmentAdminService 
     public void createEstablishmentAdmin(Establishment establishment) {
 
 
-
         User user = new User(establishment.getCnpj(), establishment.getName(),
                 BCrypt.hashpw("haircutter", BCrypt.gensalt(10)), UserRoleEnum.ROLE_ESTABLISHMENT_ADMIN, true,
                 new Date(ZonedDateTime.now().toInstant().toEpochMilli()),
@@ -36,17 +36,29 @@ public class EstablishmentAdminServiceImpl implements EstablishmentAdminService 
         EstablishmentAdmin establishmentAdmin = establishmentAdminRespository.save(
                 new EstablishmentAdmin(establishment.getCnpj(), user,
                         new Date(ZonedDateTime.now().toInstant().toEpochMilli()),
-                        new Date(ZonedDateTime.now().toInstant().toEpochMilli()),
-                        false));
+                        new Date(ZonedDateTime.now().toInstant().toEpochMilli())));
 
-        sendCreationEmail(establishment.getOwnerEmail(), establishmentAdmin.getUser());
+        sendCreationEmail(establishment.getOwnerName(), establishment.getOwnerEmail(), establishmentAdmin.getUser());
     }
 
-    private void sendCreationEmail(String ownerEmail, User user) {
+    @Override
+    public void disableEstablishmentAdmins(String cnpj) {
+        List<EstablishmentAdmin> establishmentAdmins = establishmentAdminRespository.findByEstablishmentCnpj(cnpj);
+        Date now = new Date(ZonedDateTime.now().toInstant().toEpochMilli());
+
+        establishmentAdmins.stream().forEach(establishmentAdmin -> {
+            establishmentAdmin.getUser().setEnabled(false);
+            establishmentAdmin.getUser().setLastModifiedDate(now);
+            establishmentAdmin.setLastModifiedDate(now);
+            establishmentAdminRespository.save(establishmentAdmin);
+        });
+    }
+
+    private void sendCreationEmail(String ownerName, String ownerEmail, User user) {
 
         String subject = "Aprovação de Estabelecimento";
 
-        String text = "Olá " + user.getName() + ",\n\n"
+        String text = "Olá " + ownerName + ",\n\n"
                 + "Seu estabelecimento foi aprovado!\n\n" + "Usuário: " + user.getUsername() + "\n\n"
                 + "Senha: haircutter\n\n\n\nEquipe Haircutter";
 

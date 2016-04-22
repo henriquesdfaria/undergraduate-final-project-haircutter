@@ -1,9 +1,12 @@
 package br.com.haircutter.core.service.impl;
 
+import br.com.haircutter.core.enums.EstablishmentStatusEnum;
 import br.com.haircutter.core.model.Establishment;
 import br.com.haircutter.core.model.repository.EstablishmentRespository;
+import br.com.haircutter.core.service.EstablishmentAdminService;
 import br.com.haircutter.core.service.EstablishmentAuditLogService;
 import br.com.haircutter.core.service.EstablishmentService;
+import br.com.haircutter.core.utils.HaircutterMailSender;
 import br.com.haircutter.core.validator.EstablishmentServiceValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +29,12 @@ public class EstablishmentServiceImpl implements EstablishmentService {
     @Autowired
     EstablishmentAuditLogService auditLogService;
 
+    @Autowired
+    EstablishmentAdminService establishmentAdminService;
+
+    @Autowired
+    private HaircutterMailSender mailSender;
+
     @Override
     public Establishment get(String cnpj) {
 
@@ -42,5 +51,33 @@ public class EstablishmentServiceImpl implements EstablishmentService {
         Establishment editedEstablishment = establishmentRespository.save(establishment);
 
         auditLogService.registerLog(editedEstablishment.getCnpj(), username, "Editou perfil do estabelecimento");
+    }
+
+    @Override
+    public void deactivate(String cnpj, String username) {
+        Establishment foundEstablishement = establishmentRespository.findOneByCnpj(cnpj);
+
+        foundEstablishement.setLastModifiedDate(new Date(ZonedDateTime.now().toInstant().toEpochMilli()));
+        foundEstablishement.setStatus(EstablishmentStatusEnum.INACTIVE);
+
+        Establishment inactivatedEstablishment = establishmentRespository.save(foundEstablishement);
+
+        auditLogService.registerLog(inactivatedEstablishment.getCnpj(), username, "Editou perfil do estabelecimento");
+
+        establishmentAdminService.disableEstablishmentAdmins(inactivatedEstablishment.getCnpj());
+
+        sendEstablishmentInactivatedEmail(inactivatedEstablishment);
+    }
+
+    private void sendEstablishmentInactivatedEmail(final Establishment establishment) {
+
+        String subject = "Estabelecimento desativado";
+
+        String text = "Olá " + establishment.getOwnerName() + ",\n\n"
+                + "Você desativou o estabelecimento " + establishment.getName() + ".\n\n"
+                + "Caso deseje reativá-lo entre em contato conosco.\n\n"
+                + "\n\nEquipe Haircutter";
+
+        mailSender.sendEmail(establishment.getOwnerEmail(), subject, text);
     }
 }

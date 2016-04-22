@@ -1,23 +1,23 @@
 <div class="col-sm-9 page-content">
 
-    <div class="inner-box category-content">
-        <h2 class="title-2">
-            <i class="fa fa-file-text-o"></i>
-            <strong>Perfil</strong>
-        </h2>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="alert alert-danger" ng-show="internalError">
-                    Não foi possivel realizar a edição do perfil, tente novamente mais tarde.
-                </div>
-                <form name="establishmentForm" ng-submit="establishmentForm.$valid && editProfileSettings(establishment)"
-                      class="form-horizontal" novalidate>
-                    <fieldset>
-                        <div class="form-group required">
-                            <label class="col-md-4 control-label" for="textarea">Descrição
-                                <sup>*</sup>
-                            </label>
-                            <div class="col-md-6">
+  <div class="inner-box category-content">
+    <h2 class="title-2">
+      <i class="fa fa-file-text-o"></i>
+      <strong>Perfil</strong>
+    </h2>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="alert alert-danger" ng-show="internalError">
+          Não foi possivel realizar a edição do perfil, tente novamente mais tarde.
+        </div>
+        <form name="establishmentForm" ng-submit="establishmentForm.$valid && editProfileSettings(establishment)"
+              class="form-horizontal" novalidate>
+          <fieldset>
+            <div class="form-group required">
+              <label class="col-md-4 control-label" for="textarea">Descrição
+                <sup>*</sup>
+              </label>
+              <div class="col-md-6">
                                 <textarea name="establishmentDescription" ng-model="establishment.description"
                                           ng-trim="false" ng-required="true" ng-maxlength="maxlengthDescription"
                                           maxlength="{{maxlengthDescription}}" class="form-control" id="textarea"
@@ -25,207 +25,213 @@
                                 <span>Tamanho:
                                   {{establishment.description.length - 0}}
                                   caracteres.</span>
-                                <div class="text-danger"
-                                     ng-show="establishmentForm.$submitted || establishmentForm.establishmentDescription.$touched">
-                                    <p ng-show="establishmentForm.establishmentDescription.$error.required">Descrição é
-                                        um campo obrigatório.</p>
-                                    <p ng-show="establishmentForm.establishmentDescription.$error.maxlength">O tamanho
-                                        máximo do campo é
-                                        {{maxlengthDescription}}
-                                        caracteres.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group required">
-                            <label class="col-md-4 control-label">Telefone Comercial
-                                <sup>*</sup>
-                            </label>
-                            <div class="col-md-6">
-                                <input name="establishmentPhone" ng-model="establishment.phone" ng-required="true"
-                                       ui-br-phone-number placeholder="Telefone Comercial" class="form-control input-md"
-                                       required="" type="text">
-                                <div class="text-danger"
-                                     ng-show="establishmentForm.$submitted || establishmentForm.establishmentPhone.$touched">
-                                    <p ng-show="establishmentForm.establishmentPhone.$error.required">Telefone Comercial
-                                        é um campo obrigatório.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="content-subheading">
-                            <i class="icon-home fa"></i>
-                            Endereço do Estabelecimento
-                        </div>
-
-                        <div class="form-group required">
-                            <label class="col-md-4 control-label">Endereço
-                                <sup>*</sup>
-                            </label>
-                            <div class="col-md-6">
-                                <input name="establishmentAddressStreet" ng-model="establishment.address.street"
-                                       ng-required="true" placeholder="Av. Brasil, 123" class="form-control input-md"
-                                       required="" type="text">
-                                <div class="text-danger"
-                                     ng-show="establishmentForm.$submitted || establishmentForm.establishmentAddressStreet.$touched">
-                                    <p ng-show="establishmentForm.establishmentAddressStreet.$error.required">Rua é um
-                                        campo obrigatório.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group required">
-                            <label class="col-md-4 control-label">Bairro
-                                <sup>*</sup>
-                            </label>
-                            <div class="col-md-6">
-                                <input name="establishmentAddressNeighborhood"
-                                       ng-model="establishment.address.neighborhood" ng-required="true"
-                                       placeholder="Bairro" class="form-control input-md" required="" type="text">
-                                <div class="text-danger"
-                                     ng-show="establishmentForm.$submitted || establishmentForm.establishmentAddressNeighborhood.$touched">
-                                    <p ng-show="establishmentForm.establishmentAddressNeighborhood.$error.required">
-                                        Bairro é um campo obrigatório.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group required">
-                            <label class="col-md-4 control-label">Cidade
-                                <sup>*</sup>
-                            </label>
-                            <div class="col-md-6">
-                                <input name="establishmentAddressCity" ng-model="establishment.address.city"
-                                       ng-required="true" placeholder="Cidade" class="form-control input-md" required=""
-                                       type="text">
-                                <div class="text-danger"
-                                     ng-show="establishmentForm.$submitted || establishmentForm.establishmentAddressCity.$touched">
-                                    <p ng-show="establishmentForm.establishmentAddressCity.$error.required">Cidade é um
-                                        campo obrigatório.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group required">
-                            <label class="col-md-4 control-label" for="establishmentAddressState">Estado
-                                <sup>*</sup>
-                            </label>
-                            <div class="col-md-6">
-                                <select id="establishmentAddressState" name="establishmentAddressState"
-                                        ng-model="establishment.address.state" ng-required="true" class="form-control">
-                                    <option value="" disabled selected>Selecione</option>
-                                    <option value="SP">SP</option>
-                                </select>
-                                <div class="text-danger"
-                                     ng-show="establishmentForm.$submitted || establishmentForm.establishmentAddressState.$touched">
-                                    <p ng-show="establishmentForm.establishmentAddressState.$error.required">Selecione
-                                        um Estado.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group required">
-                            <label class="col-md-4 control-label">CEP
-                                <sup>*</sup>
-                            </label>
-                            <div class="col-md-6">
-                                <input name="establishmentAddressZipCode" ng-model="establishment.address.zipCode"
-                                       ng-required="true" ng-pattern="regexZipCode" ui-br-cep-mask placeholder="CEP"
-                                       class="form-control input-md" required="" type="text">
-                                <div class="text-danger"
-                                     ng-show="establishmentForm.$submitted || establishmentForm.establishmentAddressZipCode.$touched">
-                                    <p ng-show="establishmentForm.establishmentAddressZipCode.$error.required">CEP é um
-                                        campo obrigatório.</p>
-                                    <p ng-show="establishmentForm.establishmentAddressZipCode.$invalid">CEP
-                                        inválido.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="content-subheading">
-                            <i class="icon-user fa"></i>
-                            Informações do Proprietário
-                        </div>
-
-                        <div class="form-group required">
-                            <label class="col-md-4 control-label">Nome
-                                <sup>*</sup>
-                            </label>
-                            <div class="col-md-6">
-                                <input name="establishmentOwnerName" ng-model="establishment.ownerName"
-                                       ng-required="true" placeholder="Nome do Proprietário"
-                                       class="form-control input-md" required="" type="text">
-                                <div class="text-danger"
-                                     ng-show="establishmentForm.$submitted || establishmentForm.establishmentOwnerName.$touched">
-                                    <p ng-show="establishmentForm.establishmentOwnerName.$error.required">Nome do
-                                        Proprietário é um campo obrigatório.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group required">
-                            <label class="col-md-4 control-label">E-mail
-                                <sup>*</sup>
-                            </label>
-                            <div class="col-md-6">
-                                <input name="establishmentOwnerEmail" ng-model="establishment.ownerEmail"
-                                       ng-required="true" placeholder="E-mail" class="form-control input-md" required=""
-                                       type="email">
-                                <div class="text-danger"
-                                     ng-show="establishmentForm.$submitted || establishmentForm.establishmentOwnerEmail.$touched">
-                                    <p ng-show="establishmentForm.establishmentOwnerEmail.$error.required">E-mail é um
-                                        campo obrigatório.</p>
-                                    <p ng-show="establishmentForm.establishmentOwnerEmail.$error.email">E-mail
-                                        inválido.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group required">
-                            <label class="col-md-4 control-label">CPF
-                                <sup>*</sup>
-                            </label>
-                            <div class="col-md-6">
-                                <input name="establishmentCpf" ng-model="establishment.ownerCpf" ng-cpf
-                                       ng-required="true" placeholder="CPF" ui-br-cpf-mask class="form-control input-md"
-                                       required="" type="text">
-                                <div class="text-danger"
-                                     ng-show="establishmentForm.$submitted || establishmentForm.establishmentCpf.$touched">
-                                    <p ng-show="establishmentForm.establishmentCpf.$error.required">CPF é um campo
-                                        obrigatório.</p>
-                                    <p ng-show="establishmentForm.establishmentCpf.$invalid">CPF inválido.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group required">
-                            <label class="col-md-4 control-label">Telefone Pessoal
-                                <sup>*</sup>
-                            </label>
-                            <div class="col-md-6">
-                                <input name="establishmentOwnerPhone" ng-model="establishment.ownerPhone"
-                                       ng-required="true" ui-br-phone-number placeholder="Telefone Pessoal"
-                                       class="form-control input-md" required="" type="text">
-                                <div class="text-danger"
-                                     ng-show="establishmentForm.$submitted || establishmentForm.establishmentOwnerPhone.$touched">
-                                    <p ng-show="establishmentForm.establishmentOwnerPhone.$error.required">Telefone
-                                        Pessoal é um campo obrigatório.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label"></label>
-                            <div class="col-md-8">
-                                <div class="termbox mb10"></div>
-                                <div style="clear:both"></div>
-                                <button type="submit" class="btn btn-success">Salvar</button>
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
+                <div class="text-danger"
+                     ng-show="establishmentForm.$submitted || establishmentForm.establishmentDescription.$touched">
+                  <p ng-show="establishmentForm.establishmentDescription.$error.required">Descrição é
+                    um campo obrigatório.</p>
+                  <p ng-show="establishmentForm.establishmentDescription.$error.maxlength">O tamanho
+                    máximo do campo é
+                    {{maxlengthDescription}}
+                    caracteres.</p>
+                </div>
+              </div>
             </div>
-        </div>
-    </div>
 
+            <div class="form-group required">
+              <label class="col-md-4 control-label">Telefone Comercial
+                <sup>*</sup>
+              </label>
+              <div class="col-md-6">
+                <input name="establishmentPhone" ng-model="establishment.phone" ng-required="true"
+                       ui-br-phone-number placeholder="Telefone Comercial" class="form-control input-md"
+                       required="" type="text">
+                <div class="text-danger"
+                     ng-show="establishmentForm.$submitted || establishmentForm.establishmentPhone.$touched">
+                  <p ng-show="establishmentForm.establishmentPhone.$error.required">Telefone Comercial
+                    é um campo obrigatório.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="content-subheading">
+              <i class="icon-home fa"></i>
+              Endereço do Estabelecimento
+            </div>
+
+            <div class="form-group required">
+              <label class="col-md-4 control-label">Endereço
+                <sup>*</sup>
+              </label>
+              <div class="col-md-6">
+                <input name="establishmentAddressStreet" ng-model="establishment.address.street"
+                       ng-required="true" placeholder="Av. Brasil, 123" class="form-control input-md"
+                       required="" type="text">
+                <div class="text-danger"
+                     ng-show="establishmentForm.$submitted || establishmentForm.establishmentAddressStreet.$touched">
+                  <p ng-show="establishmentForm.establishmentAddressStreet.$error.required">Rua é um
+                    campo obrigatório.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group required">
+              <label class="col-md-4 control-label">Bairro
+                <sup>*</sup>
+              </label>
+              <div class="col-md-6">
+                <input name="establishmentAddressNeighborhood"
+                       ng-model="establishment.address.neighborhood" ng-required="true"
+                       placeholder="Bairro" class="form-control input-md" required="" type="text">
+                <div class="text-danger"
+                     ng-show="establishmentForm.$submitted || establishmentForm.establishmentAddressNeighborhood.$touched">
+                  <p ng-show="establishmentForm.establishmentAddressNeighborhood.$error.required">
+                    Bairro é um campo obrigatório.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group required">
+              <label class="col-md-4 control-label">Cidade
+                <sup>*</sup>
+              </label>
+              <div class="col-md-6">
+                <input name="establishmentAddressCity" ng-model="establishment.address.city"
+                       ng-required="true" placeholder="Cidade" class="form-control input-md" required=""
+                       type="text">
+                <div class="text-danger"
+                     ng-show="establishmentForm.$submitted || establishmentForm.establishmentAddressCity.$touched">
+                  <p ng-show="establishmentForm.establishmentAddressCity.$error.required">Cidade é um
+                    campo obrigatório.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group required">
+              <label class="col-md-4 control-label" for="establishmentAddressState">Estado
+                <sup>*</sup>
+              </label>
+              <div class="col-md-6">
+                <select id="establishmentAddressState" name="establishmentAddressState"
+                        ng-model="establishment.address.state" ng-required="true" class="form-control">
+                  <option value="" disabled selected>Selecione</option>
+                  <option value="SP">SP</option>
+                </select>
+                <div class="text-danger"
+                     ng-show="establishmentForm.$submitted || establishmentForm.establishmentAddressState.$touched">
+                  <p ng-show="establishmentForm.establishmentAddressState.$error.required">Selecione
+                    um Estado.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group required">
+              <label class="col-md-4 control-label">CEP
+                <sup>*</sup>
+              </label>
+              <div class="col-md-6">
+                <input name="establishmentAddressZipCode" ng-model="establishment.address.zipCode"
+                       ng-required="true" ng-pattern="regexZipCode" ui-br-cep-mask placeholder="CEP"
+                       class="form-control input-md" required="" type="text">
+                <div class="text-danger"
+                     ng-show="establishmentForm.$submitted || establishmentForm.establishmentAddressZipCode.$touched">
+                  <p ng-show="establishmentForm.establishmentAddressZipCode.$error.required">CEP é um
+                    campo obrigatório.</p>
+                  <p ng-show="establishmentForm.establishmentAddressZipCode.$invalid">CEP
+                    inválido.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="content-subheading">
+              <i class="icon-user fa"></i>
+              Informações do Proprietário
+            </div>
+
+            <div class="form-group required">
+              <label class="col-md-4 control-label">Nome
+                <sup>*</sup>
+              </label>
+              <div class="col-md-6">
+                <input name="establishmentOwnerName" ng-model="establishment.ownerName"
+                       ng-required="true" placeholder="Nome do Proprietário"
+                       class="form-control input-md" required="" type="text">
+                <div class="text-danger"
+                     ng-show="establishmentForm.$submitted || establishmentForm.establishmentOwnerName.$touched">
+                  <p ng-show="establishmentForm.establishmentOwnerName.$error.required">Nome do
+                    Proprietário é um campo obrigatório.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group required">
+              <label class="col-md-4 control-label">E-mail
+                <sup>*</sup>
+              </label>
+              <div class="col-md-6">
+                <input name="establishmentOwnerEmail" ng-model="establishment.ownerEmail"
+                       ng-required="true" placeholder="E-mail" class="form-control input-md" required=""
+                       type="email">
+                <div class="text-danger"
+                     ng-show="establishmentForm.$submitted || establishmentForm.establishmentOwnerEmail.$touched">
+                  <p ng-show="establishmentForm.establishmentOwnerEmail.$error.required">E-mail é um
+                    campo obrigatório.</p>
+                  <p ng-show="establishmentForm.establishmentOwnerEmail.$error.email">E-mail
+                    inválido.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group required">
+              <label class="col-md-4 control-label">CPF
+                <sup>*</sup>
+              </label>
+              <div class="col-md-6">
+                <input name="establishmentCpf" ng-model="establishment.ownerCpf" ng-cpf
+                       ng-required="true" placeholder="CPF" ui-br-cpf-mask class="form-control input-md"
+                       required="" type="text">
+                <div class="text-danger"
+                     ng-show="establishmentForm.$submitted || establishmentForm.establishmentCpf.$touched">
+                  <p ng-show="establishmentForm.establishmentCpf.$error.required">CPF é um campo
+                    obrigatório.</p>
+                  <p ng-show="establishmentForm.establishmentCpf.$invalid">CPF inválido.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group required">
+              <label class="col-md-4 control-label">Telefone Pessoal
+                <sup>*</sup>
+              </label>
+              <div class="col-md-6">
+                <input name="establishmentOwnerPhone" ng-model="establishment.ownerPhone"
+                       ng-required="true" ui-br-phone-number placeholder="Telefone Pessoal"
+                       class="form-control input-md" required="" type="text">
+                <div class="text-danger"
+                     ng-show="establishmentForm.$submitted || establishmentForm.establishmentOwnerPhone.$touched">
+                  <p ng-show="establishmentForm.establishmentOwnerPhone.$error.required">Telefone
+                    Pessoal é um campo obrigatório.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label"></label>
+              <div class="col-md-8">
+                <div class="termbox mb10"></div>
+                <div style="clear:both"></div>
+
+                <button data-target="#deactivateModal" class="btn btn-danger" data-toggle="modal">
+                  <i class="fa fa-power-off"></i>
+                  Desativar Estabelecimento
+                </button>
+
+                <button type="submit" class="btn btn-success">Salvar</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div ng-include="'/establishment-admin/partials/content/establishment-deactivate-modal.html'"></div>
 </div>
