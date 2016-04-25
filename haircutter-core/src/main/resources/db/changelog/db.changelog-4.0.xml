@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- ESTABLISHMENT SERVICES TABLE -->
+    <changeSet author="henrique" id="1">
+        <createTable tableName="establishment_service">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="establishment_cnpj" type="VARCHAR(14)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="service" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="price" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creation_time" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_date" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="deleted" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="establishment_service_establishment_fk"
+                                 referencedTableName="establishment" baseColumnNames="establishment_cnpj"
+                                 baseTableName="establishment_service" referencedColumnNames="cnpj"/>
+
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="establishment_service"
+                                      constraintName="establishment_service_establishment_fk"/>
+            <dropTable tableName="establishment_service"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

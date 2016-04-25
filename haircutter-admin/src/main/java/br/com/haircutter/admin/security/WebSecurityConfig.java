@@ -40,6 +40,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				// Establishment Admin
 				.antMatchers("/establishment-admin/**", "/api/establishment-admin/**")
 					.hasAnyAuthority(UserRoleEnum.ROLE_ESTABLISHMENT_ADMIN.toString())
+				// Manager
+				.antMatchers("/manager/**", "/api/manager/**")
+					.hasAnyAuthority(UserRoleEnum.ROLE_MANAGER.toString())
 				.anyRequest()
 					.authenticated()
 				.and()

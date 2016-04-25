@@ -2,7 +2,7 @@ package br.com.haircutter.admin.facade;
 
 import br.com.haircutter.admin.endpoint.EstablishmentEndpoint;
 import br.com.haircutter.admin.facade.json.EstablishmentJson;
-import br.com.haircutter.admin.service.EstablishmentUserService;
+import br.com.haircutter.admin.service.EstablishmentAdminUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +22,7 @@ public class EstablishmentFacade {
 
 
     @Autowired
-    private EstablishmentUserService service;
+    private EstablishmentAdminUserService service;
 
 
     @RequestMapping(value = {"/establishment-admin/establishment/profile"}, method = RequestMethod.GET)
