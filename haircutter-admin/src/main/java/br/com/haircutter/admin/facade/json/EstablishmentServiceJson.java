@@ -1,48 +1,34 @@
-package br.com.haircutter.core.model;
+package br.com.haircutter.admin.facade.json;
 
-
-import javax.persistence.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-@Entity
-@Table(name = "establishment_service")
-public class Service implements Serializable {
+/**
+ * Created by hfaria on 4/24/16.
+ */
+public class EstablishmentServiceJson {
 
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "establishment_cnpj")
     private String establishmentCnpj;
 
-    @Column(name = "service")
     private String service;
 
-    @Column(name = "description")
     private String description;
 
-    @Column(name = "price")
     private BigDecimal price;
 
-    @Column(name = "creation_time")
     private Date creationTime;
 
-    @Column(name = "last_modified_date")
     private Date lastModifiedDate;
 
-    @Column(name = "deleted")
     private Boolean deleted;
 
-    public Service() {
+    public EstablishmentServiceJson() {
 
     }
 
-    public Service(Long id, String establishmentCnpj, String service, String description, BigDecimal price, Date creationTime, Date lastModifiedDate, Boolean deleted) {
+    public EstablishmentServiceJson(Long id, String establishmentCnpj, String service, String description, BigDecimal price, Date creationTime, Date lastModifiedDate, Boolean deleted) {
         this.id = id;
         this.establishmentCnpj = establishmentCnpj;
         this.service = service;
@@ -116,5 +102,4 @@ public class Service implements Serializable {
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
-
 }

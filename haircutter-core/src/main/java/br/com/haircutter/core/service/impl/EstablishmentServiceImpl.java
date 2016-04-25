@@ -7,7 +7,7 @@ import br.com.haircutter.core.service.EstablishmentAdminService;
 import br.com.haircutter.core.service.EstablishmentAuditLogService;
 import br.com.haircutter.core.service.EstablishmentService;
 import br.com.haircutter.core.utils.HaircutterMailSender;
-import br.com.haircutter.core.validator.EstablishmentServiceValidator;
+import br.com.haircutter.core.validator.EstablishmentValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ public class EstablishmentServiceImpl implements EstablishmentService {
     EstablishmentRespository establishmentRespository;
 
     @Autowired
-    EstablishmentServiceValidator validator;
+    EstablishmentValidator validator;
 
     @Autowired
     EstablishmentAuditLogService auditLogService;

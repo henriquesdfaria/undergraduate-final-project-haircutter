@@ -1,29 +1,29 @@
 package br.com.haircutter.admin.endpoint;
 
-import br.com.haircutter.admin.facade.json.ServiceJson;
+import br.com.haircutter.admin.facade.json.EstablishmentServiceJson;
 import br.com.haircutter.admin.utils.LoggedUserUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 @Component
-public class ServiceEndpoint {
+public class EstablishmentServiceEndpoint {
 
     @Value("${endpoint.haircutter.core.api.url}")
     private String API_URL;
 
     private RestTemplate restTemplate = new RestTemplate();
 
-    public Object create(ServiceJson serviceJson) {
+    public Object create(EstablishmentServiceJson establishmentServiceJson) {
 
         return restTemplate.postForObject(API_URL + "/establishment/service?username="
-                + LoggedUserUtils.getLoggedUserUsername(), serviceJson, Object.class);
+                + LoggedUserUtils.getLoggedUserUsername(), establishmentServiceJson, Object.class);
     }
 
-    public void edit(ServiceJson serviceJson, String cnpj) {
+    public void edit(EstablishmentServiceJson establishmentServiceJson, String cnpj) {
 
         restTemplate.put(API_URL + "/establishment/" + cnpj + "/service?username=" + LoggedUserUtils.getLoggedUserUsername(),
-                serviceJson);
+                establishmentServiceJson);
     }
 
     public void delete(Long id, String cnpj) {
