@@ -2,6 +2,7 @@ package br.com.haircutter.core.model;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -26,6 +27,7 @@ public class EstablishmentService implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Digits(integer = 10, fraction = 2)
     @Column(name = "price")
     private BigDecimal price;
 

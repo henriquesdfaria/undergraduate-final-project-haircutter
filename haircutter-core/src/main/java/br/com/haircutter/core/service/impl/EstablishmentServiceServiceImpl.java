@@ -1,5 +1,6 @@
 package br.com.haircutter.core.service.impl;
 
+import br.com.haircutter.core.exception.CustomInvalidException;
 import br.com.haircutter.core.model.EstablishmentService;
 import br.com.haircutter.core.model.repository.EstablishmentServiceRespository;
 import br.com.haircutter.core.service.EstablishmentServiceService;
@@ -48,11 +49,19 @@ public class EstablishmentServiceServiceImpl implements EstablishmentServiceServ
     @Override
     public List<EstablishmentService> getAllByCnpj(String cnpj) {
 
-        return establishmentServiceRespository.findAllByEstablishmentCnpj(cnpj);
+        return establishmentServiceRespository.findAllByEstablishmentCnpjAndDeleted(cnpj, false);
     }
 
     @Override
-    public void edit(EstablishmentService establishmentService, String username) {
+    public void edit(EstablishmentService establishmentService, String username, String cnpj) {
+
+        EstablishmentService foundEstablishmentService = establishmentServiceRespository
+                .findOneByIdAndEstablishmentCnpjAndDeleted(establishmentService.getId(), cnpj, false);
+
+
+        if (foundEstablishmentService == null) {
+            throw new CustomInvalidException("You should not edit this service, it is from another establishment");
+        }
 
         establishmentServiceValidator.validateEdit(establishmentService);
 
@@ -69,21 +78,25 @@ public class EstablishmentServiceServiceImpl implements EstablishmentServiceServ
     @Override
     public void delete(Long id, String cnpj, String username) {
 
-        EstablishmentService establishmentService = establishmentServiceRespository
-                .findOneByIdAndEstablishmentCnpj(id, cnpj);
+        EstablishmentService foundEstablishmentService = establishmentServiceRespository
+                .findOneByIdAndEstablishmentCnpjAndDeleted(id, cnpj, false);
 
-        establishmentService.setLastModifiedDate(new Date(ZonedDateTime.now().toInstant().toEpochMilli()));
-        establishmentService.setDeleted(true);
+        if (foundEstablishmentService == null) {
+            throw new CustomInvalidException("You should not delete this service, it is from another establishment");
+        }
 
-        EstablishmentService editedEstablishmentService = establishmentServiceRespository.save(establishmentService);
+        foundEstablishmentService.setLastModifiedDate(new Date(ZonedDateTime.now().toInstant().toEpochMilli()));
+        foundEstablishmentService.setDeleted(true);
+
+        EstablishmentService editedEstablishmentService = establishmentServiceRespository.save(foundEstablishmentService);
 
         establishmentAuditLogService.registerLog(editedEstablishmentService.getEstablishmentCnpj(), username,
-                "Deletou o serviço \"" + establishmentService.getService() + "\"");
+                "Deletou o serviço \"" + foundEstablishmentService.getService() + "\"");
 
     }
 
     @Override
     public EstablishmentService getByIdAndCnpj(Long id, String cnpj) {
-        return establishmentServiceRespository.findOneByIdAndEstablishmentCnpj(id, cnpj);
+        return establishmentServiceRespository.findOneByIdAndEstablishmentCnpjAndDeleted(id, cnpj, false);
     }
 }

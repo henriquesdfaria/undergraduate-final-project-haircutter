@@ -2,102 +2,13 @@
 
 /* Controllers */
 
-var establishmentAdminControllers = angular.module('establishmentAdminControllers', []);
-
-/* AUDIT LOGS CONTROLLER*/
-establishmentAdminControllers.controller('AuditLogsController', ['$scope', '$http',
-    function ($scope, $http) {
-      $scope.auditLogsActiveMenu = 'active';
-
-      $scope.getLoggedUser = function () {
-        $http({
-            method: 'GET',
-            url: '/api/public/get-logged-user'
-          }
-        ).success(function (data) {
-            $scope.loggedUser = data;
-          }
-        );
-      }
-
-      $scope.getAuditLogs = function () {
-        $http({
-            method: 'GET',
-            url: '/api/establishment-admin/establishment-audit-log/audit-logs',
-          }
-        ).success(function (data) {
-            $scope.auditLogs = data;
-            _.forEach($scope.auditLogs, function (auditLog) {
-                auditLog.date = new moment(auditLog.date).format('DD/MM/YYYY HH:mm');
-              }
-            );
-          }
-        );
-      }
-
-      $scope.getLoggedUser();
-      $scope.getAuditLogs();
-    }
-  ]
-);
+var managerControllers = angular.module('managerControllers', []);
 
 
-/* ESTABLISHMENT PROFILE CONTROLLER*/
-establishmentAdminControllers.controller('EstablishmentProfileController', ['$scope', '$http',
-    function ($scope, $http) {
-      $scope.establishmentProfileActiveMenu = 'active';
-
-      $scope.getLoggedUser = function () {
-        $http({
-            method: 'GET',
-            url: '/api/public/get-logged-user'
-          }
-        ).success(function (data) {
-            $scope.loggedUser = data;
-          }
-        );
-      }
-
-      $scope.getProfileSettings = function () {
-        $http({
-            method: 'GET',
-            url: '/api/establishment-admin/establishment/profile',
-          }
-        ).success(function (data) {
-            $scope.establishment = data;
-          }
-        );
-      }
-
-      $scope.editProfileSettings = function (establishment) {
-        $http({
-            method: 'PUT',
-            url: '/api/establishment-admin/establishment/profile',
-            data: establishment
-          }
-        );
-      }
-
-      $scope.deactivateEstablishment = function () {
-        $http({
-            method: 'DELETE',
-            url: '/api/establishment-admin/establishment/deactivate'
-          }
-        ).success(function() {
-          window.location.href='logout';
-        });
-      }
-
-      $scope.getLoggedUser();
-      $scope.getProfileSettings();
-    }
-  ]
-);
-
-/* ESTABLISHMENT EMPLOYEES CONTROLLER*/
-establishmentAdminControllers.controller('EstablishmentEmployeesController', ['$scope', '$http', '$location',
+/* ESTABLISHMENT SERVICES CONTROLLER*/
+managerControllers.controller('EstablishmentServicesController', ['$scope', '$http', '$location',
     function ($scope, $http, $location) {
-      $scope.establishmentEmployeesActiveMenu = 'active';
+      $scope.establishmentServicesActiveMenu = 'active';
 
       $scope.getLoggedUser = function () {
         $http({
@@ -110,55 +21,42 @@ establishmentAdminControllers.controller('EstablishmentEmployeesController', ['$
         );
       }
 
-      $scope.getEmployees = function () {
+      $scope.getServices = function () {
         $http({
             method: 'GET',
-            url: '/api/establishment-admin/employees',
+            url: '/api/manager/establishment/services',
           }
         ).success(function (data) {
-            $scope.employees = data;
-            _.forEach($scope.employees, function (employee) {
-
-                if (employee.user.role === 'ROLE_MANAGER') {
-                  employee.user.roleName = 'Gerente';
-                }
-
-                if (employee.user.role === 'ROLE_ATTENDANT') {
-                  employee.user.roleName = 'Atendente';
-                }
-
-                if (employee.user.role === 'ROLE_PROFESSIONAL') {
-                  employee.user.roleName = 'Profissional';
-                }
-              }
-            );
+            $scope.establishmentServices = data;
           }
         );
       }
 
-      $scope.removeEmployee = function (employee) {
+      $scope.removeService = function (service) {
         $http({
             method: 'DELETE',
-            url: '/api/establishment-admin/employee/' + employee.id
+            url: '/api/manager/establishment/service/' + service.id
           }
         ).success(function () {
-            $scope.getEmployees();
-            $location.path('/establishment/employees');
+            $scope.getServices();
+            $location.path('/establishment/services');
           }
         );
       }
 
       $scope.getLoggedUser();
-      $scope.getEmployees();
+      $scope.getServices();
     }
   ]
 );
 
-/* CREATE ESTABLISHMENT PROFILE CONTROLLER*/
-establishmentAdminControllers.controller('CreateEstablishmentEmployeeController', ['$scope', '$http', '$location',
+/* CREATE ESTABLISHMENT SERVICE CONTROLLER*/
+managerControllers.controller('CreateEstablishmentServiceController', ['$scope', '$http', '$location',
     function ($scope, $http, $location) {
 
-      $scope.establishmentEmployeesActiveMenu = 'active';
+      $scope.establishmentServicesActiveMenu = 'active';
+
+      $scope.maxlengthDescription = 200;
 
       $scope.getLoggedUser = function () {
         $http({
@@ -171,14 +69,16 @@ establishmentAdminControllers.controller('CreateEstablishmentEmployeeController'
         );
       }
 
-      $scope.create = function (employee) {
+      $scope.create = function (service) {
+
+        service.price = parseFloat(service.price);
         $http({
             method: 'POST',
-            url: '/api/establishment-admin/employee',
-            data: employee
+            url: '/api/manager/establishment/service',
+            data: service
           }
         ).success(function () {
-            $location.path('/establishment/employees');
+            $location.path('/establishment/services');
           }
         ).error(function () {
             $scope.internalError = true;
@@ -192,10 +92,10 @@ establishmentAdminControllers.controller('CreateEstablishmentEmployeeController'
 );
 
 /* ESTABLISHMENT EMPLOYEE CONTROLLER*/
-establishmentAdminControllers.controller('EstablishmentEmployeeController',
+managerControllers.controller('EstablishmentServiceController',
   ['$scope', '$routeParams', '$http', '$location',
     function ($scope, $routeParams, $http, $location) {
-      $scope.establishmentEmployeesActiveMenu = 'active';
+      $scope.establishmentServicesActiveMenu = 'active';
 
       $scope.getLoggedUser = function () {
         $http({
@@ -209,25 +109,25 @@ establishmentAdminControllers.controller('EstablishmentEmployeeController',
       }
 
 
-      $scope.getEmployee = function () {
+      $scope.getService = function () {
         $http({
             method: 'GET',
-            url: '/api/establishment-admin/employee/' + $routeParams.employeeId
+            url: '/api/manager/establishment/service/' + $routeParams.establishmentServiceId
           }
         ).success(function (data) {
-            $scope.employee = data;
+            $scope.establishmentService = data;
           }
         );
       }
 
-      $scope.save = function (employee) {
+      $scope.save = function (service) {
         $http({
             method: 'PUT',
-            url: '/api/establishment-admin/employee',
-            data: employee
+            url: '/api/manager/establishment/service',
+            data: service
           }
         ).success(function () {
-            $location.path('/establishment/employees');
+            $location.path('/establishment/service');
           }
         ).error(function () {
             $scope.internalError = true;
@@ -236,7 +136,7 @@ establishmentAdminControllers.controller('EstablishmentEmployeeController',
       }
 
       $scope.getLoggedUser();
-      $scope.getEmployee();
+      $scope.getService();
     }
   ]
 );

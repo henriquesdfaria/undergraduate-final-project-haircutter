@@ -9,10 +9,10 @@ import java.util.List;
 @Transactional
 public interface EstablishmentServiceRespository extends CrudRepository<EstablishmentService, Long> {
 	
-	EstablishmentService findOneByEstablishmentCnpj(String cnpj);
+	EstablishmentService findOneByEstablishmentCnpjAndDeleted(String cnpj, Boolean deleted);
 
-	EstablishmentService findOneByIdAndEstablishmentCnpj(Long id, String cnpj);
+	EstablishmentService findOneByIdAndEstablishmentCnpjAndDeleted(Long id, String cnpj, Boolean deleted);
 
-	List<EstablishmentService> findAllByEstablishmentCnpj(String cnpj);
+	List<EstablishmentService> findAllByEstablishmentCnpjAndDeleted(String cnpj, Boolean deleted);
 
 }

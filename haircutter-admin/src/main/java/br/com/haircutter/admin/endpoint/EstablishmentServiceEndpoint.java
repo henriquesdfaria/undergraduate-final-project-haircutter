@@ -27,14 +27,14 @@ public class EstablishmentServiceEndpoint {
     }
 
     public void delete(Long id, String cnpj) {
-        restTemplate.delete(API_URL + "/establishment/" + cnpj + "/service/" + id + "?" + LoggedUserUtils.getLoggedUserUsername());
+        restTemplate.delete(API_URL + "/establishment/" + cnpj + "/service/" + id + "?username=" + LoggedUserUtils.getLoggedUserUsername());
     }
 
     public Object getByIdAndCnpj(Long id, String cnpj) {
-        return restTemplate.getForObject(API_URL + "/establishment/" + cnpj + "/service/" + id, null, Object.class);
+        return restTemplate.getForObject(API_URL + "/establishment/" + cnpj + "/service/" + id, Object.class);
     }
 
     public Object getAllByCnpj(String cnpj) {
-        return restTemplate.getForObject(API_URL + "/establishment/" + cnpj + "/services", null, Object.class);
+        return restTemplate.getForObject(API_URL + "/establishment/" + cnpj + "/services", Object.class);
     }
 }

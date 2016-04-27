@@ -3,63 +3,67 @@
   <div class="inner-box category-content">
     <h2 class="title-2">
       <i class="fa fa-file-text-o"></i>
-      <strong>Funcionário</strong>
+      <strong>Serviço</strong>
     </h2>
     <div class="row">
       <div class="col-sm-12">
         <div class="alert alert-danger" ng-show="internalError">
-          Não foi possivel editar o serviço, tente novamente mais tarde.
+          Não foi possivel criar o serviço, tente novamente mais tarde.
         </div>
-        <form name="establishmentServiceForm" ng-submit="establishmentServiceForm.$valid && save(establishmentService)"
+        <form name="establishmentServiceForm"
+              ng-submit="establishmentServiceForm.$valid && save(establishmentService)"
               class="form-horizontal" novalidate>
           <fieldset>
             <div class="form-group required">
-              <label class="col-md-4 control-label">Nome
+              <label class="col-md-4 control-label">Serviço
                 <sup>*</sup>
               </label>
               <div class="col-md-6">
-                <input name="establishmentServiceName" ng-model="establishmentService.user.name"
-                       ng-required="true" placeholder="Nome do Funcionário"
+                <input name="establishmentServiceService" ng-model="establishmentService.service"
+                       ng-required="true" placeholder="Nome do Serviço"
                        class="form-control input-md" required="" type="text">
                 <div class="text-danger"
-                     ng-show="establishmentServiceForm.$submitted || establishmentServiceForm.establishmentServiceName.$touched">
-                  <p ng-show="establishmentServiceForm.establishmentServiceName.$error.required">Nome é um campo obrigatório.</p>
+                     ng-show="establishmentServiceForm.$submitted || establishmentServiceForm.establishmentServiceService.$touched">
+                  <p ng-show="establishmentServiceForm.establishmentServiceService.$error.required">Serviço é um campo
+                    obrigatório.</p>
                 </div>
               </div>
             </div>
 
             <div class="form-group required">
-              <label class="col-md-4 control-label">Usuário
-                <sup>*</sup>
+              <label class="col-md-4 control-label" for="textarea">Descrição
+
               </label>
               <div class="col-md-6">
-                <input name="establishmentServiceUsername" ng-model="establishmentService.user.username"
-                       ng-required="true" placeholder="Username" class="form-control input-md" required=""
-                       type="text" disabled>
+                <textarea name="establishmentServiceDescription" ng-model="establishmentService.description"
+                          ng-trim="false" ng-required="false" ng-maxlength="maxlengthDescription"
+                          maxlength="{{maxlengthDescription}}" class="form-control" id="textarea"
+                          name="textarea"></textarea>
+                    <span>Tamanho:
+                      {{establishmentService.description.length - 0}}
+                      caracteres.</span>
                 <div class="text-danger"
-                     ng-show="establishmentServiceForm.$submitted || establishmentServiceForm.establishmentServiceUsername.$touched">
-                  <p ng-show="establishmentServiceForm.establishmentServiceUsername.$error.required">Usuário é um
-                    campo obrigatório.</p>
+                     ng-show="establishmentServiceForm.$submitted || establishmentServiceForm.establishmentServiceDescription.$touched">
+                  <p ng-show="establishmentServiceForm.establishmentServiceDescription.$error.maxlength">O tamanho
+                    máximo do campo é
+                    {{maxlengthDescription}}
+                    caracteres.</p>
                 </div>
               </div>
             </div>
 
             <div class="form-group required">
-              <label class="col-md-4 control-label" for="establishmentServiceRole">Função
+              <label class="col-md-4 control-label">Preço
                 <sup>*</sup>
               </label>
               <div class="col-md-6">
-                <select id="establishmentServiceRole" name="establishmentServiceRole"
-                        ng-model="establishmentService.user.role" ng-required="true" class="form-control">
-                  <option value="" disabled selected>Selecione</option>
-                  <option value="ROLE_MANAGER">Gerente</option>
-                  <option value="ROLE_PROFESSIONAL">Profissional</option>
-                  <option value="ROLE_ATTENDANT">Atendente</option>
-                </select>
+                <input name="establishmentServicePrice" ng-model="establishmentService.price"
+                       ng-required="true"
+                       class="form-control input-md" required="" type="text">
                 <div class="text-danger"
-                     ng-show="establishmentServiceForm.$submitted || establishmentServiceForm.establishmentServiceRole.$touched">
-                  <p ng-show="establishmentServiceForm.establishmentServiceRole.$error.required">Selecione
-                    uma função.</p>
+                     ng-show="establishmentServiceForm.$submitted || establishmentServiceForm.establishmentServicePrice.$touched">
+                  <p ng-show="establishmentServiceForm.establishmentServicePrice.$error.required">Preço é um campo
+                    obrigatório.</p>
                 </div>
               </div>
             </div>

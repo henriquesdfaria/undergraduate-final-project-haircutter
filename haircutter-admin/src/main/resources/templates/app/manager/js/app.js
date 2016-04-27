@@ -8,7 +8,7 @@ var managerApp = angular.module('managerApp', [
     ]
 );
 
-establishmentAdminApp.config(['$routeProvider',
+managerApp.config(['$routeProvider',
         function ($routeProvider) {
             $routeProvider
                 .when('/establishment/services', {
@@ -27,7 +27,7 @@ establishmentAdminApp.config(['$routeProvider',
                     }
                 )
                 .otherwise(
-                    {redirectTo: '/services'}
+                    {redirectTo: '/establishment/services'}
                 );
         }
     ]
