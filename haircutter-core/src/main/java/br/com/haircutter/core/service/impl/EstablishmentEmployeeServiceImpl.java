@@ -2,7 +2,9 @@ package br.com.haircutter.core.service.impl;
 
 
 import br.com.haircutter.core.model.EstablishmentEmployee;
+import br.com.haircutter.core.model.User;
 import br.com.haircutter.core.model.repository.EstablishmentEmployeeRespository;
+import br.com.haircutter.core.model.repository.UserRespository;
 import br.com.haircutter.core.service.EstablishmentAuditLogService;
 import br.com.haircutter.core.service.EstablishmentEmployeeService;
 import br.com.haircutter.core.validator.EstablishmentEmployeeValidator;
@@ -25,6 +27,9 @@ public class EstablishmentEmployeeServiceImpl implements EstablishmentEmployeeSe
 
     @Autowired
     EstablishmentAuditLogService auditLogService;
+
+    @Autowired
+    UserRespository userRespository;
 
 
     @Override
@@ -79,12 +84,15 @@ public class EstablishmentEmployeeServiceImpl implements EstablishmentEmployeeSe
 
         EstablishmentEmployee establishmentEmployee = repository.findOne(id);
 
-        //repository.delete(id);
-
         establishmentEmployee.setDeleted(true);
         establishmentEmployee.setLastModifiedDate(new Date(ZonedDateTime.now().toInstant().toEpochMilli()));
 
         repository.save(establishmentEmployee);
+
+        User user = userRespository.findOneByUsername(establishmentEmployee.getUser().getUsername());
+        user.setEnabled(false);
+
+        userRespository.save(user);
 
         auditLogService.registerLog(establishmentEmployee.getEstablishmentCnpj(), username, "Removeu usuário " + establishmentEmployee.getUser().getUsername());
     }
