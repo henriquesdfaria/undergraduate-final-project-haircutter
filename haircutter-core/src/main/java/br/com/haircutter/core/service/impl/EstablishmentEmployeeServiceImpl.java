@@ -39,7 +39,7 @@ public class EstablishmentEmployeeServiceImpl implements EstablishmentEmployeeSe
 
     @Override
     public List<EstablishmentEmployee> getAllByEstablishment(String cnpj) {
-        return repository.findAllByDeleted(false);
+        return repository.findAllByEstablishmentCnpjAndDeleted(cnpj, false);
     }
 
     @Override
