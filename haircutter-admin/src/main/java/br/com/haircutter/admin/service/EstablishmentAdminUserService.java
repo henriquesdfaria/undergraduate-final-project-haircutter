@@ -32,4 +32,14 @@ public class EstablishmentAdminUserService {
 
         return true;
     }
+
+    public String getCnpjByLoggedUserUsername() {
+
+        String cnpj = jdbcTemplate.queryForObject(
+                "SELECT ea.establishment_cnpj FROM establishment_admin ea WHERE ea.username = ?;",
+                new Object[]{LoggedUserUtils.getLoggedUserUsername()},
+                String.class);
+
+        return cnpj;
+    }
 }

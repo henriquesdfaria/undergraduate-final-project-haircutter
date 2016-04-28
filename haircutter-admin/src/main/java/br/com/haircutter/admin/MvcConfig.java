@@ -17,6 +17,7 @@ public class MvcConfig extends WebMvcAutoConfigurationAdapter {
 		registerView("/", "public/index", registry);
 		registerView("/moderator", "moderator/index", registry);
 		registerView("/establishment-admin", "establishment-admin/index", registry);
+		registerView("/manager", "manager/index", registry);
 		
 		// Login
 		registerView("/login", "public/login", registry);
@@ -30,9 +31,9 @@ public class MvcConfig extends WebMvcAutoConfigurationAdapter {
 		registry.addResourceHandler("/public/**/*").addResourceLocations("classpath:/templates/app/public/");
 		registry.addResourceHandler("/client/**/*").addResourceLocations("classpath:/templates/app/client/");
 		registry.addResourceHandler("/establishment-admin/**/*").addResourceLocations("classpath:/templates/app/establishment-admin/");
-		registry.addResourceHandler("/establishment-attendant/**/*").addResourceLocations("classpath:/templates/app/establishment-attendant/");
-		registry.addResourceHandler("/establishment-manager/**/*").addResourceLocations("classpath:/templates/app/establishment-manager/");
-		registry.addResourceHandler("/establishment-professional/**/*").addResourceLocations("classpath:/templates/app/establishment-professional/");
+		registry.addResourceHandler("/attendant/**/*").addResourceLocations("classpath:/templates/app/attendant/");
+		registry.addResourceHandler("/manager/**/*").addResourceLocations("classpath:/templates/app/manager/");
+		registry.addResourceHandler("/professional/**/*").addResourceLocations("classpath:/templates/app/professional/");
 		registry.addResourceHandler("/moderator/**/*").addResourceLocations("classpath:/templates/app/moderator/");
 	}
 

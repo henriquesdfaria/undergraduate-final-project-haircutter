@@ -1,7 +1,7 @@
 package br.com.haircutter.admin.facade;
 
 import br.com.haircutter.admin.endpoint.EstablishmentAuditLogEndpoint;
-import br.com.haircutter.admin.service.EstablishmentUserService;
+import br.com.haircutter.admin.service.EstablishmentAdminUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,12 +16,12 @@ public class EstablishmentAuditLogFacade {
     private EstablishmentAuditLogEndpoint endpoint;
 
     @Autowired
-    private EstablishmentUserService service;
+    private EstablishmentAdminUserService establishmentAdminUserService;
 
     @RequestMapping(value = {"/establishment-admin/establishment-audit-log/audit-logs"}, method = RequestMethod.GET)
     public ResponseEntity<?> getAuditLogsByCnpj() {
 
-        String cnpj = service.getCnpjByLoggedUserUsername();
+        String cnpj = establishmentAdminUserService.getCnpjByLoggedUserUsername();
 
         return ResponseEntity.ok(endpoint.getAuditLogsByCnpj(cnpj));
     }

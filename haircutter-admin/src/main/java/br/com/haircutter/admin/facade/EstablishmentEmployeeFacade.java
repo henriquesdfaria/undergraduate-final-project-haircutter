@@ -3,7 +3,6 @@ package br.com.haircutter.admin.facade;
 import br.com.haircutter.admin.endpoint.EstablishmentEmployeeEndpoint;
 import br.com.haircutter.admin.facade.json.EstablishmentEmployeeJson;
 import br.com.haircutter.admin.service.EstablishmentAdminUserService;
-import br.com.haircutter.admin.service.EstablishmentUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +21,12 @@ public class EstablishmentEmployeeFacade {
     @Autowired
     private EstablishmentAdminUserService establishmentAdminUserService;
 
-    @Autowired
-    private EstablishmentUserService establishmentUserService;
 
 
     @RequestMapping(value = {"/establishment-admin/employees"}, method = RequestMethod.GET)
     public ResponseEntity<?> getAllByEstablishment() {
 
-        String cnpj = establishmentUserService.getCnpjByLoggedUserUsername();
+        String cnpj = establishmentAdminUserService.getCnpjByLoggedUserUsername();
 
         return ResponseEntity.ok(endpoint.getAllByEstablishment(cnpj));
     }
@@ -47,7 +44,7 @@ public class EstablishmentEmployeeFacade {
     @RequestMapping(value = {"/establishment-admin/employee"}, method = RequestMethod.POST)
     public ResponseEntity<?> create(@RequestBody EstablishmentEmployeeJson establishmentEmployeeJson) {
 
-        establishmentEmployeeJson.setEstablishmentCnpj(establishmentUserService.getCnpjByLoggedUserUsername());
+        establishmentEmployeeJson.setEstablishmentCnpj(establishmentAdminUserService.getCnpjByLoggedUserUsername());
 
         return ResponseEntity.ok(endpoint.create(establishmentEmployeeJson));
     }

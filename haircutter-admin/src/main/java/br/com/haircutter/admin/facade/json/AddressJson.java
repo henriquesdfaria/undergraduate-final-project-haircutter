@@ -2,7 +2,6 @@ package br.com.haircutter.admin.facade.json;
 
 public class AddressJson {
 
-
 	private Long id;
 
 	private String street;

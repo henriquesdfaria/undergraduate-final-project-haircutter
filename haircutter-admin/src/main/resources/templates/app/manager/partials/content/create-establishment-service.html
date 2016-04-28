@@ -1,0 +1,85 @@
+<div class="col-sm-9 page-content">
+
+  <div class="inner-box category-content">
+    <h2 class="title-2">
+      <i class="fa fa-file-text-o"></i>
+      <strong>Serviço</strong>
+    </h2>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="alert alert-danger" ng-show="internalError">
+          Não foi possivel criar o serviço, tente novamente mais tarde.
+        </div>
+        <form name="establishmentServiceForm"
+              ng-submit="establishmentServiceForm.$valid && create(establishmentService)"
+              class="form-horizontal" novalidate>
+          <fieldset>
+            <div class="form-group required">
+              <label class="col-md-4 control-label">Serviço
+                <sup>*</sup>
+              </label>
+              <div class="col-md-6">
+                <input name="establishmentServiceService" ng-model="establishmentService.service"
+                       ng-required="true" placeholder="Nome do Serviço"
+                       class="form-control input-md" required="" type="text">
+                <div class="text-danger"
+                     ng-show="establishmentServiceForm.$submitted || establishmentServiceForm.establishmentServiceService.$touched">
+                  <p ng-show="establishmentServiceForm.establishmentServiceService.$error.required">Serviço é um campo
+                    obrigatório.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group required">
+              <label class="col-md-4 control-label" for="textarea">Descrição
+
+              </label>
+              <div class="col-md-6">
+                <textarea name="establishmentServiceDescription" ng-model="establishmentService.description"
+                          ng-trim="false" ng-required="false" ng-maxlength="maxlengthDescription"
+                          maxlength="{{maxlengthDescription}}" class="form-control" id="textarea"
+                          name="textarea"></textarea>
+                    <span>Tamanho:
+                      {{establishmentService.description.length - 0}}
+                      caracteres.</span>
+                <div class="text-danger"
+                     ng-show="establishmentServiceForm.$submitted || establishmentServiceForm.establishmentServiceDescription.$touched">
+                  <p ng-show="establishmentServiceForm.establishmentServiceDescription.$error.maxlength">O tamanho
+                    máximo do campo é
+                    {{maxlengthDescription}}
+                    caracteres.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group required">
+              <label class="col-md-4 control-label">Preço
+                <sup>*</sup>
+              </label>
+              <div class="col-md-6">
+                <input name="establishmentServicePrice" ng-model="establishmentService.price"
+                       ng-required="true"
+                       class="form-control input-md" required="" type="text" ui-money-mask>
+                <div class="text-danger"
+                     ng-show="establishmentServiceForm.$submitted || establishmentServiceForm.establishmentServicePrice.$touched">
+                  <p ng-show="establishmentServiceForm.establishmentServicePrice.$error.required">Preço é um campo
+                    obrigatório.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label"></label>
+              <div class="col-md-8">
+                <div class="termbox mb10"></div>
+                <div style="clear:both"></div>
+                <button type="submit" class="btn btn-success">Criar</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>

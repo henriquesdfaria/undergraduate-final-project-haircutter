@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
  * Created by hfaria on 07/04/16.
  */
 @Service
-public class EstablishmentUserService {
+public class EstablishmentEmployeeUserService {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
@@ -17,7 +17,7 @@ public class EstablishmentUserService {
     public String getCnpjByLoggedUserUsername() {
 
         String cnpj = jdbcTemplate.queryForObject(
-                "SELECT ea.establishment_cnpj FROM establishment_admin ea WHERE ea.username = ?;",
+                "SELECT ee.establishment_cnpj FROM establishment_employee ee WHERE ee.username = ?;",
                 new Object[]{LoggedUserUtils.getLoggedUserUsername()},
                 String.class);
 
