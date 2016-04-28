@@ -59,7 +59,7 @@
               <div class="col-md-6">
                 <input name="establishmentServicePrice" ng-model="establishmentService.price"
                        ng-required="true"
-                       class="form-control input-md" required="" type="text">
+                       class="form-control input-md" required="" type="text" ui-money-mask>
                 <div class="text-danger"
                      ng-show="establishmentServiceForm.$submitted || establishmentServiceForm.establishmentServicePrice.$touched">
                   <p ng-show="establishmentServiceForm.establishmentServicePrice.$error.required">Preço é um campo
