@@ -20,9 +20,9 @@ public class EstablishmentServiceEndpoint {
                 + LoggedUserUtils.getLoggedUserUsername(), establishmentServiceJson, Object.class);
     }
 
-    public void edit(EstablishmentServiceJson establishmentServiceJson, String cnpj) {
+    public void edit(EstablishmentServiceJson establishmentServiceJson) {
 
-        restTemplate.put(API_URL + "/establishment/" + cnpj + "/service?username=" + LoggedUserUtils.getLoggedUserUsername(),
+        restTemplate.put(API_URL + "/establishment/service?username=" + LoggedUserUtils.getLoggedUserUsername(),
                 establishmentServiceJson);
     }
 

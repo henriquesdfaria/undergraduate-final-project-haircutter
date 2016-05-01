@@ -33,12 +33,12 @@ public class EstablishmentServiceFacade {
         return ResponseEntity.ok(createdEstablishmentService);
     }
 
-    @RequestMapping(value = {"/{cnpj}/service"}, method = RequestMethod.PUT)
-    public void edit(@PathVariable("cnpj") String cnpj, @RequestBody EstablishmentService establishmentService, @RequestParam("username") String username) {
+    @RequestMapping(value = {"/service"}, method = RequestMethod.PUT)
+    public void edit(@RequestBody EstablishmentService establishmentService, @RequestParam("username") String username) {
 
         LOGGER.info("Started by " + username + " - Edit Establishment EstablishmentService", establishmentService);
 
-        establishmentServiceService.edit(establishmentService, username, cnpj);
+        establishmentServiceService.edit(establishmentService, username);
 
         LOGGER.info("Ended by " + username + " - Edit Establishment EstablishmentService");
 

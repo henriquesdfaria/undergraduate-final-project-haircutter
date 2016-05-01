@@ -13,7 +13,7 @@ public interface EstablishmentServiceService {
 
     List<EstablishmentService> getAllByCnpj(String cnpj);
 
-    void edit(EstablishmentService establishmentService, String username, String cnpj);
+    void edit(EstablishmentService establishmentService, String username);
 
     void delete(Long id, String cnpj, String username);
 

@@ -53,10 +53,10 @@ public class EstablishmentServiceServiceImpl implements EstablishmentServiceServ
     }
 
     @Override
-    public void edit(EstablishmentService establishmentService, String username, String cnpj) {
+    public void edit(EstablishmentService establishmentService, String username) {
 
         EstablishmentService foundEstablishmentService = establishmentServiceRespository
-                .findOneByIdAndEstablishmentCnpjAndDeleted(establishmentService.getId(), cnpj, false);
+                .findOneByIdAndEstablishmentCnpjAndDeleted(establishmentService.getId(), establishmentService.getEstablishmentCnpj(), false);
 
 
         if (foundEstablishmentService == null) {

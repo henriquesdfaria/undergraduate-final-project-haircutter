@@ -34,8 +34,9 @@ public class EstablishmentServiceFacade {
     public void edit(@RequestBody EstablishmentServiceJson establishmentServiceJson) {
 
         String cnpj = establishmentEmployeeUserService.getCnpjByLoggedUserUsername();
+        establishmentServiceJson.setEstablishmentCnpj(cnpj);
 
-        establishmentServiceEndpoint.edit(establishmentServiceJson, cnpj);
+        establishmentServiceEndpoint.edit(establishmentServiceJson);
     }
 
     @RequestMapping(value = {"/manager/establishment/service/{id}"}, method = RequestMethod.DELETE)
