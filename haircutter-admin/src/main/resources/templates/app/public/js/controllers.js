@@ -16,6 +16,13 @@ var moderator_menu = [{
 }
 ];
 
+
+var professional_menu = [{
+  name: 'Perfil',
+  link: '/professional#/profile'
+}
+];
+
 var establishment_admin_menu = [{
   name: 'Logs Auditoria',
   link: '/establishment-admin#/establishment-audit-logs'
@@ -50,6 +57,10 @@ publicControllers.controller('Controller', ['$scope', '$http', '$location',
 
             if (data && data.role === 'ROLE_ESTABLISHMENT_ADMIN') {
               $scope.menu = establishment_admin_menu;
+            }
+
+            if (data && data.role === 'ROLE_PROFESSIONAL') {
+              $scope.menu = professional_menu;
             }
 
             $scope.loggedUser = data

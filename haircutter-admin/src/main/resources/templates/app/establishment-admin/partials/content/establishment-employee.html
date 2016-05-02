@@ -45,6 +45,19 @@
             </div>
 
             <div class="form-group required">
+              <label class="col-md-4 control-label">E-mail
+                <sup>*</sup>
+              </label>
+              <div class="col-md-6">
+                <input name="employeeEmail" ng-model="employee.user.email" ng-required="true" placeholder="E-mail" class="form-control input-md" required="true" type="email">
+                <div class="text-danger" ng-show="employeeForm.$submitted || employeeForm.employeeEmail.$touched">
+                  <p ng-show="employeeForm.employeeEmail.$error.required">E-mail é um campo obrigatório.</p>
+                  <p ng-show="employeeForm.employeeEmail.$error.email">E-mail inválido.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group required">
               <label class="col-md-4 control-label" for="employeeRole">Função
                 <sup>*</sup>
               </label>

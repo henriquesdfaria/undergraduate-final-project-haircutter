@@ -17,6 +17,10 @@ public class UserJson {
 
     private Boolean enabled;
 
+    private String email;
+
+    private Boolean emailVerified;
+
     private Date creationTime;
 
     private Date lastModifiedDate;
@@ -25,12 +29,14 @@ public class UserJson {
 
     }
 
-    public UserJson(String username, String name, String password, UserRoleEnum role, Boolean enabled, Date creationTime, Date lastModifiedDate) {
+    public UserJson(String username, String name, String password, UserRoleEnum role, Boolean enabled, String email, Boolean emailVerified, Date creationTime, Date lastModifiedDate) {
         this.username = username;
         this.name = name;
         this.password = password;
         this.role = role;
         this.enabled = enabled;
+        this.email = email;
+        this.emailVerified = emailVerified;
         this.creationTime = creationTime;
         this.lastModifiedDate = lastModifiedDate;
     }
@@ -73,6 +79,22 @@ public class UserJson {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Boolean getEmailVerified() {
+        return emailVerified;
+    }
+
+    public void setEmailVerified(Boolean emailVerified) {
+        this.emailVerified = emailVerified;
     }
 
     public Date getCreationTime() {

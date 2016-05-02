@@ -34,7 +34,7 @@ professionalControllers.controller('ProfessionalProfileController', ['$scope', '
       $scope.save = function (professional) {
         $http({
             method: 'PUT',
-            url: '/api/establishment-admin/establishment/profile',
+            url: '/api/professional/profile',
             data: professional
           }
         );
