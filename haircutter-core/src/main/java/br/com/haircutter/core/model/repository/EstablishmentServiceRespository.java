@@ -14,5 +14,4 @@ public interface EstablishmentServiceRespository extends CrudRepository<Establis
 	EstablishmentService findOneByIdAndEstablishmentCnpjAndDeleted(Long id, String cnpj, Boolean deleted);
 
 	List<EstablishmentService> findAllByEstablishmentCnpjAndDeleted(String cnpj, Boolean deleted);
-
 }

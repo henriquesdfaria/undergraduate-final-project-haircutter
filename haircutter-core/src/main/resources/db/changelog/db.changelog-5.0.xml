@@ -4,37 +4,6 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <!-- ESTABLISHMENT PROFESSIONAL PROFILE TABLE -->
-    <changeSet author="henrique" id="1">
-        <createTable tableName="establishment_professional_profile">
-            <column name="establishment_employee_id" type="BIGINT" autoIncrement="true">
-                <constraints nullable="false" primaryKey="true"/>
-            </column>
-            <column name="name" type="VARCHAR(255)">
-                <constraints nullable="true"/>
-            </column>
-            <column name="email" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="creation_time" type="DATETIME">
-                <constraints nullable="false"/>
-            </column>
-            <column name="last_modified_date" type="DATETIME">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addForeignKeyConstraint constraintName="establishment_professional_profile_establishment_employee_fk"
-                                 referencedTableName="establishment_employee" baseColumnNames="establishment_employee_id"
-                                 baseTableName="establishment_professional_profile" referencedColumnNames="id"/>
-
-        <rollback>
-            <dropForeignKeyConstraint baseTableName="establishment_professional_profile"
-                                      constraintName="establishment_professional_profile_establishment_employee_fk"/>
-            <dropTable tableName="establishment_professional_profile"/>
-        </rollback>
-    </changeSet>
-
     <!-- ESTABLISHMENT PROFESSIONAL SERVICE TABLE -->
     <changeSet author="henrique" id="1">
         <createTable tableName="establishment_professional_service">
@@ -47,9 +16,6 @@
             <column name="establishment_service_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
-            <column name="duration" type="INT">
-                <constraints nullable="false"/>
-            </column>
         </createTable>
 
         <addForeignKeyConstraint constraintName="establishment_professional_service_establishment_employee_fk"
@@ -59,7 +25,10 @@
         <addForeignKeyConstraint constraintName="establishment_professional_service_establishment_service_fk"
                                  referencedTableName="establishment_service" baseColumnNames="establishment_service_id"
                                  baseTableName="establishment_professional_service" referencedColumnNames="id"/>
-
+                                 
+         <addUniqueConstraint columnNames="establishment_employee_id, establishment_service_id"
+            constraintName="establishment_employee_service_unique" tableName="establishment_professional_service"/>
+            
         <rollback>
             <dropForeignKeyConstraint baseTableName="establishment_professional_service"
                                       constraintName="establishment_professional_service_establishment_employee_fk"/>
