@@ -28,6 +28,14 @@ managerControllers.controller('EstablishmentServicesController', ['$scope', '$ht
           }
         ).success(function (data) {
             $scope.establishmentServices = data;
+
+            _.forEach($scope.establishmentServices, function (service) {
+                var time = moment({hour: 0, minute: 0});
+                time.add(service.duration * 30, "minutes");
+                service.durationTitle = (time.hours() !== 0 ? time.hours() + 'H' : '') +
+                  (time.minutes() !== 0 ? time.minutes() + 'M' : '');
+              }
+            );
           }
         );
       }
@@ -71,7 +79,9 @@ managerControllers.controller('CreateEstablishmentServiceController', ['$scope',
 
       $scope.create = function (service) {
 
+        service.duration = parseInt(service.duration);
         service.price = parseFloat(service.price);
+
         $http({
             method: 'POST',
             url: '/api/manager/establishment/service',
@@ -121,6 +131,10 @@ managerControllers.controller('EstablishmentServiceController',
       }
 
       $scope.save = function (service) {
+
+        service.duration = parseInt(service.duration);
+        service.price = parseFloat(service.price);
+
         $http({
             method: 'PUT',
             url: '/api/manager/establishment/service',
