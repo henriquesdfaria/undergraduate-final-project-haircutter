@@ -7,7 +7,7 @@
     <!-- WEEKDAY TABLE -->
     <changeSet author="henrique" id="1">
         <createTable tableName="weekday">
-            <column name="id" type="VARCHAR(50)">
+            <column name="weekday" type="VARCHAR(50)">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
         </createTable>
@@ -28,23 +28,33 @@
             <column name="weekday" type="VARCHAR(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="scheduleInMinutes" type="INTEGER">
+            <column name="schedule-in-minutes" type="INT">
                 <constraints nullable="false"/>
             </column>
         </createTable>
 
         <addForeignKeyConstraint constraintName="establishment_professional_calendar_establishment_employee_fk"
-                                 referencedTableName="establishment_employee" baseColumnNames="establishment_employee_id"
+                                 referencedTableName="establishment_employee"
+                                 baseColumnNames="establishment_employee_id"
                                  baseTableName="establishment_professional_calendar" referencedColumnNames="id"/>
 
         <addForeignKeyConstraint constraintName="establishment_professional_calendar_weekday_fk"
                                  referencedTableName="weekday" baseColumnNames="weekday"
                                  baseTableName="establishment_professional_calendar" referencedColumnNames="weekday"/>
+
+        <addUniqueConstraint columnNames="establishment_employee_id, weekday, schedule-in-minutes"
+                             constraintName="establishment_employee_calendar_unique"
+                             tableName="establishment_professional_calendar"/>
+
         <rollback>
             <dropForeignKeyConstraint baseTableName="establishment_professional_calendar"
                                       constraintName="establishment_professional_calendar_establishment_employee_fk"/>
             <dropForeignKeyConstraint baseTableName="establishment_professional_calendar"
                                       constraintName="establishment_professional_calendar_weekday_fk"/>
+
+            <dropUniqueConstraint tableName="establishment_professional_calendar"
+                                  constraintName="establishment_professional_calendar_unique"/>
+
             <dropTable tableName="establishment_professional_calendar"/>
         </rollback>
     </changeSet>

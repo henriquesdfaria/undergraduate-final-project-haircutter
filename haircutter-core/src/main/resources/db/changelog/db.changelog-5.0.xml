@@ -34,6 +34,8 @@
                                       constraintName="establishment_professional_service_establishment_employee_fk"/>
             <dropForeignKeyConstraint baseTableName="establishment_professional_service"
                                       constraintName="establishment_professional_service_establishment_service_fk"/>
+            <dropUniqueConstraint tableName="establishment_professional_service"
+                                  constraintName="establishment_professional_service_unique"/>
             <dropTable tableName="establishment_professional_service"/>
         </rollback>
     </changeSet>
