@@ -31,7 +31,7 @@ managerControllers.controller('EstablishmentServicesController', ['$scope', '$ht
 
             _.forEach($scope.establishmentServices, function (service) {
                 var time = moment({hour: 0, minute: 0});
-                time.add(service.duration * 30, "minutes");
+                time.add(service.duration, "minutes");
                 service.durationTitle = (time.hours() !== 0 ? time.hours() + 'H' : '') +
                   (time.minutes() !== 0 ? time.minutes() + 'M' : '');
               }
