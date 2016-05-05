@@ -68,6 +68,39 @@
               </div>
             </div>
 
+            <div class="form-group required">
+              <label class="col-md-4 control-label" for="establishmentServiceDuration">Duração
+                <sup>*</sup>
+              </label>
+              <div class="col-md-6">
+                <select id="establishmentServiceDuration" name="establishmentServiceDuration"
+                        ng-model="establishmentService.duration" ng-required="true" class="form-control">
+                  <option value="" disabled selected>Selecione</option>
+                  <option value="30">30M</option>
+                  <option value="60">1H</option>
+                  <option value="90">1H30M</option>
+                  <option value="120">2H</option>
+                  <option value="150">2H30M</option>
+                  <option value="180">3H</option>
+                  <option value="210">3H30M</option>
+                  <option value="240">4H</option>
+                  <option value="270">4H30M</option>
+                  <option value="300">5H</option>
+                  <option value="330">5H30M</option>
+                  <option value="360">6H</option>
+                  <option value="390">6H30M</option>
+                  <option value="420">7H</option>
+                  <option value="450">7H30M</option>
+                  <option value="470">8H</option>
+                </select>
+                <div class="text-danger"
+                     ng-show="establishmentServiceForm.$submitted || establishmentServiceForm.establishmentServiceDuration.$touched">
+                  <p ng-show="establishmentServiceForm.establishmentServiceDuration.$error.required">Selecione uma
+                    duração.</p>
+                </div>
+              </div>
+            </div>
+
             <div class="form-group">
               <label class="col-md-4 control-label"></label>
               <div class="col-md-8">

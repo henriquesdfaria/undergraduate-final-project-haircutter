@@ -28,7 +28,7 @@ establishmentAdminControllers.controller('AuditLogsController', ['$scope', '$htt
         ).success(function (data) {
             $scope.auditLogs = data;
             _.forEach($scope.auditLogs, function (auditLog) {
-                auditLog.date = new moment(auditLog.date).format('DD/MM/YYYY HH:mm');
+                auditLog.formatedDate = new moment(auditLog.date).format('DD/MM/YYYY HH:mm');
               }
             );
           }

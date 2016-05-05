@@ -34,8 +34,9 @@ public class EstablishmentServiceFacade {
     public void edit(@RequestBody EstablishmentServiceJson establishmentServiceJson) {
 
         String cnpj = establishmentEmployeeUserService.getCnpjByLoggedUserUsername();
+        establishmentServiceJson.setEstablishmentCnpj(cnpj);
 
-        establishmentServiceEndpoint.edit(establishmentServiceJson, cnpj);
+        establishmentServiceEndpoint.edit(establishmentServiceJson);
     }
 
     @RequestMapping(value = {"/manager/establishment/service/{id}"}, method = RequestMethod.DELETE)
@@ -54,7 +55,7 @@ public class EstablishmentServiceFacade {
         return ResponseEntity.ok(establishmentServiceEndpoint.getByIdAndCnpj(id, cnpj));
     }
 
-    @RequestMapping(value = {"/manager/establishment/services"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/manager/establishment/services", "/professional/establishment/services"}, method = RequestMethod.GET)
     public ResponseEntity<?> getAllByCnpj() {
 
         String cnpj = establishmentEmployeeUserService.getCnpjByLoggedUserUsername();

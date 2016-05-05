@@ -18,6 +18,8 @@ public class EstablishmentServiceJson {
 
     private BigDecimal price;
 
+    private Integer duration;
+
     private Date creationTime;
 
     private Date lastModifiedDate;
@@ -28,12 +30,13 @@ public class EstablishmentServiceJson {
 
     }
 
-    public EstablishmentServiceJson(Long id, String establishmentCnpj, String service, String description, BigDecimal price, Date creationTime, Date lastModifiedDate, Boolean deleted) {
-        this.id = id;
+    public EstablishmentServiceJson(String establishmentCnpj, Long id, String service, String description, BigDecimal price, Integer duration, Date creationTime, Date lastModifiedDate, Boolean deleted) {
         this.establishmentCnpj = establishmentCnpj;
+        this.id = id;
         this.service = service;
         this.description = description;
         this.price = price;
+        this.duration = duration;
         this.creationTime = creationTime;
         this.lastModifiedDate = lastModifiedDate;
         this.deleted = deleted;
@@ -77,6 +80,14 @@ public class EstablishmentServiceJson {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
     }
 
     public Date getCreationTime() {

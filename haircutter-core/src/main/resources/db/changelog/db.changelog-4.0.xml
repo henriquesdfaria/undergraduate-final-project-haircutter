@@ -22,6 +22,9 @@
             <column name="price" type="DECIMAL(10,2)">
                 <constraints nullable="false"/>
             </column>
+            <column name="duration" type="INT">
+                <constraints nullable="false"/>
+            </column>
             <column name="creation_time" type="DATETIME">
                 <constraints nullable="false"/>
             </column>

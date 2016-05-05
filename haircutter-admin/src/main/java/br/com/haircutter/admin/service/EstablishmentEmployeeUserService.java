@@ -24,4 +24,15 @@ public class EstablishmentEmployeeUserService {
         return cnpj;
     }
 
+    public Long getEmployeeIdByLoggedUserUsername() {
+
+        Long id = jdbcTemplate.queryForObject(
+                "SELECT ee.id FROM establishment_employee ee WHERE ee.username = ?;",
+                new Object[]{LoggedUserUtils.getLoggedUserUsername()},
+                Long.class);
+
+        return id;
+    }
+
+
 }

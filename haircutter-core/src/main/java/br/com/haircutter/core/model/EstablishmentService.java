@@ -31,6 +31,9 @@ public class EstablishmentService implements Serializable {
     @Column(name = "price")
     private BigDecimal price;
 
+    @Column(name = "duration")
+    private Integer duration;
+
     @Column(name = "creation_time")
     private Date creationTime;
 
@@ -44,12 +47,12 @@ public class EstablishmentService implements Serializable {
 
     }
 
-    public EstablishmentService(Long id, String establishmentCnpj, String service, String description, BigDecimal price, Date creationTime, Date lastModifiedDate, Boolean deleted) {
-        this.id = id;
+    public EstablishmentService(String establishmentCnpj, String service, String description, BigDecimal price, Integer duration, Date creationTime, Date lastModifiedDate, Boolean deleted) {
         this.establishmentCnpj = establishmentCnpj;
         this.service = service;
         this.description = description;
         this.price = price;
+        this.duration = duration;
         this.creationTime = creationTime;
         this.lastModifiedDate = lastModifiedDate;
         this.deleted = deleted;
@@ -95,6 +98,14 @@ public class EstablishmentService implements Serializable {
         this.price = price;
     }
 
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
+
     public Date getCreationTime() {
         return creationTime;
     }
@@ -118,5 +129,4 @@ public class EstablishmentService implements Serializable {
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
-
 }

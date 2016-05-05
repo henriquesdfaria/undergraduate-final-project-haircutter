@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- WEEKDAY TABLE -->
+    <changeSet author="henrique" id="1">
+        <createTable tableName="weekday">
+            <column name="id" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="weekday"/>
+        </rollback>
+    </changeSet>
+
+    <!-- ESTABLISHMENT PROFESSIONAL CALENDAR TABLE -->
+    <changeSet author="henrique" id="2">
+        <createTable tableName="establishment_professional_calendar">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="establishment_employee_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="weekday" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="scheduleInMinutes" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="establishment_professional_calendar_establishment_employee_fk"
+                                 referencedTableName="establishment_employee" baseColumnNames="establishment_employee_id"
+                                 baseTableName="establishment_professional_calendar" referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint constraintName="establishment_professional_calendar_weekday_fk"
+                                 referencedTableName="weekday" baseColumnNames="weekday"
+                                 baseTableName="establishment_professional_calendar" referencedColumnNames="weekday"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="establishment_professional_calendar"
+                                      constraintName="establishment_professional_calendar_establishment_employee_fk"/>
+            <dropForeignKeyConstraint baseTableName="establishment_professional_calendar"
+                                      constraintName="establishment_professional_calendar_weekday_fk"/>
+            <dropTable tableName="establishment_professional_calendar"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

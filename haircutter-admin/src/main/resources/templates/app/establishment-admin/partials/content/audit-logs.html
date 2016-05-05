@@ -22,7 +22,7 @@
             </th>
           </tr>
         </thead>
-        <tbody ng-repeat="al in auditLogs | filter:searchText">
+        <tbody ng-repeat="al in auditLogs | filter:searchText | orderBy: 'date':true">
           <tr>
             <td style="width:20%" class="ads-details-td">
               <div>
@@ -41,7 +41,7 @@
             <td style="width:25%" class="action-td">
               <div>
                 <p>
-                  {{al.date}}
+                  {{al.formatedDate}}
                 </p>
               </div>
             </td>
