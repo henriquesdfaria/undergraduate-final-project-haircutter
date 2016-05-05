@@ -47,11 +47,11 @@ public class EstablishmentServiceFacade {
     @RequestMapping(value = {"/{cnpj}/service/{id}"}, method = RequestMethod.DELETE)
     public void delete(@PathVariable("cnpj") String cnpj, @PathVariable("id") Long id, @RequestParam("username") String username) {
 
-        LOGGER.info("Started by " + username + " - Edit Establishment EstablishmentService", id);
+        LOGGER.info("Started by " + username + " - Delete Establishment EstablishmentService", id);
 
         establishmentServiceService.delete(id, cnpj, username);
 
-        LOGGER.info("Ended by " + username + " - Edit Establishment EstablishmentService", id);
+        LOGGER.info("Ended by " + username + " - Delete Establishment EstablishmentService", id);
 
     }
 

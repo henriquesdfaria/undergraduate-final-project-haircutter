@@ -20,6 +20,9 @@ var moderator_menu = [{
 var professional_menu = [{
   name: 'Perfil',
   link: '/professional#/profile'
+}, {
+  name: 'Serviços',
+  link: '/professional#/services'
 }
 ];
 

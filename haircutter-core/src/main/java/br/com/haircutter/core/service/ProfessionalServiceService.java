@@ -1,14 +1,15 @@
 package br.com.haircutter.core.service;
 
-import java.util.List;
-
 import br.com.haircutter.core.model.ProfessionalService;
+
+import java.util.List;
 
 public interface ProfessionalServiceService {
 	
 	ProfessionalService create(ProfessionalService professionalService, String cnpj, String username);
 	
-	void delete(ProfessionalService professionalService, String cnpj, String username);
+	void delete(Long professionalServiceId, String cnpj, String username);
 	
-	List<ProfessionalService> findByProfessional(Long establishmentEmployeeId);
+	List<ProfessionalService> getAllByEstablishmentEmployeeId(Long establishmentEmployeeId);
+
 }

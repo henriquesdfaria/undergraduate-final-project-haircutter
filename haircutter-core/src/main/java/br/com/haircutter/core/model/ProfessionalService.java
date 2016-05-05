@@ -1,13 +1,7 @@
 package br.com.haircutter.core.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
 @Table(name = "establishment_professional_service")
@@ -19,7 +13,13 @@ public class ProfessionalService implements Serializable {
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
+	@Transient
+	private EstablishmentEmployee establishmentEmployee;
+
+	@Transient
+	private EstablishmentService establishmentService;
+
 	@Column(name = "establishment_employee_id")
 	private Long establishmentEmployeeId;
 	
@@ -27,13 +27,11 @@ public class ProfessionalService implements Serializable {
 	private Long establishmentServiceId;
 
 	public ProfessionalService() {
-		super();
 	}
 
-	public ProfessionalService(Long id, Long establishmentEmployeeId, Long establishmentServiceId,
-			Integer duaration) {
-		super();
-		this.id = id;
+	public ProfessionalService(EstablishmentEmployee establishmentEmployee, EstablishmentService establishmentService, Long establishmentEmployeeId, Long establishmentServiceId) {
+		this.establishmentEmployee = establishmentEmployee;
+		this.establishmentService = establishmentService;
 		this.establishmentEmployeeId = establishmentEmployeeId;
 		this.establishmentServiceId = establishmentServiceId;
 	}
@@ -44,6 +42,22 @@ public class ProfessionalService implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public EstablishmentEmployee getEstablishmentEmployee() {
+		return establishmentEmployee;
+	}
+
+	public void setEstablishmentEmployee(EstablishmentEmployee establishmentEmployee) {
+		this.establishmentEmployee = establishmentEmployee;
+	}
+
+	public EstablishmentService getEstablishmentService() {
+		return establishmentService;
+	}
+
+	public void setEstablishmentService(EstablishmentService establishmentService) {
+		this.establishmentService = establishmentService;
 	}
 
 	public Long getEstablishmentEmployeeId() {

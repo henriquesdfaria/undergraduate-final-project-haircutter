@@ -17,6 +17,18 @@ professionalApp.config(['$routeProvider',
             controller: 'ProfessionalProfileController'
           }
         )
+        .when(
+          '/services', {
+            templateUrl: 'professional/partials/professional-services-content.html',
+            controller: 'ProfessionalServicesController'
+          }
+        )
+        .when(
+          '/services/create', {
+            templateUrl: 'professional/partials/create-professional-service-content.html',
+            controller: 'CreateProfessionalServiceController'
+          }
+        )
         .otherwise(
           {redirectTo: '/profile'}
         );
