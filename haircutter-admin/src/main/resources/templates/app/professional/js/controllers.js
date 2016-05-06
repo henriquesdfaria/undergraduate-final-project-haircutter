@@ -5,8 +5,8 @@
 var professionalControllers = angular.module('professionalControllers', []);
 
 /* ESTABLISHMENT PROFESSIONAL PROFILE CONTROLLER*/
-professionalControllers.controller('ProfessionalProfileController', ['$scope', '$http',
-    function ($scope, $http) {
+professionalControllers.controller('ProfessionalProfileController', ['$scope', '$http', '$location',
+    function ($scope, $http, $location) {
       $scope.profileActiveMenu = 'active';
 
       $scope.getLoggedUser = function () {
@@ -36,6 +36,10 @@ professionalControllers.controller('ProfessionalProfileController', ['$scope', '
             method: 'PUT',
             url: '/api/professional/profile',
             data: professional
+          }
+        ).success(function () {
+            $scope.getLoggedUser();
+            $location.path('/profile');
           }
         );
       }

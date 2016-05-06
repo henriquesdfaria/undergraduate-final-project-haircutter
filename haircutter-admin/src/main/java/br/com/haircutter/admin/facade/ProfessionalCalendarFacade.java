@@ -39,7 +39,7 @@ public class ProfessionalCalendarFacade {
     }
 
 
-    @RequestMapping(value = {"/professional/services"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/professional/calendars"}, method = RequestMethod.GET)
     public ResponseEntity<?> getAllByEstablishmentEmployeeId() {
 
         Long establishmentEmployeeId = establishmentEmployeeUserService.getEmployeeIdByLoggedUserUsername();
