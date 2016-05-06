@@ -25,11 +25,11 @@ public class ProfessionalCalendar implements Serializable {
 	@Column(name = "establishment_employee_id")
 	private Long establishmentEmployeeId;
 
-    @Column(name = "weekday")
     @Enumerated(EnumType.STRING)
+    @Column(name = "weekday")
     private WeekdayEnum weekday;
 
-	@Column(name = "schedule-in-minutes")
+	@Column(name = "schedule_in_minutes")
 	private Integer scheduleInMinutes;
 
 	public ProfessionalCalendar() {

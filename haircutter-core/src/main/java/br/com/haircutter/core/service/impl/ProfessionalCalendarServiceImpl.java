@@ -1,7 +1,6 @@
 package br.com.haircutter.core.service.impl;
 
 import br.com.haircutter.core.model.ProfessionalCalendar;
-import br.com.haircutter.core.model.repository.EstablishmentServiceRespository;
 import br.com.haircutter.core.model.repository.ProfessionalCalendarRespository;
 import br.com.haircutter.core.service.EstablishmentAuditLogService;
 import br.com.haircutter.core.service.EstablishmentEmployeeService;
@@ -18,7 +17,7 @@ import java.util.List;
 public class ProfessionalCalendarServiceImpl implements ProfessionalCalendarService {
 
     public static final int MILLISECOND_TO_MINUTE = 60000;
-    
+
     @Autowired
     private ProfessionalCalendarRespository professionalCalendarRespository;
 
@@ -31,21 +30,22 @@ public class ProfessionalCalendarServiceImpl implements ProfessionalCalendarServ
     @Autowired
     private EstablishmentAuditLogService auditLogService;
 
-
-    @Autowired
-    private EstablishmentServiceRespository establishmentServiceRespository;
-
     public ProfessionalCalendar create(ProfessionalCalendar professionalCalendar, String cnpj, String username) {
 
         validator.validate(professionalCalendar);
 
-        professionalCalendarRespository.save(professionalCalendar);
+        ProfessionalCalendar createdProfessionalCalendar = professionalCalendarRespository.save(professionalCalendar);
+
+        createdProfessionalCalendar.setEstablishmentEmployee(establishmentEmployeeService
+                .get(createdProfessionalCalendar.getEstablishmentEmployeeId()));
+
+        createdProfessionalCalendar.setWeekdayTitle(createdProfessionalCalendar.getWeekday().getBundle());
 
         auditLogService.registerLog(cnpj, username, "O profissional agora atende o horário "
                 + professionalCalendar.getWeekday().getBundle() + " às "
                 + new Time(professionalCalendar.getScheduleInMinutes() * MILLISECOND_TO_MINUTE).toString());
 
-        return professionalCalendar;
+        return createdProfessionalCalendar;
     }
 
     public void delete(Long professionalCalendarId, String cnpj, String username) {
@@ -68,6 +68,7 @@ public class ProfessionalCalendarServiceImpl implements ProfessionalCalendarServ
 
         professionalServices.stream().forEach(ps -> {
             ps.setEstablishmentEmployee(establishmentEmployeeService.get(ps.getEstablishmentEmployeeId()));
+            ps.setWeekdayTitle(ps.getWeekday().getBundle());
         });
 
         return professionalServices;

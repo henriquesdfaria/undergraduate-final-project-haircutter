@@ -28,7 +28,7 @@
             <column name="weekday" type="VARCHAR(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="schedule-in-minutes" type="INT">
+            <column name="schedule_in_minutes" type="INT">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -42,7 +42,7 @@
                                  referencedTableName="weekday" baseColumnNames="weekday"
                                  baseTableName="establishment_professional_calendar" referencedColumnNames="weekday"/>
 
-        <addUniqueConstraint columnNames="establishment_employee_id, weekday, schedule-in-minutes"
+        <addUniqueConstraint columnNames="establishment_employee_id, weekday, schedule_in_minutes"
                              constraintName="establishment_employee_calendar_unique"
                              tableName="establishment_professional_calendar"/>
 
@@ -57,6 +57,30 @@
 
             <dropTable tableName="establishment_professional_calendar"/>
         </rollback>
+    </changeSet>
+
+    <changeSet author="henrique" id="3">
+        <insert tableName="weekday">
+            <column name="weekday" value="SUNDAY"/>
+        </insert>
+        <insert tableName="weekday">
+            <column name="weekday" value="MONDAY"/>
+        </insert>
+        <insert tableName="weekday">
+            <column name="weekday" value="TUESDAY"/>
+        </insert>
+        <insert tableName="weekday">
+            <column name="weekday" value="WEDNESDAY"/>
+        </insert>
+        <insert tableName="weekday">
+            <column name="weekday" value="THURSDAY"/>
+        </insert>
+        <insert tableName="weekday">
+            <column name="weekday" value="FRIDAY"/>
+        </insert>
+        <insert tableName="weekday">
+            <column name="weekday" value="SATURDAY"/>
+        </insert>
     </changeSet>
 
 </databaseChangeLog>

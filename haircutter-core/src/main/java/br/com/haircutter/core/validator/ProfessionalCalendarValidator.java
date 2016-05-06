@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class ProfessionalCalendarValidator {
 	
 	public void validate(final ProfessionalCalendar professionalCalendar){
-		if(professionalCalendar.getEstablishmentEmployeeId() != null){
+		if(professionalCalendar.getId() != null){
 			throw new CustomInvalidException("Should be null", "EstablishmentEmployeeId");
 		}
 	}
