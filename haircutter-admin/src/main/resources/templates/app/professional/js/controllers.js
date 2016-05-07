@@ -152,3 +152,55 @@ professionalControllers.controller('CreateProfessionalServiceController', ['$sco
     }
   ]
 );
+
+/* CALENDARS CONTROLLER*/
+professionalControllers.controller('CalendarsController', ['$scope', '$http', '$location',
+    function ($scope, $http, $location) {
+      $scope.calendarsActiveMenu = 'active';
+
+      $scope.getLoggedUser = function () {
+        $http({
+            method: 'GET',
+            url: '/api/public/get-logged-user'
+          }
+        ).success(function (data) {
+            $scope.loggedUser = data;
+          }
+        );
+      }
+
+      $scope.getCalendars = function () {
+        $http({
+            method: 'GET',
+            url: '/api/professional/calendars',
+          }
+        ).success(function (data) {
+            $scope.calendars = data;
+
+            _.forEach($scope.calendars, function (calendar) {
+                var time = moment({hour: 0, minute: 0});
+                time.add(calendar.scheduleInMinutes, "minutes");
+                calendar.schedule = time.format('HH:mm');
+              }
+            );
+          }
+        );
+      }
+
+      $scope.removeCalendar = function (calendar) {
+        $http({
+            method: 'DELETE',
+            url: '/api/professional/calendar/' + calendar.id
+          }
+        ).success(function () {
+            $scope.getCalendars();
+            $location.path('/calendars');
+          }
+        );
+      }
+
+      $scope.getLoggedUser();
+      $scope.getCalendars();
+    }
+  ]
+);

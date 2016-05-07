@@ -9,7 +9,7 @@ public class ProfessionalCalendarValidator {
 	
 	public void validate(final ProfessionalCalendar professionalCalendar){
 		if(professionalCalendar.getId() != null){
-			throw new CustomInvalidException("Should be null", "EstablishmentEmployeeId");
+			throw new CustomInvalidException("Should be null", "id");
 		}
 	}
 }
