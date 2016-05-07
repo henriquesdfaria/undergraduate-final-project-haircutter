@@ -37,11 +37,11 @@ public class ProfessionalServiceFacade {
     @RequestMapping(value = {"/service/{professionalServiceId}"}, method = RequestMethod.DELETE)
     public void delete(@PathVariable("professionalServiceId") Long professionalServiceId, @RequestParam("cnpj") String cnpj, @RequestParam("username") String username) {
 
-        LOGGER.info("Started by " + username + " - Edit Establishment EstablishmentService", id);
+        LOGGER.info("Started by " + username + " - Disassociate Professional Service", id);
 
         professionalServiceService.delete(professionalServiceId, cnpj, username);
 
-        LOGGER.info("Ended by " + username + " - Edit Establishment EstablishmentService", id);
+        LOGGER.info("Ended by " + username + " - Disassociate Professional Service", id);
 
     }
 
@@ -52,7 +52,7 @@ public class ProfessionalServiceFacade {
 
         List<ProfessionalService> professionalServices = professionalServiceService.getAllByEstablishmentEmployeeId(establishmentEmployeeId);
 
-        LOGGER.info("Ended - Get Establishment Services by establishmentEmployeeId", professionalServices);
+        LOGGER.info("Ended - Get Professional Services by establishmentEmployeeId", professionalServices);
 
         return ResponseEntity.ok(professionalServices);
     }

@@ -5,8 +5,8 @@
 var professionalControllers = angular.module('professionalControllers', []);
 
 /* ESTABLISHMENT PROFESSIONAL PROFILE CONTROLLER*/
-professionalControllers.controller('ProfessionalProfileController', ['$scope', '$http',
-    function ($scope, $http) {
+professionalControllers.controller('ProfessionalProfileController', ['$scope', '$http', '$location',
+    function ($scope, $http, $location) {
       $scope.profileActiveMenu = 'active';
 
       $scope.getLoggedUser = function () {
@@ -36,6 +36,10 @@ professionalControllers.controller('ProfessionalProfileController', ['$scope', '
             method: 'PUT',
             url: '/api/professional/profile',
             data: professional
+          }
+        ).success(function () {
+            $scope.getLoggedUser();
+            $location.path('/profile');
           }
         );
       }
@@ -108,25 +112,6 @@ professionalControllers.controller('CreateProfessionalServiceController', ['$sco
         );
       }
 
-      $scope.getEsblishmentServices = function () {
-        $http({
-            method: 'GET',
-            url: '/api/professional/establishment/services',
-          }
-        ).success(function (data) {
-            $scope.establishmentServices = data;
-
-            _.forEach($scope.establishmentServices, function (service) {
-                var time = moment({hour: 0, minute: 0});
-                time.add(service.duration * 30, "minutes");
-                service.durationTitle = (time.hours() !== 0 ? time.hours() + 'H' : '') +
-                  (time.minutes() !== 0 ? time.minutes() + 'M' : '');
-              }
-            );
-          }
-        );
-      }
-
       $scope.create = function (service) {
 
         $http({
@@ -144,7 +129,96 @@ professionalControllers.controller('CreateProfessionalServiceController', ['$sco
       }
 
       $scope.getLoggedUser();
-      $scope.getEsblishmentServices();
+    }
+  ]
+);
+
+/* CALENDARS CONTROLLER*/
+professionalControllers.controller('CalendarsController', ['$scope', '$http', '$location',
+    function ($scope, $http, $location) {
+      $scope.calendarsActiveMenu = 'active';
+
+      $scope.getLoggedUser = function () {
+        $http({
+            method: 'GET',
+            url: '/api/public/get-logged-user'
+          }
+        ).success(function (data) {
+            $scope.loggedUser = data;
+          }
+        );
+      }
+
+      $scope.getCalendars = function () {
+        $http({
+            method: 'GET',
+            url: '/api/professional/calendars',
+          }
+        ).success(function (data) {
+            $scope.calendars = data;
+
+            _.forEach($scope.calendars, function (calendar) {
+                var time = moment({hour: 0, minute: 0});
+                time.add(calendar.scheduleInMinutes, "minutes");
+                calendar.schedule = time.format('HH:mm');
+              }
+            );
+          }
+        );
+      }
+
+      $scope.removeCalendar = function (calendar) {
+        $http({
+            method: 'DELETE',
+            url: '/api/professional/calendar/' + calendar.id
+          }
+        ).success(function () {
+            $scope.getCalendars();
+            $location.path('/calendars');
+          }
+        );
+      }
+
+      $scope.getLoggedUser();
+      $scope.getCalendars();
+    }
+  ]
+);
+
+/* CREATE CALENDAR CONTROLLER*/
+professionalControllers.controller('CreateCalendarController', ['$scope', '$http', '$location',
+    function ($scope, $http, $location) {
+      
+      $scope.calendarsActiveMenu = 'active';
+
+      $scope.getLoggedUser = function () {
+        $http({
+            method: 'GET',
+            url: '/api/public/get-logged-user'
+          }
+        ).success(function (data) {
+            $scope.loggedUser = data;
+          }
+        );
+      }
+
+      $scope.createRange = function (calendars) {
+
+        $http({
+            method: 'POST',
+            url: '/api/professional/calendars',
+            data: calendars
+          }
+        ).success(function () {
+            $location.path('/calendars');
+          }
+        ).error(function () {
+            $scope.internalError = true;
+          }
+        );
+      }
+
+      $scope.getLoggedUser();
     }
   ]
 );

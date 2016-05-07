@@ -11,4 +11,6 @@ public interface EstablishmentEmployeeRespository extends JpaRepository<Establis
 
     List<EstablishmentEmployee> findAllByEstablishmentCnpjAndDeleted(String establishmentCnpj, Boolean deleted);
 
+    EstablishmentEmployee findOneByIdAndEstablishmentCnpj(Long id, String establishmentCnpj);
+
 }

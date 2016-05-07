@@ -1,0 +1,310 @@
+<div class="col-sm-9 page-content">
+  <div class="inner-box">
+    <h2 class="title-2">
+      <i class="icon-hourglass"></i>
+      Calendário Semanal
+    </h2>
+
+    <div>
+      <label class="pull-right">
+        <a class="btn btn-primary" href="#/calendars/create">Adicionar horários</a>
+      </label>
+      <div style="clear:both"></div>
+    </div>
+
+
+    <ul class="nav nav-tabs add-tabs" id="ajaxTabs" role="tablist">
+      <li class="active">
+        <a href="/#sunday" role="tab" data-toggle="tab">Domingo</a>
+      </li>
+      <li>
+        <a href="/#monday" role="tab" data-toggle="tab">Segunda-Feira</a>
+      </li>
+      <li>
+        <a href="/#tuesday" role="tab" data-toggle="tab">Terça-Feira</a>
+      </li>
+      <li>
+        <a href="/#wednesday" role="tab" data-toggle="tab">Quarta-Feira</a>
+      </li>
+      <li>
+        <a href="/#thursday" role="tab" data-toggle="tab">Quinta-Feira</a>
+      </li>
+      <li>
+        <a href="/#friday" role="tab" data-toggle="tab">Sexta-Feira</a>
+      </li>
+      <li>
+        <a href="/#saturday" role="tab" data-toggle="tab">Sábado</a>
+      </li>
+    </ul>
+
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="sunday">
+        <div class="table-responsive">
+          <table id="sundayTable"
+                 class="table table-striped table-bordered add-manage-table table demo footable-loaded footable"
+                 data-filter="#filter" data-filter-text-only="true">
+            <thead>
+            <tr>
+              <th>
+                Horário
+              </th>
+              <th>
+                Ação
+              </th>
+            </tr>
+            </thead>
+            <tbody ng-repeat="calendar in calendars | filter: { weekday: 'SUNDAY' }">
+            <tr>
+              <td style="width:80%" class="ads-details-td">
+                <div>
+                  <p>
+                    {{calendar.schedule}}
+                  </p>
+                </div>
+              </td>
+              <td style="width:20%" class="action-td">
+                <div>
+                  <a id="rmScheduleSunday" name="rmScheduleSunday" ng-click="removeCalendar(calendar)"
+                     class="btn btn-danger btn-xs">
+                    <i class=" fa fa-close"></i>
+                    Desassociar
+                  </a>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="tab-pane" id="monday">
+        <div class="table-responsive">
+          <table id="mondayTable"
+                 class="table table-striped table-bordered add-manage-table table demo footable-loaded footable"
+                 data-filter="#filter" data-filter-text-only="true">
+            <thead>
+            <tr>
+              <th>
+                Horário
+              </th>
+              <th>
+                Ação
+              </th>
+            </tr>
+            </thead>
+            <tbody ng-repeat="calendar in calendars | filter: { weekday: 'MONDAY' }" class="ads-details-td">
+            <tr>
+              <td style="width:80%" class="ads-details-td">
+                <div>
+                  <p>
+                    {{calendar.schedule}}
+                  </p>
+                </div>
+              </td>
+              <td style="width:20%" class="action-td">
+                <div>
+                  <a id="rmCalendarMonday" name="rmCalendarMonday" ng-click="removeCalendar(calendar)"
+                     class="btn btn-danger btn-xs">
+                    <i class=" fa fa-close"></i>
+                    Desassociar
+                  </a>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="tab-pane" id="tuesday">
+        <div class="table-responsive">
+          <table id="tuesdayTable"
+                 class="table table-striped table-bordered add-manage-table table demo footable-loaded footable"
+                 data-filter="#filter" data-filter-text-only="true">
+            <thead>
+            <tr>
+              <th>
+                Horário
+              </th>
+              <th>
+                Ação
+              </th>
+            </tr>
+            </thead>
+            <tbody ng-repeat="calendar in calendars | filter: { weekday: 'TUESDAY' }" class="ads-details-td">
+            <tr>
+              <td style="width:80%" class="ads-details-td">
+                <div>
+                  <p>
+                    {{calendar.schedule}}
+                  </p>
+                </div>
+              </td>
+              <td style="width:20%" class="action-td">
+                <div>
+                  <a id="rmCalendarTuesday" name="rmCalendarTuesday" ng-click="removeCalendar(calendar)"
+                     class="btn btn-danger btn-xs">
+                    <i class=" fa fa-close"></i>
+                    Desassociar
+                  </a>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="tab-pane" id="wednesday">
+        <div class="table-responsive">
+          <table id="wednesdayTable"
+                 class="table table-striped table-bordered add-manage-table table demo footable-loaded footable"
+                 data-filter="#filter" data-filter-text-only="true">
+            <thead>
+            <tr>
+              <th>
+                Horário
+              </th>
+              <th>
+                Ação
+              </th>
+            </tr>
+            </thead>
+            <tbody ng-repeat="calendar in calendars | filter: { weekday: 'WEDNESDAY' }" class="ads-details-td">
+            <tr>
+              <td style="width:80%" class="ads-details-td">
+                <div>
+                  <p>
+                    {{calendar.schedule}}
+                  </p>
+                </div>
+              </td>
+              <td style="width:20%" class="action-td">
+                <div>
+                  <a id="rmCalendarWednesday" name="rmCalendarWednesday" ng-click="removeCalendar(calendar)"
+                     class="btn btn-danger btn-xs">
+                    <i class=" fa fa-close"></i>
+                    Desassociar
+                  </a>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="tab-pane" id="thursday">
+        <div class="table-responsive">
+          <table id="thursdayTable"
+                 class="table table-striped table-bordered add-manage-table table demo footable-loaded footable"
+                 data-filter="#filter" data-filter-text-only="true">
+            <thead>
+            <tr>
+              <th>
+                Horário
+              </th>
+              <th>
+                Ação
+              </th>
+            </tr>
+            </thead>
+            <tbody ng-repeat="calendar in calendars | filter: { weekday: 'THURSDAY' }" class="ads-details-td">
+            <tr>
+              <td style="width:80%" class="ads-details-td">
+                <div>
+                  <p>
+                    {{calendar.schedule}}
+                  </p>
+                </div>
+              </td>
+              <td style="width:20%" class="action-td">
+                <div>
+                  <a id="rmCalendarThursday" name="rmCalendarThursday" ng-click="removeCalendar(calendar)"
+                     class="btn btn-danger btn-xs">
+                    <i class=" fa fa-close"></i>
+                    Desassociar
+                  </a>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="tab-pane" id="friday">
+        <div class="table-responsive">
+          <table id="fridayTable"
+                 class="table table-striped table-bordered add-manage-table table demo footable-loaded footable"
+                 data-filter="#filter" data-filter-text-only="true">
+            <thead>
+            <tr>
+              <th>
+                Horário
+              </th>
+              <th>
+                Ação
+              </th>
+            </tr>
+            </thead>
+            <tbody ng-repeat="calendar in calendars | filter: { weekday: 'FRIDAY' }" class="ads-details-td">
+            <tr>
+              <td style="width:80%" class="ads-details-td">
+                <div>
+                  <p>
+                    {{calendar.schedule}}
+                  </p>
+                </div>
+              </td>
+              <td style="width:20%" class="action-td">
+                <div>
+                  <a id="rmCalendarFriday" name="rmCalendarFriday" ng-click="removeCalendar(calendar)"
+                     class="btn btn-danger btn-xs">
+                    <i class=" fa fa-close"></i>
+                    Desassociar
+                  </a>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="tab-pane" id="saturday">
+        <div class="table-responsive">
+          <table id="saturdayTable"
+                 class="table table-striped table-bordered add-manage-table table demo footable-loaded footable"
+                 data-filter="#filter" data-filter-text-only="true">
+            <thead>
+            <tr>
+              <th>
+                Horário
+              </th>
+              <th>
+                Ação
+              </th>
+            </tr>
+            </thead>
+            <tbody ng-repeat="calendar in calendars | filter: { weekday: 'SATURDAY' }" class="ads-details-td">
+            <tr>
+              <td style="width:80%" class="ads-details-td">
+                <div>
+                  <p>
+                    {{calendar.schedule}}
+                  </p>
+                </div>
+              </td>
+              <td style="width:20%" class="action-td">
+                <div>
+                  <a id="rmCalendar" name="rmCalendar" ng-click="removeCalendar(calendar)"
+                     class="btn btn-danger btn-xs">
+                    <i class=" fa fa-close"></i>
+                    Desassociar
+                  </a>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
