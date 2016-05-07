@@ -188,7 +188,7 @@ professionalControllers.controller('CalendarsController', ['$scope', '$http', '$
 /* CREATE CALENDAR CONTROLLER*/
 professionalControllers.controller('CreateCalendarController', ['$scope', '$http', '$location',
     function ($scope, $http, $location) {
-
+      
       $scope.calendarsActiveMenu = 'active';
 
       $scope.getLoggedUser = function () {
