@@ -1,0 +1,35 @@
+<div class="intro">
+  <div class="dtable hw100">
+    <div class="dtable-cell hw100">
+      <div class="container text-center">
+        <h1 class="intro-title animated fadeInDown">
+          <a href="#/" class="logo logo-title" style="font-size: 60px;color: white;">
+          <span class="logo-icon">
+            <i class="fa fa-scissors ln-shadow-logo shape-0"
+               style="height: 86px;line-height: 78px;width: 85px;margin-top: -25px;"></i>
+          </span>
+            HAIR<span>CUTTER</span>
+          </a>
+        </h1>
+        <p class="sub animateme fittext3 animated fadeIn" style="font-weight: 400;"> Encontre seu cabelereiro e agende
+          um horário </p>
+        <div class="row search-row animated fadeInUp">
+          <div class="col-lg-4 col-sm-4 search-col relative locationicon">
+            <i class="icon-location-2 icon-append"></i>
+            <input type="text" name="country" id="autocomplete-ajax"
+                   class="form-control locinput input-rel searchtag-input has-icon" placeholder="Cidade"
+                   ng-model="city">
+          </div>
+          <div class="col-lg-4 col-sm-4 search-col relative"><i class="icon-docs icon-append"></i>
+            <input type="text" name="ads" class="form-control has-icon" placeholder="Estou procurando por.."
+                   ng-model="query">
+          </div>
+          <div class="col-lg-4 col-sm-4 search-col">
+            <button ng-click="search(city, query)" class="btn btn-primary btn-search btn-block"><i class="icon-search"></i><strong>Procurar</strong>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

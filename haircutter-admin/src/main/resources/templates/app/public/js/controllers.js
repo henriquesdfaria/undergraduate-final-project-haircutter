@@ -107,3 +107,54 @@ publicControllers.controller('Controller', ['$scope', '$http', '$location',
     }
   ]
 );
+
+/* Home Controller */
+publicControllers.controller('HomeController', ['$scope', '$http', '$location',
+    function ($scope, $http, $location) {
+
+      $scope.getLoggedUser = function () {
+        $http({
+            method: 'GET',
+            url: '/api/public/get-logged-user',
+          }
+        ).success(function (data) {
+            $scope.menu = [];
+
+            if (data && data.role === 'ROLE_MANAGER') {
+              $scope.menu = manager_menu;
+            }
+
+            if (data && data.role === 'ROLE_MODERATOR') {
+              $scope.menu = moderator_menu;
+            }
+
+            if (data && data.role === 'ROLE_ESTABLISHMENT_ADMIN') {
+              $scope.menu = establishment_admin_menu;
+            }
+
+            if (data && data.role === 'ROLE_PROFESSIONAL') {
+              $scope.menu = professional_menu;
+            }
+
+            $scope.loggedUser = data
+
+          }
+        );
+      };
+
+      $scope.search = function (city, searchValue) {
+        $http({
+            method: 'GET',
+            url: '/api/public/search?city=' + city + '&search=' +  searchValue,
+          }
+        ).success(function() {
+
+        });
+      };
+
+
+      $scope.getLoggedUser();
+    }
+  ]
+);
+

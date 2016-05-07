@@ -19,6 +19,7 @@ public class MvcConfig extends WebMvcAutoConfigurationAdapter {
 		registerView("/establishment-admin", "establishment-admin/index", registry);
 		registerView("/manager", "manager/index", registry);
 		registerView("/professional", "professional/index", registry);
+		registerView("/attendant", "attendant/index", registry);
 		
 		// Login
 		registerView("/login", "public/login", registry);

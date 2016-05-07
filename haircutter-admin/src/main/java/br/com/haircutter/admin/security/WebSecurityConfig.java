@@ -46,6 +46,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				// Professional
 				.antMatchers("/professional/**", "/api/professional/**")
 					.hasAnyAuthority(UserRoleEnum.ROLE_PROFESSIONAL.toString())
+				// Professional
+				.antMatchers("/attendant/**", "/api/attendant/**")
+					.hasAnyAuthority(UserRoleEnum.ROLE_ATTENDANT.toString())
 				.anyRequest()
 					.authenticated()
 				.and()
