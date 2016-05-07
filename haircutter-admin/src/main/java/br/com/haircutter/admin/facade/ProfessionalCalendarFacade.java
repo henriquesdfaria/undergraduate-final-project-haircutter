@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/api")
 public class ProfessionalCalendarFacade {
 
+    private static final Integer SERVICE_MINIMUM_DURATON_TIME_IN_MINUTES = 30;
+
     @Autowired
     EstablishmentEmployeeUserService establishmentEmployeeUserService;
 
@@ -28,6 +30,27 @@ public class ProfessionalCalendarFacade {
         professionalCalendarJson.setEstablishmentEmployeeId(establishmentEmployeeUserService.getEmployeeIdByLoggedUserUsername());
 
         return ResponseEntity.ok(professionalCalendarEndpoint.create(professionalCalendarJson, cnpj));
+    }
+
+    @RequestMapping(value = "/professional/calendars", method = RequestMethod.POST)
+    public void createRange(@RequestBody ProfessionalCalendarJson professionalCalendarJson) {
+        String cnpj = establishmentEmployeeUserService.getCnpjByLoggedUserUsername();
+
+        int init = professionalCalendarJson.getScheduleInMinutesFrom();
+        int limit = professionalCalendarJson.getScheduleInMinutesTo();
+
+        professionalCalendarJson.setEstablishmentEmployeeId(establishmentEmployeeUserService.getEmployeeIdByLoggedUserUsername());
+
+        for (int i = init; i <= limit; i = i + SERVICE_MINIMUM_DURATON_TIME_IN_MINUTES) {
+            professionalCalendarJson.setScheduleInMinutes(i);
+
+            try {
+                professionalCalendarEndpoint.create(professionalCalendarJson, cnpj);
+            } catch (Exception e) {
+
+            }
+        }
+
     }
 
     @RequestMapping(value = {"/professional/calendar/{professionalCalendarId}"}, method = RequestMethod.DELETE)

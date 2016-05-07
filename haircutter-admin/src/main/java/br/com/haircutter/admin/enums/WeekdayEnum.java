@@ -7,7 +7,7 @@ public enum WeekdayEnum {
     SUNDAY("Domingo"),
     MONDAY("Segunda-Feira"),
     TUESDAY("Terça-Feira"),
-    WEDNESDEY("Quarta-Feira"),
+    WEDNESDAY("Quarta-Feira"),
     THURSDAY("Quinta-Feira"),
     FRIDAY("Sexta-Feira"),
     SATURDAY("Sábado");

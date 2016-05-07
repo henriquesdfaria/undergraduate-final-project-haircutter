@@ -35,6 +35,12 @@ professionalApp.config(['$routeProvider',
             controller: 'CalendarsController'
           }
         )
+        .when(
+          '/calendars/create', {
+            templateUrl: 'professional/partials/create-calendar-content.html',
+            controller: 'CreateCalendarController'
+          }
+        )
         .otherwise(
           {redirectTo: '/profile'}
         );

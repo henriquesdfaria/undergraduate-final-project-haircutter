@@ -14,16 +14,22 @@ public class ProfessionalCalendarJson {
 
 	private Integer scheduleInMinutes;
 
+    private Integer scheduleInMinutesFrom;
+
+    private Integer scheduleInMinutesTo;
+
 	public ProfessionalCalendarJson() {
 
 	}
 
-    public ProfessionalCalendarJson(EstablishmentEmployeeJson establishmentEmployee, Long id, Long establishmentEmployeeId, WeekdayEnum weekday, Integer scheduleInMinutes) {
-        this.establishmentEmployee = establishmentEmployee;
+    public ProfessionalCalendarJson(Long id, EstablishmentEmployeeJson establishmentEmployee, Long establishmentEmployeeId, WeekdayEnum weekday, Integer scheduleInMinutes, Integer scheduleInMinutesFrom, Integer scheduleInMinutesTo) {
         this.id = id;
+        this.establishmentEmployee = establishmentEmployee;
         this.establishmentEmployeeId = establishmentEmployeeId;
         this.weekday = weekday;
         this.scheduleInMinutes = scheduleInMinutes;
+        this.scheduleInMinutesFrom = scheduleInMinutesFrom;
+        this.scheduleInMinutesTo = scheduleInMinutesTo;
     }
 
     public Long getId() {
@@ -64,5 +70,21 @@ public class ProfessionalCalendarJson {
 
     public void setScheduleInMinutes(Integer scheduleInMinutes) {
         this.scheduleInMinutes = scheduleInMinutes;
+    }
+
+    public Integer getScheduleInMinutesFrom() {
+        return scheduleInMinutesFrom;
+    }
+
+    public void setScheduleInMinutesFrom(Integer scheduleInMinutesFrom) {
+        this.scheduleInMinutesFrom = scheduleInMinutesFrom;
+    }
+
+    public Integer getScheduleInMinutesTo() {
+        return scheduleInMinutesTo;
+    }
+
+    public void setScheduleInMinutesTo(Integer scheduleInMinutesTo) {
+        this.scheduleInMinutesTo = scheduleInMinutesTo;
     }
 }

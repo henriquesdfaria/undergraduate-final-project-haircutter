@@ -23,6 +23,9 @@ var professional_menu = [{
 }, {
   name: 'Serviços',
   link: '/professional#/services'
+}, {
+  name: 'Calendário',
+  link: '/professional#/calendars'
 }
 ];
 
