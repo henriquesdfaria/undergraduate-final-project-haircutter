@@ -10,8 +10,11 @@
         <div class="alert alert-danger" ng-show="internalError">
           Desculpe! Algum erro interno ocorreu, estamos trabalhando nisso.
         </div>
+        <div class="alert alert-danger" ng-show="calendar.scheduleInMinutesFrom > calendar.scheduleInMinutesTo">
+          Horário De deve ser menor que o Horário Até.
+        </div>
         <form name="calendarForm"
-              ng-submit="calendarForm.$valid && createRange(calendar)"
+              ng-submit="calendarForm.$valid && calendar.scheduleInMinutesFrom <= calendar.scheduleInMinutesTo && createRange(calendar)"
               class="form-horizontal" novalidate>
           <fieldset>
 
