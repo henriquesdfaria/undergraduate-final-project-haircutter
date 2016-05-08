@@ -112,6 +112,17 @@ professionalControllers.controller('CreateProfessionalServiceController', ['$sco
         );
       }
 
+      $scope.getEstablishmentServices = function () {
+        $http({
+            method: 'GET',
+            url: '/api/professional/establishment/services',
+          }
+        ).success(function (data) {
+            $scope.establishmentServices = data;
+          }
+        );
+      }
+
       $scope.create = function (service) {
 
         $http({
@@ -129,6 +140,7 @@ professionalControllers.controller('CreateProfessionalServiceController', ['$sco
       }
 
       $scope.getLoggedUser();
+      $scope.getEstablishmentServices();
     }
   ]
 );

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- WEEKDAY TABLE -->
+    <changeSet author="henrique" id="1">
+        <createTable tableName="user_profile">
+            <column name="username" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="cpf" type="VARCHAR(11)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creation_time" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_date" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="user_profile_user_fk"
+                                 referencedTableName="user" baseColumnNames="username"
+                                 baseTableName="user_profile" referencedColumnNames="username"/>
+        <addForeignKeyConstraint constraintName="user_profile_address_fk"
+                                 referencedTableName="address" baseColumnNames="address_id"
+                                 baseTableName="user_profile" referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="user_profile" constraintName="user_profile_user_fk"/>
+            <dropForeignKeyConstraint baseTableName="user_profile" constraintName="user_profile_address_fk"/>
+            <dropTable tableName="user_profile"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

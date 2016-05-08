@@ -17,6 +17,8 @@ public class UserJson {
 
     private Boolean enabled;
 
+    private UserProfileJson profile;
+
     private String email;
 
     private Boolean emailVerified;
@@ -29,12 +31,13 @@ public class UserJson {
 
     }
 
-    public UserJson(String username, String name, String password, UserRoleEnum role, Boolean enabled, String email, Boolean emailVerified, Date creationTime, Date lastModifiedDate) {
+    public UserJson(String username, String name, String password, UserRoleEnum role, Boolean enabled, UserProfileJson profile, String email, Boolean emailVerified, Date creationTime, Date lastModifiedDate) {
         this.username = username;
         this.name = name;
         this.password = password;
         this.role = role;
         this.enabled = enabled;
+        this.profile = profile;
         this.email = email;
         this.emailVerified = emailVerified;
         this.creationTime = creationTime;
@@ -79,6 +82,14 @@ public class UserJson {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public UserProfileJson getProfile() {
+        return profile;
+    }
+
+    public void setProfile(UserProfileJson profile) {
+        this.profile = profile;
     }
 
     public String getEmail() {

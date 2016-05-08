@@ -29,7 +29,7 @@ public class EstablishmentAdminServiceImpl implements EstablishmentAdminService 
 
 
         User user = new User(establishment.getCnpj(), establishment.getName(),
-                BCrypt.hashpw("haircutter", BCrypt.gensalt(10)), UserRoleEnum.ROLE_ESTABLISHMENT_ADMIN, true,
+                BCrypt.hashpw("haircutter", BCrypt.gensalt(10)), UserRoleEnum.ROLE_ESTABLISHMENT_ADMIN, true, null,
                 null, null, new Date(ZonedDateTime.now().toInstant().toEpochMilli()),
                 new Date(ZonedDateTime.now().toInstant().toEpochMilli()));
 

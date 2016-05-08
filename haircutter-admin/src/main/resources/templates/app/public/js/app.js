@@ -13,11 +13,16 @@ var publicApp = angular.module('publicApp', [
 publicApp.config(['$routeProvider',
     function ($routeProvider) {
       $routeProvider.when('/home', {
-        templateUrl: 'public/partials/home-content.html',
-        controller: 'HomeController'
-      }).when('/new-establishment-request', {
+          templateUrl: 'public/partials/home-content.html',
+          controller: 'HomeController'
+        }
+      ).when('/new-establishment-request', {
           templateUrl: 'public/partials/content.html',
           controller: 'Controller'
+        }
+      ).when('/register', {
+          templateUrl: 'public/partials/register-content.html',
+          controller: 'RegisterController'
         }
       ).otherwise({
           redirectTo: '/home'

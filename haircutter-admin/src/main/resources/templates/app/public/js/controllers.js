@@ -158,3 +158,65 @@ publicControllers.controller('HomeController', ['$scope', '$http', '$location',
   ]
 );
 
+/* Register Controller */
+publicControllers.controller('RegisterController', ['$scope', '$http', '$location',
+    function ($scope, $http, $location) {
+
+      $scope.getLoggedUser = function () {
+        $http({
+            method: 'GET',
+            url: '/api/public/get-logged-user',
+          }
+        ).success(function (data) {
+            $scope.menu = [];
+
+            if (data && data.role === 'ROLE_MANAGER') {
+              $scope.menu = manager_menu;
+            }
+
+            if (data && data.role === 'ROLE_MODERATOR') {
+              $scope.menu = moderator_menu;
+            }
+
+            if (data && data.role === 'ROLE_ESTABLISHMENT_ADMIN') {
+              $scope.menu = establishment_admin_menu;
+            }
+
+            if (data && data.role === 'ROLE_PROFESSIONAL') {
+              $scope.menu = professional_menu;
+            }
+
+            $scope.loggedUser = data
+
+          }
+        );
+      }
+      
+
+      $scope.register = function (user) {
+
+        $http({
+            method: 'POST',
+            url: '/api/public/register',
+            data: user,
+            headers: {
+              'Content-Type': 'application/json; charset=utf-8'
+            }
+          }
+        ).then(function () {
+            $location.path('/');
+          }, function () {
+            $scope.internalError = true;
+          }
+        );
+
+      };
+
+      $scope.cancel = function () {
+        $location.path('/');
+      };
+
+      $scope.getLoggedUser();
+    }
+  ]
+);

@@ -9,7 +9,7 @@ import java.util.List;
 @Transactional
 public interface EstablishmentEmployeeRespository extends JpaRepository<EstablishmentEmployee, Long> {
 
-    List<EstablishmentEmployee> findAllByDeleted(Boolean deleted);
+    List<EstablishmentEmployee> findAllByEstablishmentCnpjAndDeleted(String establishmentCnpj, Boolean deleted);
 
     EstablishmentEmployee findOneByIdAndEstablishmentCnpj(Long id, String establishmentCnpj);
 
