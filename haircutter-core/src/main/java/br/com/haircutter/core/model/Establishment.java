@@ -1,11 +1,20 @@
 package br.com.haircutter.core.model;
 
 
-import br.com.haircutter.core.enums.EstablishmentStatusEnum;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import br.com.haircutter.core.enums.EstablishmentStatusEnum;
 
 @Entity
 @Table(name = "establishment")
