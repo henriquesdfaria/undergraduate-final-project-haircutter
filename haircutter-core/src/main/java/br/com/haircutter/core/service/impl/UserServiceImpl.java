@@ -7,6 +7,7 @@ import br.com.haircutter.core.model.UserProfile;
 import br.com.haircutter.core.model.repository.UserProfileRespository;
 import br.com.haircutter.core.model.repository.UserRespository;
 import br.com.haircutter.core.service.UserService;
+import br.com.haircutter.core.utils.HaircutterMailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserProfileRespository userProfileRespository;
+
+    @Autowired
+    private HaircutterMailSender haircutterMailSender;
 
     @Override
     public User create(User user, UserRoleEnum role) {
@@ -58,6 +62,8 @@ public class UserServiceImpl implements UserService {
         UserProfile userProfile = userProfileRespository.save(createdUser.getProfile());
 
         createdUser.setProfile(userProfile);
+
+        sendCreationEmail(user);
 
         return createdUser;
     }
@@ -98,5 +104,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public User get(String username) {
         return userRespository.findOneByUsername(username);
+    }
+
+    private void sendCreationEmail(User user) {
+
+        String subject = "Bem-vindo ao Haircutter!";
+
+        String text = "Olá " + user.getName() + ",\n\n"
+                + "Seja bem vindo ao Haircutter!\n\nEquipe Haircutter";
+
+        haircutterMailSender.sendEmail(user.getName(), subject, text);
     }
 }

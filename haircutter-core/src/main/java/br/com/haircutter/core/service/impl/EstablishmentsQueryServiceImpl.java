@@ -1,14 +1,13 @@
 package br.com.haircutter.core.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import br.com.haircutter.core.model.Establishment;
 import br.com.haircutter.core.model.repository.EstablishmentsQueryRepository;
 import br.com.haircutter.core.service.EstablishmentsQueryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class EstablishmentsQueryServiceImpl implements EstablishmentsQueryService{
@@ -44,7 +43,7 @@ public class EstablishmentsQueryServiceImpl implements EstablishmentsQueryServic
 
 	@Override
 	public List<Establishment> findAll(String text) {
-		List<Establishment> result = new ArrayList<Establishment>();
+		List<Establishment> result = new ArrayList<>();
 		
 		result.addAll(findEstablishmentByName(text));
 		result.addAll(findEstablishmentByProfessional(text));
