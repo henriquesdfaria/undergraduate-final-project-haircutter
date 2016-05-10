@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     UserProfileRepository userProfileRepository;
 
     @Autowired
-    private HaircutterMailSender haircutterMailSender;
+    HaircutterMailSender haircutterMailSender;
 
     @Override
     public User create(User user, UserRoleEnum role) {
