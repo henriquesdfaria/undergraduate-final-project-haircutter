@@ -20,7 +20,7 @@ public class ClientEndpoint {
     }
 
     public Object get() {
-        return restTemplate.getForObject(API_URL + "/client/" + LoggedUserUtils.getLoggedUserUsername(), Object.class);
+        return restTemplate.getForObject(API_URL + "/client?username=" + LoggedUserUtils.getLoggedUserUsername(), Object.class);
     }
 
     public void edit(UserJson userJson) {
@@ -28,6 +28,6 @@ public class ClientEndpoint {
     }
 
     public void delete() {
-        restTemplate.delete(API_URL + "/client/" + LoggedUserUtils.getLoggedUserUsername());
+        restTemplate.delete(API_URL + "/client?username=" + LoggedUserUtils.getLoggedUserUsername());
     }
 }

@@ -1,0 +1,180 @@
+<div class="col-sm-9 page-content">
+
+  <div class="inner-box category-content">
+    <h2 class="title-2">
+      <i class="fa fa-file-text-o"></i>
+      <strong>Perfil</strong>
+    </h2>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="alert alert-danger" ng-show="internalError">
+          Não foi possivel realizar a edição do perfil, tente novamente mais tarde.
+        </div>
+        <form name="userForm" ng-submit="userForm.$valid && editProfileSettings(user)" class="form-horizontal" novalidate>
+          <fieldset>
+            <div class="form-group required">
+              <label class="col-md-4 control-label">Nome
+                <sup>*</sup>
+              </label>
+              <div class="col-md-6">
+                <input name="userName" ng-model="user.name" ng-required="true" placeholder="Nome"
+                       class="form-control input-md" required="" type="text">
+                <div class="text-danger" ng-show="userForm.$submitted || userForm.userName.$touched">
+                  <p ng-show="userForm.userName.$error.required">Nome é um campo obrigatório.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group required">
+              <label class="col-md-4 control-label">E-mail
+                <sup>*</sup>
+              </label>
+              <div class="col-md-6">
+                <input name="userEmail" ng-model="user.email" ng-required="true"
+                       placeholder="E-mail" class="form-control input-md" required="" type="email">
+                <div class="text-danger"
+                     ng-show="userForm.$submitted || userForm.userEmail.$touched">
+                  <p ng-show="userForm.userEmail.$error.required">E-mail é um campo
+                    obrigatório.</p>
+                  <p ng-show="userForm.userEmail.$error.email">E-mail inválido.</p>
+                </div>
+              </div>
+            </div>
+
+     <!--       <div class="form-group required">
+              <label class="col-md-4 control-label">Senha
+                <sup>*</sup>
+              </label>
+              <div class="col-md-6">
+                <input name="userPassword" ng-model="user.password" ng-required="true" class="form-control input-md"
+                       required="true" type="password">
+                <div class="text-danger"
+                     ng-show="userForm.$submitted || userForm.userPassword.$touched">
+                  <p ng-show="userForm.userPassword.$error.required">Senha é um campo
+                    obrigatório.</p>
+                </div>
+              </div>
+            </div>-->
+
+            <div class="form-group required">
+              <label class="col-md-4 control-label">CPF
+                <sup>*</sup>
+              </label>
+              <div class="col-md-6">
+                <input name="userProfileCpf" ng-model="user.profile.cpf" ng-cpf ng-required="true"
+                       placeholder="CPF" ui-br-cpf-mask class="form-control input-md" required="" type="text">
+                <div class="text-danger"
+                     ng-show="userForm.$submitted || userForm.userProfileCpf.$touched">
+                  <p ng-show="userForm.userProfileCpf.$error.required">CPF é um campo obrigatório.</p>
+                  <p ng-show="userForm.userProfileCpf.$invalid">CPF inválido.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group required">
+              <label class="col-md-4 control-label">Telefone
+                <sup>*</sup>
+              </label>
+              <div class="col-md-6">
+                <input name="userProfilePhone" ng-model="user.profile.phone" ng-required="true"
+                       ui-br-phone-number placeholder="Telefone Pessoal" class="form-control input-md"
+                       required="true"
+                       type="text">
+                <div class="text-danger"
+                     ng-show="userForm.$submitted || userForm.userProfilePhone.$touched">
+                  <p ng-show="userForm.userProfilePhone.$error.required">Telefone é um campo
+                    obrigatório.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group required">
+              <label class="col-md-4 control-label">Cidade
+                <sup>*</sup>
+              </label>
+              <div class="col-md-6">
+                <input name="userProfileAddressCity" ng-model="user.profile.address.city" ng-required="true"
+                       placeholder="Cidade" class="form-control input-md" required="" type="text">
+                <div class="text-danger"
+                     ng-show="userForm.$submitted || userForm.userProfileAddressCity.$touched">
+                  <p ng-show="userForm.userProfileAddressCity.$error.required">Cidade é um campo
+                    obrigatório.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group required">
+              <label class="col-md-4 control-label" for="userProfileAddressState">Estado
+                <sup>*</sup>
+              </label>
+              <div class="col-md-6">
+                <select id="userProfileAddressState" name="userProfileAddressState"
+                        ng-model="user.profile.address.state" ng-required="true" class="form-control">
+                  <option value="" disabled selected>Selecione</option>
+                  <option value="AC">Acre</option>
+                  <option value="AL">Alagoas</option>
+                  <option value="AM">Amazonas</option>
+                  <option value="AP">Amapá</option>
+                  <option value="BA">Bahia</option>
+                  <option value="CE">Ceará</option>
+                  <option value="DF">Distrito Federal</option>
+                  <option value="ES">Espírito Santo</option>
+                  <option value="GO">Goiás</option>
+                  <option value="MA">Maranhão</option>
+                  <option value="MT">Mato Grosso</option>
+                  <option value="MS">Mato Grosso do Sul</option>
+                  <option value="MG">Minas Gerais</option>
+                  <option value="PA">Pará</option>
+                  <option value="PB">Paraíba</option>
+                  <option value="PR">Paraná</option>
+                  <option value="PE">Pernambuco</option>
+                  <option value="PI">Piauí</option>
+                  <option value="RJ">Rio de Janeiro</option>
+                  <option value="RN">Rio Grande do Norte</option>
+                  <option value="RO">Rondônia</option>
+                  <option value="RS">Rio Grande do Sul</option>
+                  <option value="RR">Roraima</option>
+                  <option value="SC">Santa Catarina</option>
+                  <option value="SE">Sergipe</option>
+                  <option value="SP">São Paulo</option>
+                  <option value="TO">Tocantins</option>
+                </select>
+                <div class="text-danger"
+                     ng-show="userForm.$submitted || userForm.userProfileAddressState.$touched">
+                  <p ng-show="userForm.userProfileAddressState.$error.required">Selecione um Estado.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group required">
+              <label class="col-md-4 control-label">CEP
+                <sup>*</sup>
+              </label>
+              <div class="col-md-6">
+                <input name="userProfileAddressZipCode" ng-model="user.profile.address.zipCode"
+                       ng-required="true" ng-pattern="regexZipCode" ui-br-cep-mask placeholder="CEP"
+                       class="form-control input-md" required="" type="text">
+                <div class="text-danger"
+                     ng-show="userForm.$submitted || userForm.userProfileAddressZipCode.$touched">
+                  <p ng-show="userForm.userProfileAddressZipCode.$error.required">CEP é um campo
+                    obrigatório.</p>
+                  <p ng-show="userForm.userProfileAddressZipCode.$invalid">CEP inválido.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label"></label>
+              <div class="col-md-8">
+                <div class="termbox mb10"></div>
+                <div style="clear:both"></div>
+                <button type="submit" class="btn btn-success">Salvar</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!--<div ng-include="'/establishment-admin/partials/content/establishment-deactivate-modal.html'"></div>-->
+</div>
