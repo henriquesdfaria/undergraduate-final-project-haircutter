@@ -8,7 +8,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a href="#/" class="navbar-brand logo logo-title">
+        <a href="/" class="navbar-brand logo logo-title">
 
           <span class="logo-icon">
             <i class="fa fa-scissors ln-shadow-logo shape-0"></i>
@@ -19,29 +19,22 @@
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li ng-hide="loggedUser">
-            <a href="/login">Entrar</a>
-          </li>
-          <li ng-hide="loggedUser">
-            <a href="#/register">Registrar</a>
-          </li>
-
-          <li ng-show="loggedUser">
+          <li>
             <a href="/logout">Sair
               <i class="glyphicon glyphicon-off"></i>
             </a>
           </li>
-          <li class="dropdown" ng-show="loggedUser">
-            <a class="dropdown-toggle" data-toggle="dropdown">
+          <li class="dropdown">
+            <a  class="dropdown-toggle" data-toggle="dropdown">
               <span>{{loggedUser.name}}</span>
               <i class="icon-user fa"></i>
               <i class=" icon-down-open-big fa"></i>
             </a>
             <ul class="dropdown-menu user-menu">
-              <li ng-repeat="item in menu">
-                <a href="{{item.link}}">
+              <li>
+                <a href="#/profile">
                   <i class="icon-hourglass"></i>
-                  {{item.name}}
+                  Perfil
                 </a>
               </li>
             </ul>

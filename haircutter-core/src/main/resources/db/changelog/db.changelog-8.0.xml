@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- SCHEDULE TABLE -->
+    <changeSet author="henrique" id="1">
+        <createTable tableName="schedule">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="establishment_professional_calendar_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="schedule_date" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="schedule_in_minutes" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="schedule_user_fk"
+                                 referencedTableName="user" baseColumnNames="username"
+                                 baseTableName="schedule" referencedColumnNames="username"/>
+        <addForeignKeyConstraint constraintName="schedule_establishment_professional_calendar_fk"
+                                 referencedTableName="establishment_professional_calendar"
+                                 baseColumnNames="establishment_professional_calendar_id"
+                                 baseTableName="schedule" referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="schedule" constraintName="schedule_user_fk"/>
+            <dropForeignKeyConstraint baseTableName="schedule" constraintName="schedule_establishment_professional_calendar_fk"/>
+            <dropTable tableName="schedule"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
