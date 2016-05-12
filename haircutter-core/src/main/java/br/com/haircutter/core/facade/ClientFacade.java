@@ -43,11 +43,11 @@ public class ClientFacade {
     @RequestMapping(method = RequestMethod.DELETE)
     public void delete(@RequestParam("username") String username) {
 
-        LOGGER.info("Started - Edit User", username);
+        LOGGER.info("Started - Inactivate User", username);
 
         userService.delete(username);
 
-        LOGGER.info("Ended - Edit User");
+        LOGGER.info("Ended - Inactivate User");
     }
 
 
