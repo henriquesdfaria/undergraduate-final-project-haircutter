@@ -79,7 +79,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public void cancel(Long scheduleId, String author) {
-        Schedule schedule = scheduleRepository.findOne(scheduleId);
+        Schedule schedule = scheduleRepository.findOneByIdAndUsername(scheduleId, author);
 
         schedule.setStatus(ScheduleStatusEnum.CANCELED);
         schedule.setLastModifiedDate(new Date(ZonedDateTime.now().toInstant().toEpochMilli()));

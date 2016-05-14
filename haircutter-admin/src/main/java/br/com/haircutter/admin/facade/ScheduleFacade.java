@@ -36,8 +36,7 @@ public class ScheduleFacade {
         return ResponseEntity.ok(scheduleEndpoint.create(scheduleJson));
     }
 
-    @RequestMapping(value = {"/client/schedule/{scheduleId}", "/professional/schedule/{scheduleId}",
-            "/attendant/schedule/{scheduleId}", "/manager/schedule/{scheduleId}"}, method = RequestMethod.DELETE)
+    @RequestMapping(value = {"/client/schedule/{scheduleId}"}, method = RequestMethod.DELETE)
     public void cancel(@PathVariable("scheduleId") Long scheduleId) {
 
         scheduleEndpoint.cancel(scheduleId);

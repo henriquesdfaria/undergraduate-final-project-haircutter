@@ -30,7 +30,7 @@ public class ScheduleEndpoint {
     }
 
     public void cancel(Long scheduleId) {
-        restTemplate.delete(API_URL + "/schedule/" + scheduleId + "?author=" +
+        restTemplate.delete(API_URL + "/schedule?author=" +
                 LoggedUserUtils.getLoggedUserUsername());
     }
 }

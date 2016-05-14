@@ -13,4 +13,6 @@ public interface ScheduleRepository extends CrudRepository<Schedule, Long> {
 
     List<Schedule> findAllByUsername(String username);
 
+    Schedule findOneByIdAndUsername(Long id, String username);
+
 }
