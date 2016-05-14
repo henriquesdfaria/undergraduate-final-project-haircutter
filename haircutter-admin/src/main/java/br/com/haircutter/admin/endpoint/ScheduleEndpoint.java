@@ -16,18 +16,21 @@ public class ScheduleEndpoint {
 
     public Object create(ScheduleJson scheduleJson) {
 
-        return restTemplate.postForObject(API_URL + "/schedule", scheduleJson, Object.class);
+        return restTemplate.postForObject(API_URL + "/schedule?author=" + LoggedUserUtils.getLoggedUserUsername(),
+                scheduleJson, Object.class);
     }
 
     public Object getAllByUsername() {
         return restTemplate.getForObject(API_URL + "/schedule/username?username=" +
                 LoggedUserUtils.getLoggedUserUsername(), Object.class);
     }
+
     public Object getAllByProfessional(Long professionalId) {
         return restTemplate.getForObject(API_URL + "/schedule/professional/" + professionalId, Object.class);
     }
 
     public void cancel(Long scheduleId) {
-        restTemplate.delete(API_URL + "/schedule/" + scheduleId + "?username=" + LoggedUserUtils.getLoggedUserUsername());
+        restTemplate.delete(API_URL + "/schedule/" + scheduleId + "?author=" +
+                LoggedUserUtils.getLoggedUserUsername());
     }
 }

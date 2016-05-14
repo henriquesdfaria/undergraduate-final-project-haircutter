@@ -3,6 +3,7 @@ package br.com.haircutter.admin.facade;
 import br.com.haircutter.admin.endpoint.ScheduleEndpoint;
 import br.com.haircutter.admin.facade.json.ScheduleJson;
 import br.com.haircutter.admin.service.EstablishmentEmployeeUserService;
+import br.com.haircutter.admin.utils.LoggedUserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +21,17 @@ public class ScheduleFacade {
     @Autowired
     ScheduleEndpoint scheduleEndpoint;
 
-    @RequestMapping(value = {"/client/schedule", "/professional/schedule", "/attendant/schedule", "/manager/schedule"},
+    @RequestMapping(value = {"/professional/schedule", "/attendant/schedule", "/manager/schedule"},
             method = RequestMethod.POST)
     public ResponseEntity<?> create(@RequestBody ScheduleJson scheduleJson) {
+
+        return ResponseEntity.ok(scheduleEndpoint.create(scheduleJson));
+    }
+
+    @RequestMapping(value = {"/client/schedule"}, method = RequestMethod.POST)
+    public ResponseEntity<?> clientCreate(@RequestBody ScheduleJson scheduleJson) {
+
+        scheduleJson.setUsername(LoggedUserUtils.getLoggedUserUsername());
 
         return ResponseEntity.ok(scheduleEndpoint.create(scheduleJson));
     }
@@ -35,14 +44,14 @@ public class ScheduleFacade {
     }
 
     @RequestMapping(value = {"/public/schedule/professional/{establishmentEmployeeId}"},
-            method = RequestMethod.POST)
+            method = RequestMethod.GET)
     public ResponseEntity<?> getAllByProfessional(@PathVariable("establishmentEmployeeId") Long establishmentEmployeeId) {
 
         return ResponseEntity.ok(scheduleEndpoint.getAllByProfessional(establishmentEmployeeId));
     }
 
     @RequestMapping(value = {"/professional/schedule/professional/{establishmentEmployeeId}"},
-            method = RequestMethod.POST)
+            method = RequestMethod.GET)
     public ResponseEntity<?> professionalGetAllByProfessional(@PathVariable("establishmentEmployeeId") Long establishmentEmployeeId) {
 
         establishmentEmployeeUserService.getEmployeeIdByLoggedUserUsername();
@@ -50,7 +59,7 @@ public class ScheduleFacade {
         return ResponseEntity.ok(scheduleEndpoint.getAllByProfessional(establishmentEmployeeId));
     }
 
-    @RequestMapping(value = {"/public/schedule/username"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/client/schedule/username"}, method = RequestMethod.GET)
     public ResponseEntity<?> getAllByUsername() {
 
         return ResponseEntity.ok(scheduleEndpoint.getAllByUsername());

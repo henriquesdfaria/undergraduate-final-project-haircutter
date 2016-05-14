@@ -20,12 +20,12 @@ public class ScheduleFacade {
     ScheduleService scheduleService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> create(@RequestBody Schedule schedule, @RequestParam("username") String username) {
+    public ResponseEntity<?> create(@RequestBody Schedule schedule, @RequestParam("author") String author) {
 
         LOGGER.info("Started - Register schedule", schedule);
 
         Schedule createdSchedule = scheduleService.create(schedule.getProfessionalServiceId(), schedule.getUsername(),
-                schedule.getScheduleDate(), schedule.getScheduleInMinutes(), username);
+                schedule.getScheduleDate(), schedule.getScheduleInMinutes(), author);
 
         LOGGER.info("Ended - Register schedule", createdSchedule);
 
@@ -33,11 +33,11 @@ public class ScheduleFacade {
     }
 
     @RequestMapping(value = "/{scheduleId}", method = RequestMethod.DELETE)
-    public void cancel(@PathVariable("scheduleId") Long scheduleId, @RequestParam("username") String username) {
+    public void cancel(@PathVariable("scheduleId") Long scheduleId, @RequestParam("author") String author) {
 
-        LOGGER.info("Started - Cancel Schedule", username);
+        LOGGER.info("Started - Cancel Schedule", author);
 
-        scheduleService.cancel(scheduleId, username);
+        scheduleService.cancel(scheduleId, author);
 
         LOGGER.info("Ended - Cancel Schedule");
     }

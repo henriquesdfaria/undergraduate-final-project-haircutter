@@ -55,10 +55,10 @@ public class ScheduleServiceImpl implements ScheduleService {
         Schedule createdSchedule = scheduleRepository.save(schedule);
 
         ProfessionalService professionalService = professionalServiceRepository
-                .getOne(createdSchedule.getProfessionalServiceId());
+                .findOne(createdSchedule.getProfessionalServiceId());
 
         EstablishmentEmployee establishmentEmployee = establishmentEmployeeRespository
-                .getOne(professionalService.getEstablishmentEmployeeId());
+                .findOne(professionalService.getEstablishmentEmployeeId());
 
         String scheduleText = " no dia " +
                 createdSchedule.getScheduleDate() + " às "
@@ -91,10 +91,10 @@ public class ScheduleServiceImpl implements ScheduleService {
                 + new Time(canceledSchedule.getScheduleInMinutes() * MINUTES_TO_MILLISECONDS);
 
         ProfessionalService professionalService = professionalServiceRepository
-                .getOne(canceledSchedule.getProfessionalServiceId());
+                .findOne(canceledSchedule.getProfessionalServiceId());
 
         EstablishmentEmployee establishmentEmployee = establishmentEmployeeRespository
-                .getOne(professionalService.getEstablishmentEmployeeId());
+                .findOne(professionalService.getEstablishmentEmployeeId());
 
         String action = "Cancelou horário para " + establishmentEmployee.getUser().getName() + scheduleText;
 
