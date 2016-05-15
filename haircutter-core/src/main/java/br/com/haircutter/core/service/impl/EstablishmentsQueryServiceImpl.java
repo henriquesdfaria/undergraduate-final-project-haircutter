@@ -18,22 +18,22 @@ public class EstablishmentsQueryServiceImpl implements EstablishmentsQueryServic
 	
 	@Override
 	public List<Establishment> findEstablishmentByName(String establishmentName) {
-		return establishmentsQueryRepository.findEstablishmentByName(establishmentName);
+		return establishmentsQueryRepository.queryFindEstablishmentByName(establishmentName);
 	}
 
 	@Override
 	public List<Establishment> findEstablishmentByProfessional(String professionalName) {
-		return establishmentsQueryRepository.findEstablishmentByProfessional(professionalName);
+		return establishmentsQueryRepository.queryFindEstablishmentByProfessional(professionalName);
 	}
 
 	@Override
 	public List<Establishment> findEstablishmentByServices(String serviceName) {
-		return establishmentsQueryRepository.findEstablishmentByServices(serviceName);
+		return establishmentsQueryRepository.queryFindEstablishmentByServices(serviceName);
 	}
 
 	@Override
 	public List<Establishment> findEstablishmentByAddress(String address) {
-		return establishmentsQueryRepository.findEstablishmentByAddress(address);
+		return establishmentsQueryRepository.queryFindEstablishmentByAddress(address);
 	}
 
 	@Override
