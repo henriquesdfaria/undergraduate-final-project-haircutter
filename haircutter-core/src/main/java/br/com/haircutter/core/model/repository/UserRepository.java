@@ -6,8 +6,8 @@ import org.springframework.data.repository.CrudRepository;
 import javax.transaction.Transactional;
 
 @Transactional
-public interface UserRespository extends CrudRepository<User, String> {
-	
+public interface UserRepository extends CrudRepository<User, Long> {
+
 	User findOneByUsername(String username);
 
 }

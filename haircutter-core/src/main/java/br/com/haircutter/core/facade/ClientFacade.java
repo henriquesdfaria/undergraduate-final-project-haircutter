@@ -40,19 +40,19 @@ public class ClientFacade {
         LOGGER.info("Ended - Edit User");
     }
 
-    @RequestMapping(value = {"/{username}"}, method = RequestMethod.DELETE)
-    public void edit(@PathVariable("username") String username) {
+    @RequestMapping(method = RequestMethod.DELETE)
+    public void delete(@RequestParam("username") String username) {
 
-        LOGGER.info("Started - Edit User", username);
+        LOGGER.info("Started - Inactivate User", username);
 
         userService.delete(username);
 
-        LOGGER.info("Ended - Edit User");
+        LOGGER.info("Ended - Inactivate User");
     }
 
 
-    @RequestMapping(value = {"/{username}"}, method = RequestMethod.GET)
-    public ResponseEntity<?> get(@PathVariable("username") String username) {
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<?> get(@RequestParam("username") String username) {
 
         LOGGER.info("Started - Get User", username);
 

@@ -4,6 +4,12 @@ var publicControllers = angular.module('publicControllers', []);
 
 // MENU
 
+var client_menu = [{
+  name: 'Perfil',
+  link: '/client#/profile'
+}
+];
+
 var manager_menu = [{
   name: 'Serviços',
   link: '/manager#/establishment/services'
@@ -136,6 +142,10 @@ publicControllers.controller('HomeController', ['$scope', '$http', '$location',
               $scope.menu = professional_menu;
             }
 
+            if (data && data.role === 'ROLE_CLIENT') {
+              $scope.menu = client_menu;
+            }
+
             $scope.loggedUser = data
 
           }
@@ -145,11 +155,12 @@ publicControllers.controller('HomeController', ['$scope', '$http', '$location',
       $scope.search = function (city, searchValue) {
         $http({
             method: 'GET',
-            url: '/api/public/search?city=' + city + '&search=' +  searchValue,
+            url: '/api/public/search?city=' + city + '&search=' + searchValue,
           }
-        ).success(function() {
+        ).success(function () {
 
-        });
+          }
+        );
       };
 
 
@@ -186,12 +197,16 @@ publicControllers.controller('RegisterController', ['$scope', '$http', '$locatio
               $scope.menu = professional_menu;
             }
 
+            if (data && data.role === 'ROLE_CLIENT') {
+              $scope.menu = client_menu;
+            }
+
             $scope.loggedUser = data
 
           }
         );
       }
-      
+
 
       $scope.register = function (user) {
 

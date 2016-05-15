@@ -4,9 +4,10 @@ import br.com.haircutter.core.enums.UserRoleEnum;
 import br.com.haircutter.core.exception.CustomInvalidException;
 import br.com.haircutter.core.model.User;
 import br.com.haircutter.core.model.UserProfile;
-import br.com.haircutter.core.model.repository.UserProfileRespository;
-import br.com.haircutter.core.model.repository.UserRespository;
+import br.com.haircutter.core.model.repository.UserProfileRepository;
+import br.com.haircutter.core.model.repository.UserRepository;
 import br.com.haircutter.core.service.UserService;
+import br.com.haircutter.core.utils.HaircutterMailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
@@ -19,10 +20,13 @@ import java.util.Date;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    UserRespository userRespository;
+    UserRepository userRepository;
 
     @Autowired
-    UserProfileRespository userProfileRespository;
+    UserProfileRepository userProfileRepository;
+
+    @Autowired
+    HaircutterMailSender haircutterMailSender;
 
     @Override
     public User create(User user, UserRoleEnum role) {
@@ -50,14 +54,16 @@ public class UserServiceImpl implements UserService {
         user.getProfile().setLastModifiedDate(now);
         user.getProfile().setCreationTime(now);
 
-        User createdUser = userRespository.save(user);
+        User createdUser = userRepository.save(user);
 
         createdUser.setProfile(user.getProfile());
         createdUser.getProfile().setUsername(createdUser.getUsername());
 
-        UserProfile userProfile = userProfileRespository.save(createdUser.getProfile());
+        UserProfile userProfile = userProfileRepository.save(createdUser.getProfile());
 
         createdUser.setProfile(userProfile);
+
+        sendCreationEmail(user);
 
         return createdUser;
     }
@@ -73,30 +79,47 @@ public class UserServiceImpl implements UserService {
 
         user.setLastModifiedDate(now);
 
-        User editedUser = userRespository.save(user);
+        User editedUser = userRepository.save(user);
 
         editedUser.setProfile(user.getProfile());
         editedUser.getProfile().setUsername(editedUser.getUsername());
 
-        UserProfile userProfile = userProfileRespository.save(editedUser.getProfile());
+        UserProfile userProfile = userProfileRepository.save(editedUser.getProfile());
 
         editedUser.setProfile(userProfile);
 
-        userRespository.save(user);
+        userRepository.save(user);
     }
 
     @Override
     public void delete(String username) {
 
-        User user = userRespository.findOneByUsername(username);
+        User user = userRepository.findOneByUsername(username);
 
         user.setEnabled(false);
 
-        userRespository.save(user);
+        userRepository.save(user);
     }
 
     @Override
     public User get(String username) {
-        return userRespository.findOneByUsername(username);
+
+        User user = userRepository.findOneByUsername(username);
+
+        UserProfile userProfile = userProfileRepository.findOneByUsername(username);
+
+        user.setProfile(userProfile);
+
+        return user;
+    }
+
+    private void sendCreationEmail(User user) {
+
+        String subject = "Bem-vindo ao Haircutter!";
+
+        String text = "Olá " + user.getName() + ",\n\n"
+                + "Seja bem vindo ao Haircutter!\n\nEquipe Haircutter";
+
+        haircutterMailSender.sendEmail(user.getName(), subject, text);
     }
 }

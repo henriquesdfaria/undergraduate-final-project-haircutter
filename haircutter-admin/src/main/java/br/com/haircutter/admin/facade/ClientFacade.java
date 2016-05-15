@@ -22,7 +22,7 @@ public class ClientFacade {
 	}
 
 	@RequestMapping(value = "/client/profile", method = RequestMethod.GET)
-	public ResponseEntity<?> getProfile(@RequestBody UserJson userJson) {
+	public ResponseEntity<?> getProfile() {
 		return ResponseEntity.ok(clientEndpoint.get());
 	}
 
