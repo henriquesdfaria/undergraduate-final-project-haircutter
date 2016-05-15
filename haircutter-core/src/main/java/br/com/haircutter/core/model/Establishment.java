@@ -3,6 +3,7 @@ package br.com.haircutter.core.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import br.com.haircutter.core.enums.EstablishmentStatusEnum;
 
@@ -64,127 +66,155 @@ public class Establishment implements Serializable {
     @Column(name = "last_modified_date")
     private Date lastModifiedDate;
 
-    public Establishment() {
+    @Transient
+    private List<EstablishmentEmployee> establishmentEmployees;
+    
+    @Transient
+    private List<EstablishmentService> establishmentServices;
 
-    }
+	public Establishment() {
+		super();
+	}
 
-    public Establishment(String cnpj, String name, String description, Address address, String phone, EstablishmentStatusEnum status, String denyCause, String ownerName, String ownerCpf, String ownerEmail, String ownerPhone, Date creationTime, Date lastModifiedDate) {
-        this.cnpj = cnpj;
-        this.name = name;
-        this.description = description;
-        this.address = address;
-        this.phone = phone;
-        this.status = status;
-        this.denyCause = denyCause;
-        this.ownerName = ownerName;
-        this.ownerCpf = ownerCpf;
-        this.ownerEmail = ownerEmail;
-        this.ownerPhone = ownerPhone;
-        this.creationTime = creationTime;
-        this.lastModifiedDate = lastModifiedDate;
-    }
+	public Establishment(String cnpj, String name, String description, Address address, String phone,
+			EstablishmentStatusEnum status, String denyCause, String ownerName, String ownerCpf, String ownerEmail,
+			String ownerPhone, Date creationTime, Date lastModifiedDate,
+			List<EstablishmentEmployee> establishmentEmployees, List<EstablishmentService> establishmentServices) {
+		super();
+		this.cnpj = cnpj;
+		this.name = name;
+		this.description = description;
+		this.address = address;
+		this.phone = phone;
+		this.status = status;
+		this.denyCause = denyCause;
+		this.ownerName = ownerName;
+		this.ownerCpf = ownerCpf;
+		this.ownerEmail = ownerEmail;
+		this.ownerPhone = ownerPhone;
+		this.creationTime = creationTime;
+		this.lastModifiedDate = lastModifiedDate;
+		this.establishmentEmployees = establishmentEmployees;
+		this.establishmentServices = establishmentServices;
+	}
 
-    public String getCnpj() {
-        return cnpj;
-    }
+	public String getCnpj() {
+		return cnpj;
+	}
 
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public Address getAddress() {
-        return address;
-    }
+	public Address getAddress() {
+		return address;
+	}
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 
-    public String getPhone() {
-        return phone;
-    }
+	public String getPhone() {
+		return phone;
+	}
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
-    public EstablishmentStatusEnum getStatus() {
-        return status;
-    }
+	public EstablishmentStatusEnum getStatus() {
+		return status;
+	}
 
-    public void setStatus(EstablishmentStatusEnum status) {
-        this.status = status;
-    }
+	public void setStatus(EstablishmentStatusEnum status) {
+		this.status = status;
+	}
 
-    public String getDenyCause() {
-        return denyCause;
-    }
+	public String getDenyCause() {
+		return denyCause;
+	}
 
-    public void setDenyCause(String denyCause) {
-        this.denyCause = denyCause;
-    }
+	public void setDenyCause(String denyCause) {
+		this.denyCause = denyCause;
+	}
 
-    public String getOwnerName() {
-        return ownerName;
-    }
+	public String getOwnerName() {
+		return ownerName;
+	}
 
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
-    }
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
+	}
 
-    public String getOwnerCpf() {
-        return ownerCpf;
-    }
+	public String getOwnerCpf() {
+		return ownerCpf;
+	}
 
-    public void setOwnerCpf(String ownerCpf) {
-        this.ownerCpf = ownerCpf;
-    }
+	public void setOwnerCpf(String ownerCpf) {
+		this.ownerCpf = ownerCpf;
+	}
 
-    public String getOwnerEmail() {
-        return ownerEmail;
-    }
+	public String getOwnerEmail() {
+		return ownerEmail;
+	}
 
-    public void setOwnerEmail(String ownerEmail) {
-        this.ownerEmail = ownerEmail;
-    }
+	public void setOwnerEmail(String ownerEmail) {
+		this.ownerEmail = ownerEmail;
+	}
 
-    public String getOwnerPhone() {
-        return ownerPhone;
-    }
+	public String getOwnerPhone() {
+		return ownerPhone;
+	}
 
-    public void setOwnerPhone(String ownerPhone) {
-        this.ownerPhone = ownerPhone;
-    }
+	public void setOwnerPhone(String ownerPhone) {
+		this.ownerPhone = ownerPhone;
+	}
 
-    public Date getCreationTime() {
-        return creationTime;
-    }
+	public Date getCreationTime() {
+		return creationTime;
+	}
 
-    public void setCreationTime(Date creationTime) {
-        this.creationTime = creationTime;
-    }
+	public void setCreationTime(Date creationTime) {
+		this.creationTime = creationTime;
+	}
 
-    public Date getLastModifiedDate() {
-        return lastModifiedDate;
-    }
+	public Date getLastModifiedDate() {
+		return lastModifiedDate;
+	}
 
-    public void setLastModifiedDate(Date lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-    }
+	public void setLastModifiedDate(Date lastModifiedDate) {
+		this.lastModifiedDate = lastModifiedDate;
+	}
+
+	public List<EstablishmentEmployee> getEstablishmentEmployees() {
+		return establishmentEmployees;
+	}
+
+	public void setEstablishmentEmployees(List<EstablishmentEmployee> establishmentEmployees) {
+		this.establishmentEmployees = establishmentEmployees;
+	}
+
+	public List<EstablishmentService> getEstablishmentServices() {
+		return establishmentServices;
+	}
+
+	public void setEstablishmentServices(List<EstablishmentService> establishmentServices) {
+		this.establishmentServices = establishmentServices;
+	}
 }

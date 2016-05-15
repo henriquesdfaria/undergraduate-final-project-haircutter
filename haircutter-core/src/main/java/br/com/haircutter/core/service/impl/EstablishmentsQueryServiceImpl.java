@@ -6,52 +6,46 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.haircutter.core.enums.EstablishmentStatusEnum;
 import br.com.haircutter.core.model.Establishment;
-import br.com.haircutter.core.model.repository.EstablishmentsQueryRepository;
+import br.com.haircutter.core.model.EstablishmentEmployee;
+import br.com.haircutter.core.model.EstablishmentService;
+import br.com.haircutter.core.model.repository.EstablishmentEmployeeRespository;
+import br.com.haircutter.core.model.repository.EstablishmentRespository;
+import br.com.haircutter.core.model.repository.EstablishmentServiceRespository;
 import br.com.haircutter.core.service.EstablishmentsQueryService;
 
 @Service
 public class EstablishmentsQueryServiceImpl implements EstablishmentsQueryService{
 
 	@Autowired
-    EstablishmentsQueryRepository establishmentsQueryRepository;
+    EstablishmentRespository establishmentRepository;
 	
-	@Override
-	public List<Establishment> findEstablishmentByName(String establishmentName) {
-		return establishmentsQueryRepository.queryFindEstablishmentByName(establishmentName);
-	}
+	@Autowired
+	EstablishmentEmployeeRespository establishmentEmployeeReposiroy;
+	
+	@Autowired
+	EstablishmentServiceRespository establishmentServiceRepository;
 
 	@Override
-	public List<Establishment> findEstablishmentByProfessional(String professionalName) {
-		return establishmentsQueryRepository.queryFindEstablishmentByProfessional(professionalName);
-	}
-
-	@Override
-	public List<Establishment> findEstablishmentByServices(String serviceName) {
-		return establishmentsQueryRepository.queryFindEstablishmentByServices(serviceName);
-	}
-
-	@Override
-	public List<Establishment> findEstablishmentByAddress(String address) {
-		return establishmentsQueryRepository.queryFindEstablishmentByAddress(address);
-	}
-
-	@Override
-	public List<Establishment> findEstablishemtnByReputation(String reputation) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Establishment> findAll(String text) {
-		List<Establishment> result = new ArrayList<Establishment>();
+	public List<Establishment> findByCity(String city) {
+		List<Establishment> establishments = new ArrayList<Establishment>();
 		
-		result.addAll(findEstablishmentByName(text));
-		result.addAll(findEstablishmentByProfessional(text));
-		result.addAll(findEstablishmentByServices(text));
-		result.addAll(findEstablishmentByAddress(text));
-		result.addAll(findEstablishemtnByReputation(text));
+		establishments = establishmentRepository.findByCityAndStatus(city, EstablishmentStatusEnum.ACTIVE.toString());
 		
-		return result;
+		for(Establishment establishment : establishments){
+			
+			//Add establishment employees to the establishment object
+			List<EstablishmentEmployee> establishmentEmployees; 
+			establishmentEmployees = establishmentEmployeeReposiroy.findAllByEstablishmentCnpjAndDeleted(establishment.getCnpj(), false);
+			establishment.setEstablishmentEmployees(establishmentEmployees);
+			
+			//Add establishment services to the establishment objetc
+			List<EstablishmentService> establishmentServices;
+			establishmentServices = establishmentServiceRepository.findAllByEstablishmentCnpjAndDeleted(establishment.getCnpj(), false);
+			establishment.setEstablishmentServices(establishmentServices);
+		}
+		
+		return establishments;
 	}
 }
