@@ -25,12 +25,6 @@ public class ScheduleFacade {
             method = RequestMethod.POST)
     public ResponseEntity<?> create(@RequestBody ScheduleJson scheduleJson) {
 
-        return ResponseEntity.ok(scheduleEndpoint.create(scheduleJson));
-    }
-
-    @RequestMapping(value = {"/client/schedule"}, method = RequestMethod.POST)
-    public ResponseEntity<?> clientCreate(@RequestBody ScheduleJson scheduleJson) {
-
         scheduleJson.setUsername(LoggedUserUtils.getLoggedUserUsername());
 
         return ResponseEntity.ok(scheduleEndpoint.create(scheduleJson));
