@@ -36,7 +36,7 @@ public class EstablishmentsQueryServiceImpl implements EstablishmentsQueryServic
 			establishmentEmployees = establishmentEmployeeReposiroy.findAllByEstablishmentCnpjAndDeleted(establishment.getCnpj(), false);
 			establishment.setEstablishmentEmployees(establishmentEmployees);
 			
-			//Add establishment services to the establishment objetc
+			//Add establishment services to the establishment object
 			List<EstablishmentService> establishmentServices;
 			establishmentServices = establishmentServiceRepository.findAllByEstablishmentCnpjAndDeleted(establishment.getCnpj(), false);
 			establishment.setEstablishmentServices(establishmentServices);
