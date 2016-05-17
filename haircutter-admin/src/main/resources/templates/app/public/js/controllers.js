@@ -162,7 +162,7 @@ publicControllers.controller('HomeController', ['$scope', '$http', '$location',
         if (searchValue == undefined) {
           $location.path('/search/' + city);
         } else if (city == undefined) {
-          $location.path('/');
+          $location.path('/home');
         } else {
           $location.path('/search/' + city + '/' + searchValue);
         }
