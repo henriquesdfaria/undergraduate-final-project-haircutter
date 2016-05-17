@@ -7,6 +7,9 @@ var publicControllers = angular.module('publicControllers', []);
 var client_menu = [{
   name: 'Perfil',
   link: '/client#/profile'
+},{
+  name: 'Agendamentos',
+  link: '/client#/schedules'
 }
 ];
 
@@ -32,6 +35,9 @@ var professional_menu = [{
 }, {
   name: 'Calendário',
   link: '/professional#/calendars'
+},{
+  name: 'Agendamentos',
+  link: '/professional#/schedules'
 }
 ];
 

@@ -17,9 +17,14 @@ clientApp.config(['$routeProvider',
             templateUrl: 'client/partials/profile-content.html',
             controller: 'ProfileController'
           }
-        ).otherwise(
-        {redirectTo: '/profile'}
-      );
+        )
+        .when('/schedules', {
+          templateUrl: 'client/partials/schedules-content.html',
+          controller: 'SchedulesController'
+        })
+        .otherwise(
+          {redirectTo: '/profile'}
+        );
     }
   ]
 );

@@ -30,29 +30,30 @@ public class ScheduleFacade {
         return ResponseEntity.ok(scheduleEndpoint.create(scheduleJson));
     }
 
-    @RequestMapping(value = {"/client/schedule/{scheduleId}"}, method = RequestMethod.DELETE)
+    @RequestMapping(value = {"/client/schedule/{scheduleId}", "/professional/schedule/{scheduleId}",
+            "/attendant/schedule", "/manager/schedule"}, method = RequestMethod.DELETE)
     public void cancel(@PathVariable("scheduleId") Long scheduleId) {
 
         scheduleEndpoint.cancel(scheduleId);
     }
 
-    @RequestMapping(value = {"/public/schedule/professional/{establishmentEmployeeId}"},
+    @RequestMapping(value = {"/public/schedules/professional/{establishmentEmployeeId}"},
             method = RequestMethod.GET)
     public ResponseEntity<?> getAllByProfessional(@PathVariable("establishmentEmployeeId") Long establishmentEmployeeId) {
 
         return ResponseEntity.ok(scheduleEndpoint.getAllByProfessional(establishmentEmployeeId));
     }
 
-    @RequestMapping(value = {"/professional/schedule/professional/{establishmentEmployeeId}"},
+    @RequestMapping(value = {"/professional/schedules"},
             method = RequestMethod.GET)
-    public ResponseEntity<?> professionalGetAllByProfessional(@PathVariable("establishmentEmployeeId") Long establishmentEmployeeId) {
+    public ResponseEntity<?> professionalGetAllByProfessional() {
 
-        establishmentEmployeeUserService.getEmployeeIdByLoggedUserUsername();
+        Long establishmentEmployeeId = establishmentEmployeeUserService.getEmployeeIdByLoggedUserUsername();
 
         return ResponseEntity.ok(scheduleEndpoint.getAllByProfessional(establishmentEmployeeId));
     }
 
-    @RequestMapping(value = {"/client/schedule/username"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/client/schedules"}, method = RequestMethod.GET)
     public ResponseEntity<?> getAllByUsername() {
 
         return ResponseEntity.ok(scheduleEndpoint.getAllByUsername());

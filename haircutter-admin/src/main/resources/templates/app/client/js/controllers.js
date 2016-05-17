@@ -56,3 +56,48 @@ clientControllers.controller('ProfileController', ['$scope', '$http',
     }
   ]
 );
+
+/*  SCHEDULES CONTROLLER*/
+clientControllers.controller('SchedulesController', ['$scope', '$http',
+    function ($scope, $http) {
+      $scope.schedulesActiveMenu = 'active';
+
+      $scope.getLoggedUser = function () {
+        $http({
+            method: 'GET',
+            url: '/api/public/get-logged-user'
+          }
+        ).success(function (data) {
+            $scope.loggedUser = data;
+          }
+        );
+      }
+
+      $scope.getSchedules = function () {
+        $http({
+            method: 'GET',
+            url: '/api/client/schedules',
+          }
+        ).success(function (data) {
+            $scope.schedules = data;
+          }
+        );
+      }
+
+      $scope.cancel = function (schedule) {
+        $http({
+            method: 'DELETE',
+            url: '/api/client/schedule/' + schedule.id
+          }
+        ).success(function() {
+          $scope.getSchedules();
+          window.location.reload();
+        });
+      }
+
+      $scope.getLoggedUser();
+      $scope.getSchedules();
+    }
+  ]
+);
+
