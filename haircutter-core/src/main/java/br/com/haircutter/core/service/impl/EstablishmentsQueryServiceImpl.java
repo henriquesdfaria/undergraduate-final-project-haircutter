@@ -1,11 +1,5 @@
 package br.com.haircutter.core.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import br.com.haircutter.core.enums.EstablishmentStatusEnum;
 import br.com.haircutter.core.model.Establishment;
 import br.com.haircutter.core.model.EstablishmentEmployee;
@@ -14,6 +8,10 @@ import br.com.haircutter.core.model.repository.EstablishmentEmployeeRespository;
 import br.com.haircutter.core.model.repository.EstablishmentRespository;
 import br.com.haircutter.core.model.repository.EstablishmentServiceRespository;
 import br.com.haircutter.core.service.EstablishmentsQueryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class EstablishmentsQueryServiceImpl implements EstablishmentsQueryService{
@@ -29,9 +27,7 @@ public class EstablishmentsQueryServiceImpl implements EstablishmentsQueryServic
 
 	@Override
 	public List<Establishment> findByCity(String city) {
-		List<Establishment> establishments = new ArrayList<Establishment>();
-		
-		establishments = establishmentRepository.findByCityAndStatus(city, EstablishmentStatusEnum.ACTIVE.toString());
+		List<Establishment> establishments = establishmentRepository.findByAddressCityAndStatus(city, EstablishmentStatusEnum.ACTIVE);
 		
 		for(Establishment establishment : establishments){
 			

@@ -209,7 +209,7 @@ publicControllers.controller('SearchController', ['$scope', '$http', '$location'
       $scope.search = function () {
         $http({
             method: 'GET',
-            url: '/api/public/search?city=' + $routeParams.city + '&search=' + $routeParams.searchValue,
+            url: '/api/public/establishments-query/search?city=' + $routeParams.city,
           }
         ).success(function (data) {
             $scope.establishmentQuery = data;
