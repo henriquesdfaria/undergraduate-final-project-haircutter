@@ -161,9 +161,11 @@ publicControllers.controller('HomeController', ['$scope', '$http', '$location',
       $scope.search = function (city, searchValue) {
         if (searchValue == undefined) {
           $location.path('/search/' + city);
+        } else if (city == undefined) {
+          $location.path('/');
+        } else {
+          $location.path('/search/' + city + '/' + searchValue);
         }
-        
-        $location.path('/search/' + city + '/' + searchValue);
       };
 
 
@@ -224,8 +226,14 @@ publicControllers.controller('SearchController', ['$scope', '$http', '$location'
       };
 
       $scope.searchButton = function (city, searchValue) {
-        $location.path('/search/' + city + '/' + searchValue);
-      }
+        if (searchValue == undefined) {
+          $location.path('/search/' + city);
+        } else if (city == undefined) {
+          $location.path('/');
+        } else {
+          $location.path('/search/' + city + '/' + searchValue);
+        }
+      };
 
 
       $scope.getLoggedUser();
