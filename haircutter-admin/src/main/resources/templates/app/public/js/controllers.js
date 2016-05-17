@@ -159,18 +159,67 @@ publicControllers.controller('HomeController', ['$scope', '$http', '$location',
       };
 
       $scope.search = function (city, searchValue) {
+        $location.path('/search/' + city + '/' + searchValue);
+      };
+
+
+      $scope.getLoggedUser();
+    }
+  ]
+);
+
+/* Search Controller */
+publicControllers.controller('SearchController', ['$scope', '$http', '$location', '$routeParams',
+    function ($scope, $http, $location, $routeParams) {
+
+      $scope.getLoggedUser = function () {
         $http({
             method: 'GET',
-            url: '/api/public/search?city=' + city + '&search=' + searchValue,
+            url: '/api/public/get-logged-user',
           }
-        ).success(function () {
+        ).success(function (data) {
+            $scope.menu = [];
 
+            if (data && data.role === 'ROLE_MANAGER') {
+              $scope.menu = manager_menu;
+            }
+
+            if (data && data.role === 'ROLE_MODERATOR') {
+              $scope.menu = moderator_menu;
+            }
+
+            if (data && data.role === 'ROLE_ESTABLISHMENT_ADMIN') {
+              $scope.menu = establishment_admin_menu;
+            }
+
+            if (data && data.role === 'ROLE_PROFESSIONAL') {
+              $scope.menu = professional_menu;
+            }
+
+            if (data && data.role === 'ROLE_CLIENT') {
+              $scope.menu = client_menu;
+            }
+
+            $scope.loggedUser = data
+
+          }
+        );
+      };
+
+      $scope.search = function () {
+        $http({
+            method: 'GET',
+            url: '/api/public/search?city=' + $routeParams.city + '&search=' + $routeParams.searchValue,
+          }
+        ).success(function (data) {
+            $scope.establishmentQuery = data;
           }
         );
       };
 
 
       $scope.getLoggedUser();
+      $scope.search();
     }
   ]
 );
