@@ -2,13 +2,13 @@
   <div class="container ">
     <form action="#" method="GET">
       <div class="col-sm-3">
-        <input class="form-control keyword" type="text" placeholder="Cidade">
+        <input class="form-control keyword" ng-model="city" type="text" placeholder="Cidade">
       </div>
       <div class="col-sm-3">
-        <input class="form-control keyword" type="text" placeholder="Estou procurando por...">
+        <input class="form-control keyword" ng-model="searchValue" type="text" placeholder="Estou procurando por...">
       </div>
       <div class="col-sm-3">
-        <button class="btn btn-block btn-primary  "><i class="fa fa-search"></i></button>
+        <button class="btn btn-block btn-primary" ng-click="searchButton(city,searchValue)"><i class="fa fa-search"></i></button>
       </div>
     </form>
   </div>
@@ -32,12 +32,12 @@
             <div class="tab-content">
               <div class="tab-pane active" id="allAds">
 
-                <div class="item-list">
+                <div ng-repeat="est in establishments | filter:filterSearchValue" class="item-list">
 
                   <div class="col-sm-9 add-desc-box">
                     <div class="add-details">
                       <h5 class="add-title"><a href="ads-details.html">
-                        Brand New Samsung Phones </a></h5>
+                        {{est.name}} </a></h5>
                       <span class="info-row"> <span class="add-type business-ads tooltipHere" data-toggle="tooltip"
                                                     data-placement="right" title="Business Ads">B </span> <span
                         class="date"><i class=" icon-clock"> </i> Today 1:21 pm </span> - <span class="category">Electronics </span>- <span

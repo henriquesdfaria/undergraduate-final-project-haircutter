@@ -28,6 +28,10 @@ publicApp.config(['$routeProvider',
           templateUrl: 'public/partials/search-content.html',
           controller: 'SearchController'
         }
+      ).when('/search/:city', {
+          templateUrl: 'public/partials/search-content.html',
+          controller: 'SearchController'
+        }
       ).otherwise({
           redirectTo: '/home'
         }

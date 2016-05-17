@@ -7,7 +7,7 @@ var publicControllers = angular.module('publicControllers', []);
 var client_menu = [{
   name: 'Perfil',
   link: '/client#/profile'
-},{
+}, {
   name: 'Agendamentos',
   link: '/client#/schedules'
 }
@@ -35,7 +35,7 @@ var professional_menu = [{
 }, {
   name: 'Calendário',
   link: '/professional#/calendars'
-},{
+}, {
   name: 'Agendamentos',
   link: '/professional#/schedules'
 }
@@ -159,6 +159,10 @@ publicControllers.controller('HomeController', ['$scope', '$http', '$location',
       };
 
       $scope.search = function (city, searchValue) {
+        if (searchValue == undefined) {
+          $location.path('/search/' + city);
+        }
+        
         $location.path('/search/' + city + '/' + searchValue);
       };
 
@@ -212,10 +216,16 @@ publicControllers.controller('SearchController', ['$scope', '$http', '$location'
             url: '/api/public/establishments-query/search?city=' + $routeParams.city,
           }
         ).success(function (data) {
-            $scope.establishmentQuery = data;
+            $scope.establishments = data;
+            $scope.city = $routeParams.city;
+            $scope.filterSearchValue = $scope.searchValue = $routeParams.searchValue;
           }
         );
       };
+
+      $scope.searchButton = function (city, searchValue) {
+        $location.path('/search/' + city + '/' + searchValue);
+      }
 
 
       $scope.getLoggedUser();
