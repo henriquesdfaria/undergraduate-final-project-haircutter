@@ -3,8 +3,6 @@
     <ol class="breadcrumb pull-left">
       <li><a href="/#/"><i class="icon-home fa"></i></a></li>
     </ol>
-    <div class="pull-right backtolist"><a href="sub-category-sub-location.html"> <i class="fa fa-angle-double-left"></i>
-      Voltar aos resultados</a></div>
   </div>
   <div class="container">
     <div class="row">
@@ -18,13 +16,13 @@
           </span>
 
           <div class="Ads-Details">
-            <h5 class="list-title"><strong>Detalhes</strong></h5>
             <div class="row">
               <div class="ads-details-info col-md-12">
                 <p>{{establishment.description}}</p>
                 <h4><strong>Serviços</strong></h4>
                 <ul ng-repeat="svc in establishment.establishmentServices" class="list-circle">
-                  <li><strong>{{svc.service}}</strong> -  {{svc.description}} - Preço: <strong>R${{svc.price}}</strong></li>
+                  <li><strong>{{svc.service}}</strong> - {{svc.description}} - Preço: <strong>R${{svc.price}}</strong>
+                  </li>
                 </ul>
                 <h4>Profissionais</h4>
                 <ul ng-repeat="prof in establishment.establishmentEmployees">
@@ -32,10 +30,40 @@
                 </ul>
               </div>
             </div>
-            <div class="content-footer text-left"><a class="btn  btn-default" data-toggle="modal"
-                                                     href="#contactAdvertiser"><i class=" icon-mail-2"></i> Send a
-              message </a> <a class="btn  btn-info"><i class=" icon-phone-1"></i> 01680 531 352 </a></div>
+
           </div>
+          <h5 class="list-title"><strong>Agende aqui</strong></h5>
+
+
+          <div class="col-sm-4">
+            <select id="establishmentService" name="establishmentService"
+                    ng-model="establishmentServiceId" ng-required="true" class="form-control">
+              <option value="" disabled selected>Selecione um serviço</option>
+              <option ng-repeat="option in establishment.establishmentServices" value="{{option.id}}">
+                {{option.service}}
+              </option>
+            </select>
+          </div>
+          <div class="col-sm-4">
+            <select id="establishmentEmployeeProfessional" name="establishmentEmployeeProfessional"
+                    ng-model="establishmentEmployeeId" ng-required="true" class="form-control">
+              <option value="" disabled selected>Selecione um profissional</option>
+              <option ng-repeat="option in establishment.establishmentServices" value="{{option.id}}">
+                {{option.service}}
+              </option>
+            </select>
+          </div>
+          <div class="col-sm-4">
+            <select id="scheduleInMinutes" name="scheduleInMinutes"
+                    ng-model="scheduleInMinutes" ng-required="true" class="form-control">
+              <option value="" disabled selected>Selecione</option>
+              <option ng-repeat="option in schedules" value="{{option.scheduleInMinutes}}">
+                {{option.scheduleInMinutesTitle}}
+              </option>
+            </select>
+          </div>
+
+          <div style="clear:both;padding-bottom: 70px;"></div>
         </div>
 
       </div>
@@ -55,7 +83,6 @@
               </div>
             </div>
           </div>
-
         </aside>
       </div>
 

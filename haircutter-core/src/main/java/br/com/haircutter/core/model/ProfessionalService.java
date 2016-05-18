@@ -75,4 +75,32 @@ public class ProfessionalService implements Serializable {
 	public void setEstablishmentServiceId(Long establishmentServiceId) {
 		this.establishmentServiceId = establishmentServiceId;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		ProfessionalService that = (ProfessionalService) o;
+
+		if (id != null ? !id.equals(that.id) : that.id != null) return false;
+		if (establishmentEmployee != null ? !establishmentEmployee.equals(that.establishmentEmployee) : that.establishmentEmployee != null)
+			return false;
+		if (establishmentService != null ? !establishmentService.equals(that.establishmentService) : that.establishmentService != null)
+			return false;
+		if (establishmentEmployeeId != null ? !establishmentEmployeeId.equals(that.establishmentEmployeeId) : that.establishmentEmployeeId != null)
+			return false;
+		return establishmentServiceId != null ? establishmentServiceId.equals(that.establishmentServiceId) : that.establishmentServiceId == null;
+
+	}
+
+	@Override
+	public int hashCode() {
+		int result = id != null ? id.hashCode() : 0;
+		result = 31 * result + (establishmentEmployee != null ? establishmentEmployee.hashCode() : 0);
+		result = 31 * result + (establishmentService != null ? establishmentService.hashCode() : 0);
+		result = 31 * result + (establishmentEmployeeId != null ? establishmentEmployeeId.hashCode() : 0);
+		result = 31 * result + (establishmentServiceId != null ? establishmentServiceId.hashCode() : 0);
+		return result;
+	}
 }
