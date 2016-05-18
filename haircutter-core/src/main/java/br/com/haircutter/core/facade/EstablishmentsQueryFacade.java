@@ -26,13 +26,24 @@ public class EstablishmentsQueryFacade {
 	 @RequestMapping(value = {"/find-all"}, method = RequestMethod.GET)
 	 public ResponseEntity<?> findAll(@RequestParam("username") String username, @RequestParam("city") String city){
 		 
-		 LOGGER.info("Started by " + username + " - Establishments query");
+		 LOGGER.info("Started by " + username + " - Establishments query - Find all by city");
 		 
 		 List<Establishment> establishments = establishmentsQueryService.findByCity(city);
 		 
-		 LOGGER.info("Ended by " + username + " - Establishments query");
+		 LOGGER.info("Ended by " + username + " - Establishments query - Find all by city");
 		 
 		 return ResponseEntity.ok(establishments);
 	 }
 	
+	 @RequestMapping(value = {"/find-by-cnpj"}, method = RequestMethod.GET)
+	 public ResponseEntity<?> findByCnpj(@RequestParam("username") String username, @RequestParam("cnpj") String cnpj){
+		 
+		 LOGGER.info("Started by " + username + " - Establishments query - Find one by cnpj");
+		 
+		 Establishment establishment = establishmentsQueryService.findByCnpj(cnpj);
+		 
+		 LOGGER.info("Ended by " + username + " - Establishments query - Find one by cnpj");
+		 
+		 return ResponseEntity.ok(establishment);
+	 }
 }

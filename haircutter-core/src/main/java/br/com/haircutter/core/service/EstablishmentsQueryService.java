@@ -7,4 +7,6 @@ import br.com.haircutter.core.model.Establishment;
 public interface EstablishmentsQueryService {
 	
 	List<Establishment> findByCity(String city);
+	
+	Establishment findByCnpj(String cnpj);
 }

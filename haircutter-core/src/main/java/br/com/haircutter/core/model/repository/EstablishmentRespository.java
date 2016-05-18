@@ -11,6 +11,8 @@ import java.util.List;
 public interface EstablishmentRespository extends JpaRepository<Establishment, String> {
 
 	Establishment findOneByCnpj(String cnpj);
+	
+	Establishment findOneByCnpjAndStatus(String cnpj, EstablishmentStatusEnum status);
 
 	List<Establishment> findByStatus(EstablishmentStatusEnum status);
 

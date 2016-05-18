@@ -71,6 +71,9 @@ public class Establishment implements Serializable {
     
     @Transient
     private List<EstablishmentService> establishmentServices;
+    
+    @Transient
+    private List<Schedule> establishmentSchedules;
 
 	public Establishment() {
 		super();
@@ -216,5 +219,13 @@ public class Establishment implements Serializable {
 
 	public void setEstablishmentServices(List<EstablishmentService> establishmentServices) {
 		this.establishmentServices = establishmentServices;
+	}
+
+	public List<Schedule> getEstablishmentSchedules() {
+		return establishmentSchedules;
+	}
+
+	public void setEstablishmentSchedules(List<Schedule> establishmentSchedules) {
+		this.establishmentSchedules = establishmentSchedules;
 	}
 }
