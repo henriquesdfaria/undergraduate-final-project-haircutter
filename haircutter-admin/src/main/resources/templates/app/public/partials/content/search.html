@@ -8,7 +8,8 @@
         <input class="form-control keyword" ng-model="searchValue" type="text" placeholder="Estou procurando por...">
       </div>
       <div class="col-sm-3">
-        <button class="btn btn-block btn-primary" ng-click="searchButton(city,searchValue)"><i class="fa fa-search"></i></button>
+        <button class="btn btn-block btn-primary" ng-click="searchButton(city,searchValue)"><i class="fa fa-search"></i>
+        </button>
       </div>
     </form>
   </div>
@@ -36,19 +37,25 @@
 
                   <div class="col-sm-9 add-desc-box">
                     <div class="add-details">
-                      <h5 class="add-title"><a href="ads-details.html">
-                        {{est.name}} </a></h5>
-                      <span class="info-row"> <span class="add-type business-ads tooltipHere" data-toggle="tooltip"
-                                                    data-placement="right" title="Business Ads">B </span> <span
-                        class="date"><i class=" icon-clock"> </i> Today 1:21 pm </span> - <span class="category">Electronics </span>- <span
-                        class="item-location"><i class="fa fa-map-marker"></i> London </span> </span></div>
+                      <h5 class="add-title">
+                        <a href="/#/establishment/{{est.cnpj}}">{{est.name}} </a>
+                      </h5>
+                      <p><strong>Serviços:</strong></p>
+                      <p><span ng-repeat="svc in est.establishmentServices">{{svc.service}}, </span>...</p>
+                      <p><strong>Profissionais:</strong></p>
+                      <p><span ng-repeat="prof in est.establishmentEmployees">{{prof.user.name}}, </span>...</p>
+                      <span class="info-row">
+                        <span class="item-location">
+                          <i class="fa fa-map-marker"></i>
+                          {{est.address.street}} - {{est.address.neighborhood}} - {{est.address.city}} - {{est.address.state}}
+                        </span>
+                      </span>
+                    </div>
                   </div>
-
                   <div class="col-sm-3 text-right  price-box">
-                    <a class="btn btn-danger  btn-sm make-favorite"> <i class="fa fa-certificate"></i>
+                    <a href="/#/establishment/{{est.cnpj}}" class="btn btn-success  btn-lg make-favorite"> <i class="fa fa-eye"></i>
                       <span>Visitar</span> </a>
                   </div>
-
                 </div>
               </div>
             </div>

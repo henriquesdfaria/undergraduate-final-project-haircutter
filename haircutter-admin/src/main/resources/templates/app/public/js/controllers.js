@@ -308,3 +308,69 @@ publicControllers.controller('RegisterController', ['$scope', '$http', '$locatio
     }
   ]
 );
+
+/* Establishment Controller */
+publicControllers.controller('EstablishmentController', ['$scope', '$http', '$location', '$routeParams',
+    function ($scope, $http, $location, $routeParams) {
+
+      $scope.getLoggedUser = function () {
+        $http({
+            method: 'GET',
+            url: '/api/public/get-logged-user',
+          }
+        ).success(function (data) {
+            $scope.menu = [];
+
+            if (data && data.role === 'ROLE_MANAGER') {
+              $scope.menu = manager_menu;
+            }
+
+            if (data && data.role === 'ROLE_MODERATOR') {
+              $scope.menu = moderator_menu;
+            }
+
+            if (data && data.role === 'ROLE_ESTABLISHMENT_ADMIN') {
+              $scope.menu = establishment_admin_menu;
+            }
+
+            if (data && data.role === 'ROLE_PROFESSIONAL') {
+              $scope.menu = professional_menu;
+            }
+
+            if (data && data.role === 'ROLE_CLIENT') {
+              $scope.menu = client_menu;
+            }
+
+            $scope.loggedUser = data
+
+          }
+        );
+      };
+
+      $scope.getEstablishment = function () {
+        $http({
+            method: 'GET',
+            url: '/api/public/establishments-query/establishment/' + $routeParams.cnpj,
+          }
+        ).success(function (data) {
+            $scope.establishment = data;
+          }
+        );
+      };
+
+      $scope.searchButton = function (city, searchValue) {
+        if (searchValue == undefined && city != undefined) {
+          $location.path('/search/' + city);
+        } else if (city == undefined) {
+          $location.path('/');
+        } else {
+          $location.path('/search/' + city + '/' + searchValue);
+        }
+      };
+
+
+      $scope.getLoggedUser();
+      $scope.getEstablishment();
+    }
+  ]
+);

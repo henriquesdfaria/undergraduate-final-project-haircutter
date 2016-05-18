@@ -1,0 +1,64 @@
+<div class="main-container">
+  <div class="container">
+    <ol class="breadcrumb pull-left">
+      <li><a href="/#/"><i class="icon-home fa"></i></a></li>
+    </ol>
+    <div class="pull-right backtolist"><a href="sub-category-sub-location.html"> <i class="fa fa-angle-double-left"></i>
+      Voltar aos resultados</a></div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 page-content col-thin-right">
+        <div class="inner inner-box ads-details-wrapper">
+          <h2> {{establishment.name}} </h2>
+          <span class="info-row">
+            <span class="item-location"><i class="fa fa-map-marker"></i>
+            {{establishment.address.street}} - {{establishment.address.neighborhood}} - {{establishment.address.city}} - {{establishment.address.state}} - Fone: {{establishment.phone}}
+            </span>
+          </span>
+
+          <div class="Ads-Details">
+            <h5 class="list-title"><strong>Detalhes</strong></h5>
+            <div class="row">
+              <div class="ads-details-info col-md-12">
+                <p>{{establishment.description}}</p>
+                <h4><strong>Serviços</strong></h4>
+                <ul ng-repeat="svc in establishment.establishmentServices" class="list-circle">
+                  <li><strong>{{svc.service}}</strong> -  {{svc.description}} - Preço: <strong>R${{svc.price}}</strong></li>
+                </ul>
+                <h4>Profissionais</h4>
+                <ul ng-repeat="prof in establishment.establishmentEmployees">
+                  <li>{{prof.user.name}}</li>
+                </ul>
+              </div>
+            </div>
+            <div class="content-footer text-left"><a class="btn  btn-default" data-toggle="modal"
+                                                     href="#contactAdvertiser"><i class=" icon-mail-2"></i> Send a
+              message </a> <a class="btn  btn-info"><i class=" icon-phone-1"></i> 01680 531 352 </a></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-sm-3  page-sidebar-right">
+        <aside>
+          <div class="panel sidebar-panel">
+            <div class="panel-heading">Faça seu agendamento</div>
+            <div class="panel-content">
+              <div class="panel-body text-left">
+                <ul class="list-check">
+                  <li> Escolha o serviço</li>
+                  <li> Escolha o profissional</li>
+                  <li> Escolha a data</li>
+                  <li> Pronto! É só agendar</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </aside>
+      </div>
+
+    </div>
+  </div>
+</div>

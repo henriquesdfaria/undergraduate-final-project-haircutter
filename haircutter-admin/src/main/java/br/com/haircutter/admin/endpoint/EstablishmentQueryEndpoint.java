@@ -19,4 +19,10 @@ public class EstablishmentQueryEndpoint {
                 + LoggedUserUtils.getLoggedUserUsername() + "&city=" + city, Object.class);
     }
 
+    public Object findByCnpj(String cnpj) {
+
+        return restTemplate.getForObject(API_URL + "/establishments-query/find-by-cnpj?username="
+                + LoggedUserUtils.getLoggedUserUsername() + "&cnpj=" + cnpj, Object.class);
+    }
+
 }

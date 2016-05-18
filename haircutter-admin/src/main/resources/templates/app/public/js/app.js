@@ -32,6 +32,10 @@ publicApp.config(['$routeProvider',
           templateUrl: 'public/partials/search-content.html',
           controller: 'SearchController'
         }
+      ).when('/establishment/:cnpj', {
+          templateUrl: 'public/partials/establishment-content.html',
+          controller: 'EstablishmentController'
+        }
       ).otherwise({
           redirectTo: '/home'
         }
