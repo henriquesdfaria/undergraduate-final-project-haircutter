@@ -2,6 +2,7 @@ package br.com.haircutter.core.service.impl;
 
 import br.com.haircutter.core.enums.EstablishmentStatusEnum;
 import br.com.haircutter.core.enums.ScheduleStatusEnum;
+import br.com.haircutter.core.enums.UserRoleEnum;
 import br.com.haircutter.core.model.*;
 import br.com.haircutter.core.model.repository.*;
 import br.com.haircutter.core.service.EstablishmentsQueryService;
@@ -40,7 +41,7 @@ public class EstablishmentsQueryServiceImpl implements EstablishmentsQueryServic
 
 			//Add establishment employees to the establishment object
 			List<EstablishmentEmployee> establishmentEmployees = establishmentEmployeeReposiroy
-                    .findAllByEstablishmentCnpjAndDeleted(establishment.getCnpj(), false);
+                    .findAllByEstablishmentCnpjAndDeletedAndUserRole(establishment.getCnpj(), false, UserRoleEnum.ROLE_PROFESSIONAL);
 			establishment.setEstablishmentEmployees(establishmentEmployees);
 
             establishmentEmployees.stream().forEach(ee -> {
@@ -72,7 +73,7 @@ public class EstablishmentsQueryServiceImpl implements EstablishmentsQueryServic
 
 		//Add establishment employees to the establishment object
 		List<EstablishmentEmployee> establishmentEmployees; 
-		establishmentEmployees = establishmentEmployeeReposiroy.findAllByEstablishmentCnpjAndDeleted(establishment.getCnpj(), false);
+		establishmentEmployees = establishmentEmployeeReposiroy.findAllByEstablishmentCnpjAndDeletedAndUserRole(establishment.getCnpj(), false, UserRoleEnum.ROLE_PROFESSIONAL);
 		establishment.setEstablishmentEmployees(establishmentEmployees);
 
         establishmentEmployees.stream().forEach(ee -> {

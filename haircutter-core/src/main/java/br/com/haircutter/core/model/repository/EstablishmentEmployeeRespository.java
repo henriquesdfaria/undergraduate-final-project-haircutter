@@ -1,5 +1,6 @@
 package br.com.haircutter.core.model.repository;
 
+import br.com.haircutter.core.enums.UserRoleEnum;
 import br.com.haircutter.core.model.EstablishmentEmployee;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,6 +11,8 @@ import java.util.List;
 public interface EstablishmentEmployeeRespository extends JpaRepository<EstablishmentEmployee, Long> {
 
     List<EstablishmentEmployee> findAllByEstablishmentCnpjAndDeleted(String establishmentCnpj, Boolean deleted);
+
+    List<EstablishmentEmployee> findAllByEstablishmentCnpjAndDeletedAndUserRole(String establishmentCnpj, Boolean deleted, UserRoleEnum role);
 
     EstablishmentEmployee findOneByIdAndEstablishmentCnpj(Long id, String establishmentCnpj);
 

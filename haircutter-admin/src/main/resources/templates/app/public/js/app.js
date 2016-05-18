@@ -6,7 +6,8 @@ var publicApp = angular.module('publicApp', [
     'ngRoute',
     'publicControllers',
     'ui.utils.masks',
-    'ngCpfCnpj'
+    'ngCpfCnpj',
+    'jkuri.datepicker'
   ]
 );
 

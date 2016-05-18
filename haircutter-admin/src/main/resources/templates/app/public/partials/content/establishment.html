@@ -35,25 +35,29 @@
           <h5 class="list-title"><strong>Agende aqui</strong></h5>
 
 
-          <div class="col-sm-4">
+          <div class="form-group">
             <select id="establishmentService" name="establishmentService"
                     ng-model="establishmentServiceId" ng-required="true" class="form-control">
-              <option value="" disabled selected>Selecione um serviço</option>
+              <option value="" disabled selected>Serviço</option>
               <option ng-repeat="option in establishment.establishmentServices" value="{{option.id}}">
                 {{option.service}}
               </option>
             </select>
           </div>
-          <div class="col-sm-4">
+          <div class="form-group">
             <select id="establishmentEmployeeProfessional" name="establishmentEmployeeProfessional"
                     ng-model="establishmentEmployeeId" ng-required="true" class="form-control">
-              <option value="" disabled selected>Selecione um profissional</option>
+              <option value="" disabled selected>Profissional</option>
               <option ng-repeat="option in establishment.establishmentServices" value="{{option.id}}">
                 {{option.service}}
               </option>
             </select>
           </div>
-          <div class="col-sm-4">
+          <div class="form-group">
+            <ng-datepicker ng-model="scheduleDate" locale="pt-br" format="DD/MM/YYYY" view-format="DD/MM/YYYY">
+            </ng-datepicker>
+          </div>
+          <div class="form-group">
             <select id="scheduleInMinutes" name="scheduleInMinutes"
                     ng-model="scheduleInMinutes" ng-required="true" class="form-control">
               <option value="" disabled selected>Selecione</option>
@@ -63,7 +67,7 @@
             </select>
           </div>
 
-          <div style="clear:both;padding-bottom: 70px;"></div>
+          <div style="clear:both;padding-bottom: 300px;"></div>
         </div>
 
       </div>
