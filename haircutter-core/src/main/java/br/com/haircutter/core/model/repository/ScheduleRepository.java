@@ -2,13 +2,13 @@ package br.com.haircutter.core.model.repository;
 
 import br.com.haircutter.core.enums.ScheduleStatusEnum;
 import br.com.haircutter.core.model.Schedule;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
 @Transactional
-public interface ScheduleRepository extends CrudRepository<Schedule, Long> {
+public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
     List<Schedule> findAllByProfessionalServiceId(Long professionalServiceId);
 

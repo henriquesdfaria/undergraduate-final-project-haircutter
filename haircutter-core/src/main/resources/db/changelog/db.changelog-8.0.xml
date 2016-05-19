@@ -7,7 +7,7 @@
     <!-- SCHEDULE TABLE -->
     <changeSet author="henrique" id="1">
         <createTable tableName="schedule">
-            <column name="id" type="BIGINT">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="establishment_professional_service_id" type="BIGINT">

@@ -365,6 +365,8 @@ publicControllers.controller('EstablishmentController', ['$scope', '$http', '$lo
 
       $scope.saveSchedule = function (schedule) {
         
+        schedule.scheduleDate = moment(schedule.date, 'DD/MM/YYYY').toDate();
+        
         $http({
             method: 'POST',
             url: '/api/' + $scope.roleUrlPath + '/schedule',
