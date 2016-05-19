@@ -31,7 +31,7 @@ public class ScheduleFacade {
     }
 
     @RequestMapping(value = {"/client/schedule/{scheduleId}", "/professional/schedule/{scheduleId}",
-            "/attendant/schedule", "/manager/schedule"}, method = RequestMethod.DELETE)
+            "/attendant/schedule/{scheduleId}", "/manager/schedule/{scheduleId}"}, method = RequestMethod.DELETE)
     public void cancel(@PathVariable("scheduleId") Long scheduleId) {
 
         scheduleEndpoint.cancel(scheduleId);

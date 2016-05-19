@@ -23,6 +23,9 @@ public class Schedule implements Serializable {
     @Column(name = "establishment_professional_service_id")
     private Long professionalServiceId;
 
+    @Transient
+    private ProfessionalService professionalService;
+
     @Column(name = "username")
     private String username;
 
@@ -46,8 +49,9 @@ public class Schedule implements Serializable {
 
     }
 
-    public Schedule(Long professionalServiceId, String username, Date scheduleDate, Integer scheduleInMinutes, ScheduleStatusEnum status, Date lastModifiedDate, Date creationTime) {
+    public Schedule(Long professionalServiceId, ProfessionalService professionalService, String username, Date scheduleDate, Integer scheduleInMinutes, ScheduleStatusEnum status, Date lastModifiedDate, Date creationTime) {
         this.professionalServiceId = professionalServiceId;
+        this.professionalService = professionalService;
         this.username = username;
         this.scheduleDate = scheduleDate;
         this.scheduleInMinutes = scheduleInMinutes;
@@ -70,6 +74,14 @@ public class Schedule implements Serializable {
 
     public void setProfessionalServiceId(Long professionalServiceId) {
         this.professionalServiceId = professionalServiceId;
+    }
+
+    public ProfessionalService getProfessionalService() {
+        return professionalService;
+    }
+
+    public void setProfessionalService(ProfessionalService professionalService) {
+        this.professionalService = professionalService;
     }
 
     public String getUsername() {

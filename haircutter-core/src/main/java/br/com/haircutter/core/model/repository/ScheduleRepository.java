@@ -12,6 +12,8 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
     List<Schedule> findAllByProfessionalServiceId(Long professionalServiceId);
 
+    List<Schedule> findAllByProfessionalServiceIdAndStatus(Long professionalServiceId, ScheduleStatusEnum status);
+
     List<Schedule> findAllByUsername(String username);
 
     Schedule findOneByIdAndUsername(Long id, String username);

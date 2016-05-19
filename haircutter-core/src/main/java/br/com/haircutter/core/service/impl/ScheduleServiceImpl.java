@@ -5,10 +5,7 @@ import br.com.haircutter.core.model.EstablishmentEmployee;
 import br.com.haircutter.core.model.ProfessionalService;
 import br.com.haircutter.core.model.Schedule;
 import br.com.haircutter.core.model.User;
-import br.com.haircutter.core.model.repository.EstablishmentEmployeeRespository;
-import br.com.haircutter.core.model.repository.ProfessionalServiceRepository;
-import br.com.haircutter.core.model.repository.ScheduleRepository;
-import br.com.haircutter.core.model.repository.UserRepository;
+import br.com.haircutter.core.model.repository.*;
 import br.com.haircutter.core.service.EstablishmentAuditLogService;
 import br.com.haircutter.core.service.ScheduleService;
 import br.com.haircutter.core.utils.HaircutterMailSender;
@@ -37,6 +34,9 @@ public class ScheduleServiceImpl implements ScheduleService {
     EstablishmentEmployeeRespository establishmentEmployeeRespository;
 
     @Autowired
+    EstablishmentServiceRespository establishmentServiceRespository;
+
+    @Autowired
     HaircutterMailSender haircutterMailSender;
 
     @Autowired
@@ -48,7 +48,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
         Date now = new Date(ZonedDateTime.now().toInstant().toEpochMilli());
 
-        Schedule schedule = new Schedule(professionalServiceId, username, scheduleDate, scheduleInMinutes,
+        Schedule schedule = new Schedule(professionalServiceId, null, username, scheduleDate, scheduleInMinutes,
                 ScheduleStatusEnum.ACCEPTED, now, now);
 
 
@@ -117,7 +117,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         Set<Schedule> schedules = new HashSet<>();
 
         professionalServices.stream().forEach(professionalService -> {
-            List<Schedule> s = scheduleRepository.findAllByProfessionalServiceId(professionalService.getId());
+            List<Schedule> s = scheduleRepository.findAllByProfessionalServiceIdAndStatus(professionalService.getId(), ScheduleStatusEnum.ACCEPTED);
             schedules.addAll(s);
         });
 
@@ -126,7 +126,16 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public List<Schedule> getAllByUsername(String username) {
-        return scheduleRepository.findAllByUsername(username);
+
+        List<Schedule> schedules = scheduleRepository.findAllByUsernameAndStatus(username, ScheduleStatusEnum.ACCEPTED);
+
+        schedules.stream().forEach(schedule -> {
+            schedule.setProfessionalService(professionalServiceRepository.findOne(schedule.getProfessionalServiceId()));
+            schedule.getProfessionalService().setEstablishmentEmployee(establishmentEmployeeRespository.findOne(schedule.getProfessionalService().getEstablishmentEmployeeId()));
+            schedule.getProfessionalService().setEstablishmentService(establishmentServiceRespository.findOne(schedule.getProfessionalService().getEstablishmentServiceId()));
+        });
+
+        return schedules;
     }
 
     private void sendCreationEmail(String email, String action) {
@@ -135,7 +144,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
         String text = "Olá,\n\n" +
                 "Você tem um horário agendado " + action +
-                "\n\n Acesse nosso site para mais informações wwww.haircutter.com.br" +
+                "\n\n Acesse nosso site para mais informações www.haircutter.com.br" +
                 "\n\n\n\nEquipe Haircutter";
 
         haircutterMailSender.sendEmail(email, subject, text);
@@ -147,7 +156,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
         String text = "Olá,\n\n" +
                 "Você tem cancelado um horário agendado " + action +
-                "\n\n Acesse nosso site para mais informações wwww.haircutter.com.br" +
+                "\n\n Acesse nosso site para mais informações www.haircutter.com.br" +
                 "\n\n\n\nEquipe Haircutter";
 
         haircutterMailSender.sendEmail(email, subject, text);
