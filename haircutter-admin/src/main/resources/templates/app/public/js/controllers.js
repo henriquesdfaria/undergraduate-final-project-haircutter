@@ -323,22 +323,27 @@ publicControllers.controller('EstablishmentController', ['$scope', '$http', '$lo
 
             if (data && data.role === 'ROLE_MANAGER') {
               $scope.menu = manager_menu;
+              $scope.roleUrlPath = 'manager';
             }
 
             if (data && data.role === 'ROLE_MODERATOR') {
               $scope.menu = moderator_menu;
+              $scope.roleUrlPath = 'moderator';
             }
 
             if (data && data.role === 'ROLE_ESTABLISHMENT_ADMIN') {
               $scope.menu = establishment_admin_menu;
+              $scope.roleUrlPath = 'establishment-admin';
             }
 
             if (data && data.role === 'ROLE_PROFESSIONAL') {
               $scope.menu = professional_menu;
+              $scope.roleUrlPath = 'professional';
             }
 
             if (data && data.role === 'ROLE_CLIENT') {
               $scope.menu = client_menu;
+              $scope.roleUrlPath = 'client';
             }
 
             $scope.loggedUser = data
@@ -359,12 +364,16 @@ publicControllers.controller('EstablishmentController', ['$scope', '$http', '$lo
       };
 
       $scope.saveSchedule = function (schedule) {
+
+        schedule.scheduleInMinutes = parseInt(schedule.scheduleInMinutes);
+
         $http({
-            method: 'GET',
-            url: '/api/public/establishments-query/establishment/' + $routeParams.cnpj,
+            method: 'POST',
+            url: '/api/' + $scope.roleUrlPath + '/schedule',
+            data: schedule
           }
         ).success(function (data) {
-            $scope.establishment = data;
+            $location.path('/');
           }
         );
       };

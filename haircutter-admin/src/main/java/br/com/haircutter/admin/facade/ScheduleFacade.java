@@ -21,7 +21,7 @@ public class ScheduleFacade {
     @Autowired
     ScheduleEndpoint scheduleEndpoint;
 
-    @RequestMapping(value = {"/professional/schedule", "/attendant/schedule", "/manager/schedule"},
+    @RequestMapping(value = {"/client/schedule", "/professional/schedule", "/attendant/schedule", "/manager/schedule"},
             method = RequestMethod.POST)
     public ResponseEntity<?> create(@RequestBody ScheduleJson scheduleJson) {
 

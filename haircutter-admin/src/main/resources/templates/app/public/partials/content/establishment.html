@@ -37,28 +37,19 @@
           <form name="scheduleForm" ng-submit="saveSchedule(schedule)"
                 class="" novalidate>
             <div class="form-group">
-              <select id="scheduleEstablishmentService" name="scheduleEstablishmentService"
-                      ng-model="schedule.establishmentServiceId" ng-required="true" class="form-control">
-                <option value="" disabled selected>Serviço</option>
-                <option ng-repeat="option in establishment.establishmentServices" value="{{option.id}}">
-                  {{option.service}}
+              <select id="scheduleProfessionalService" name="scheduleProfessionalService"
+                      ng-model="schedule.professionalServiceId" ng-required="true" class="form-control">
+                <option value="" disabled selected>Serviço & Profissional</option>
+                <option ng-repeat="option in establishment.professionalServices" value="{{option.id}}">
+                  {{option.establishmentService.service}} - {{option.establishmentEmployee.user.name}}
                 </option>
               </select>
             </div>
-            <div class="form-group">
-              <select id="scheduleEstablishmentEmployee" name="scheduleEstablishmentEmployee"
-                      ng-model="schedule.establishmentEmployeeId" ng-required="true" class="form-control">
-                <option value="" disabled selected>Profissional</option>
-                <option ng-repeat="option in establishment.establishmentEmployees" value="{{option.id}}">
-                  {{option.user.name}}
-                </option>
-              </select>
-            </div>
-            <div class="form-group">
+        <!--    <div class="form-group">
               <ng-datepicker id="scheduleDate" name="scheduleDate" ng-model="schedule.date" locale="pt-br"
                              format="DD/MM/YYYY" view-format="DD/MM/YYYY" placeholder="__/__/____">
               </ng-datepicker>
-            </div>
+            </div>-->
             <div class="form-group">
               <select id="scheduleScheduleInMinutes" name="scheduleScheduleInMinutes"
                       ng-model="schedule.scheduleInMinutes" ng-required="true" class="form-control">
