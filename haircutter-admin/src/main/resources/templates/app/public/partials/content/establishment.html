@@ -34,44 +34,99 @@
           </div>
           <h5 class="list-title"><strong>Agende aqui</strong></h5>
 
+          <form name="scheduleForm" ng-submit="saveSchedule(schedule)"
+                class="" novalidate>
+            <div class="form-group">
+              <select id="scheduleEstablishmentService" name="scheduleEstablishmentService"
+                      ng-model="schedule.establishmentServiceId" ng-required="true" class="form-control">
+                <option value="" disabled selected>Serviço</option>
+                <option ng-repeat="option in establishment.establishmentServices" value="{{option.id}}">
+                  {{option.service}}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <select id="scheduleEstablishmentEmployee" name="scheduleEstablishmentEmployee"
+                      ng-model="schedule.establishmentEmployeeId" ng-required="true" class="form-control">
+                <option value="" disabled selected>Profissional</option>
+                <option ng-repeat="option in establishment.establishmentEmployees" value="{{option.id}}">
+                  {{option.user.name}}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <ng-datepicker id="scheduleDate" name="scheduleDate" ng-model="schedule.date" locale="pt-br"
+                             format="DD/MM/YYYY" view-format="DD/MM/YYYY" placeholder="__/__/____">
+              </ng-datepicker>
+            </div>
+            <div class="form-group">
+              <select id="scheduleScheduleInMinutes" name="scheduleScheduleInMinutes"
+                      ng-model="schedule.scheduleInMinutes" ng-required="true" class="form-control">
+                <option value="" disabled selected>Horário</option>
+                <option value="0000">00:00</option>
+                <option value="0030">00:30</option>
+                <option value="0060">01:00</option>
+                <option value="0090">01:30</option>
+                <option value="0120">02:00</option>
+                <option value="0150">02:30</option>
+                <option value="0180">03:00</option>
+                <option value="0210">03:30</option>
+                <option value="0240">04:00</option>
+                <option value="0270">04:30</option>
+                <option value="0300">05:00</option>
+                <option value="0330">05:30</option>
+                <option value="0360">06:00</option>
+                <option value="0390">06:30</option>
+                <option value="0420">07:00</option>
+                <option value="0750">07:30</option>
+                <option value="0480">08:00</option>
+                <option value="0510">08:30</option>
+                <option value="0540">09:00</option>
+                <option value="0570">09:30</option>
+                <option value="0600">10:00</option>
+                <option value="0630">10:30</option>
+                <option value="0660">11:00</option>
+                <option value="0690">11:30</option>
+                <option value="0720">12:00</option>
+                <option value="0750">12:30</option>
+                <option value="0780">13:00</option>
+                <option value="0810">13:30</option>
+                <option value="0840">14:00</option>
+                <option value="0870">14:30</option>
+                <option value="0900">15:00</option>
+                <option value="0930">15:30</option>
+                <option value="0960">16:00</option>
+                <option value="0990">16:30</option>
+                <option value="1020">17:00</option>
+                <option value="1050">17:30</option>
+                <option value="1080">18:00</option>
+                <option value="1110">18:30</option>
+                <option value="1140">19:00</option>
+                <option value="1170">19:30</option>
+                <option value="1200">20:00</option>
+                <option value="1230">20:30</option>
+                <option value="1260">21:00</option>
+                <option value="1290">21:30</option>
+                <option value="1320">22:00</option>
+                <option value="1350">22:30</option>
+                <option value="1380">23:00</option>
+                <option value="1410">23:30</option>
+              </select>
+            </div>
 
-          <div class="form-group">
-            <select id="establishmentService" name="establishmentService"
-                    ng-model="establishmentServiceId" ng-required="true" class="form-control">
-              <option value="" disabled selected>Serviço</option>
-              <option ng-repeat="option in establishment.establishmentServices" value="{{option.id}}">
-                {{option.service}}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <select id="establishmentEmployeeProfessional" name="establishmentEmployeeProfessional"
-                    ng-model="establishmentEmployeeId" ng-required="true" class="form-control">
-              <option value="" disabled selected>Profissional</option>
-              <option ng-repeat="option in establishment.establishmentServices" value="{{option.id}}">
-                {{option.service}}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <ng-datepicker ng-model="scheduleDate" locale="pt-br" format="DD/MM/YYYY" view-format="DD/MM/YYYY">
-            </ng-datepicker>
-          </div>
-          <div class="form-group">
-            <select id="scheduleInMinutes" name="scheduleInMinutes"
-                    ng-model="scheduleInMinutes" ng-required="true" class="form-control">
-              <option value="" disabled selected>Selecione</option>
-              <option ng-repeat="option in schedules" value="{{option.scheduleInMinutes}}">
-                {{option.scheduleInMinutesTitle}}
-              </option>
-            </select>
-          </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label"></label>
+              <div class="col-md-8">
+                <div class="termbox mb10"></div>
+                <div style="clear:both"></div>
+                <button type="submit" class="btn btn-success">Agendar</button>
+              </div>
+            </div>
 
-          <div style="clear:both;padding-bottom: 300px;"></div>
+            <div style="clear:both;padding-bottom: 250px;"></div>
+          </form>
         </div>
-
       </div>
-
       <div class="col-sm-3  page-sidebar-right">
         <aside>
           <div class="panel sidebar-panel">
@@ -89,7 +144,6 @@
           </div>
         </aside>
       </div>
-
     </div>
   </div>
 </div>

@@ -358,14 +358,15 @@ publicControllers.controller('EstablishmentController', ['$scope', '$http', '$lo
         );
       };
 
-      $scope.searchButton = function (city, searchValue) {
-        if (searchValue == undefined && city != undefined) {
-          $location.path('/search/' + city);
-        } else if (city == undefined) {
-          $location.path('/');
-        } else {
-          $location.path('/search/' + city + '/' + searchValue);
-        }
+      $scope.saveSchedule = function (schedule) {
+        $http({
+            method: 'GET',
+            url: '/api/public/establishments-query/establishment/' + $routeParams.cnpj,
+          }
+        ).success(function (data) {
+            $scope.establishment = data;
+          }
+        );
       };
 
 
