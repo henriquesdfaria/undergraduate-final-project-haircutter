@@ -42,6 +42,10 @@ public class Schedule implements Serializable {
     @Column(name = "creation_time")
     private Date creationTime;
 
+    public Schedule() {
+
+    }
+
     public Schedule(Long professionalServiceId, String username, Date scheduleDate, Integer scheduleInMinutes, ScheduleStatusEnum status, Date lastModifiedDate, Date creationTime) {
         this.professionalServiceId = professionalServiceId;
         this.username = username;
