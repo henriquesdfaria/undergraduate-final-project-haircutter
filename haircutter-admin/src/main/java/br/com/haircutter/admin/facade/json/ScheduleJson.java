@@ -25,6 +25,10 @@ public class ScheduleJson {
 
     private Date creationTime;
 
+    public ScheduleJson() {
+
+    }
+
     public ScheduleJson(Long professionalServiceId, String username, Date scheduleDate, Integer scheduleInMinutes, ScheduleStatusEnum status, Date lastModifiedDate, Date creationTime) {
         this.professionalServiceId = professionalServiceId;
         this.username = username;

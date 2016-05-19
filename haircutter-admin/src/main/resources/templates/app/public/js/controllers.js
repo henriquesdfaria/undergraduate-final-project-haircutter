@@ -364,9 +364,7 @@ publicControllers.controller('EstablishmentController', ['$scope', '$http', '$lo
       };
 
       $scope.saveSchedule = function (schedule) {
-
-        schedule.scheduleInMinutes = parseInt(schedule.scheduleInMinutes);
-
+        
         $http({
             method: 'POST',
             url: '/api/' + $scope.roleUrlPath + '/schedule',
