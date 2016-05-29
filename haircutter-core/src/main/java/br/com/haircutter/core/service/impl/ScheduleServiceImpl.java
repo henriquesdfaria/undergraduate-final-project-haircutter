@@ -1,10 +1,7 @@
 package br.com.haircutter.core.service.impl;
 
 import br.com.haircutter.core.enums.ScheduleStatusEnum;
-import br.com.haircutter.core.model.EstablishmentEmployee;
-import br.com.haircutter.core.model.ProfessionalService;
-import br.com.haircutter.core.model.Schedule;
-import br.com.haircutter.core.model.User;
+import br.com.haircutter.core.model.*;
 import br.com.haircutter.core.model.repository.*;
 import br.com.haircutter.core.service.EstablishmentAuditLogService;
 import br.com.haircutter.core.service.ScheduleService;
@@ -23,6 +20,10 @@ public class ScheduleServiceImpl implements ScheduleService {
     public static final int MINUTES_TO_MILLISECONDS = 60000;
     @Autowired
     ScheduleRepository scheduleRepository;
+
+
+    @Autowired
+    EstablishmentRespository establishmentRespository;
 
     @Autowired
     EstablishmentAuditLogService establishmentAuditLogService;
@@ -48,7 +49,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
         Date now = new Date(ZonedDateTime.now().toInstant().toEpochMilli());
 
-        Schedule schedule = new Schedule(professionalServiceId, null, username, scheduleDate, scheduleInMinutes,
+        Schedule schedule = new Schedule(null, professionalServiceId, null, username, scheduleDate, scheduleInMinutes,
                 ScheduleStatusEnum.ACCEPTED, now, now);
 
 
@@ -131,8 +132,10 @@ public class ScheduleServiceImpl implements ScheduleService {
 
         schedules.stream().forEach(schedule -> {
             schedule.setProfessionalService(professionalServiceRepository.findOne(schedule.getProfessionalServiceId()));
-            schedule.getProfessionalService().setEstablishmentEmployee(establishmentEmployeeRespository.findOne(schedule.getProfessionalService().getEstablishmentEmployeeId()));
+            EstablishmentEmployee ee =establishmentEmployeeRespository.findOne(schedule.getProfessionalService().getEstablishmentEmployeeId());
+            schedule.getProfessionalService().setEstablishmentEmployee(ee);
             schedule.getProfessionalService().setEstablishmentService(establishmentServiceRespository.findOne(schedule.getProfessionalService().getEstablishmentServiceId()));
+            schedule.setEstablishmentName(establishmentRespository.findOneByCnpj(ee.getEstablishmentCnpj()).getName());
         });
 
         return schedules;

@@ -46,9 +46,10 @@ clientControllers.controller('ProfileController', ['$scope', '$http',
             method: 'DELETE',
             url: '/api/client/deactivate'
           }
-        ).success(function() {
-          window.location.href='logout';
-        });
+        ).success(function () {
+            window.location.href = 'logout';
+          }
+        );
       }
 
       $scope.getLoggedUser();
@@ -80,6 +81,16 @@ clientControllers.controller('SchedulesController', ['$scope', '$http',
           }
         ).success(function (data) {
             $scope.schedules = data;
+            _.forEach($scope.schedules, function (schedule) {
+                var time = moment({hour: 0, minute: 0});
+                time.add(schedule.scheduleInMinutes, "minutes");
+                schedule.durationTitle = (time.hours() !== 0 ? time.hours() + 'H' : '') +
+                  (time.minutes() !== 0 ? time.minutes() + 'M' : '');
+
+                schedule.scheduleDateString = new moment(schedule.scheduleDate).format('DD/MM/YYYY') + ' '
+                  + schedule.durationTitle;
+              }
+            );
           }
         );
       }
@@ -89,10 +100,11 @@ clientControllers.controller('SchedulesController', ['$scope', '$http',
             method: 'DELETE',
             url: '/api/client/schedule/' + schedule.id
           }
-        ).success(function() {
-          $scope.getSchedules();
-          window.location.reload();
-        });
+        ).success(function () {
+            $scope.getSchedules();
+            window.location.reload();
+          }
+        );
       }
 
       $scope.getLoggedUser();

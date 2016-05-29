@@ -20,6 +20,9 @@ public class Schedule implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Transient
+    private String establishmentName;
+
     @Column(name = "establishment_professional_service_id")
     private Long professionalServiceId;
 
@@ -49,7 +52,8 @@ public class Schedule implements Serializable {
 
     }
 
-    public Schedule(Long professionalServiceId, ProfessionalService professionalService, String username, Date scheduleDate, Integer scheduleInMinutes, ScheduleStatusEnum status, Date lastModifiedDate, Date creationTime) {
+    public Schedule(String establishmentName, Long professionalServiceId, ProfessionalService professionalService, String username, Date scheduleDate, Integer scheduleInMinutes, ScheduleStatusEnum status, Date lastModifiedDate, Date creationTime) {
+        this.establishmentName = establishmentName;
         this.professionalServiceId = professionalServiceId;
         this.professionalService = professionalService;
         this.username = username;
@@ -66,6 +70,14 @@ public class Schedule implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getEstablishmentName() {
+        return establishmentName;
+    }
+
+    public void setEstablishmentName(String establishmentName) {
+        this.establishmentName = establishmentName;
     }
 
     public Long getProfessionalServiceId() {
