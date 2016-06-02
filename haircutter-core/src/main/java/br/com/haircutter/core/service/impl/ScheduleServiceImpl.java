@@ -43,13 +43,16 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    UserProfileRepository userProfileRepository;
+
     @Override
     public Schedule create(Long professionalServiceId, String username, Date scheduleDate, Integer scheduleInMinutes,
                            String author) {
 
         Date now = new Date(ZonedDateTime.now().toInstant().toEpochMilli());
 
-        Schedule schedule = new Schedule(null, professionalServiceId, null, username, scheduleDate, scheduleInMinutes,
+        Schedule schedule = new Schedule(null, professionalServiceId, null, null, null, null, username, scheduleDate, scheduleInMinutes,
                 ScheduleStatusEnum.ACCEPTED, now, now);
 
 
@@ -120,6 +123,16 @@ public class ScheduleServiceImpl implements ScheduleService {
         professionalServices.stream().forEach(professionalService -> {
             List<Schedule> s = scheduleRepository.findAllByProfessionalServiceIdAndStatus(professionalService.getId(), ScheduleStatusEnum.ACCEPTED);
             schedules.addAll(s);
+        });
+
+        schedules.stream().forEach(schedule -> {
+            schedule.setProfessionalService(professionalServiceRepository.findOne(schedule.getProfessionalServiceId()));
+            schedule.getProfessionalService().setEstablishmentService(establishmentServiceRespository.findOne(schedule.getProfessionalService().getEstablishmentServiceId()));
+            User user = userRepository.findOneByUsername(schedule.getUsername());
+            user.setProfile(userProfileRepository.findOneByUsername(user.getUsername()));
+            schedule.setClientName(user.getName());
+            schedule.setClientEmail(user.getEmail());
+            schedule.setClientPhone(user.getProfile().getPhone());
         });
 
         return new ArrayList<>(schedules);

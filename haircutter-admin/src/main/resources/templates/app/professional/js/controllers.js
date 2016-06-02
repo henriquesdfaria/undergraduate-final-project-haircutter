@@ -200,7 +200,7 @@ professionalControllers.controller('CalendarsController', ['$scope', '$http', '$
 /* CREATE CALENDAR CONTROLLER*/
 professionalControllers.controller('CreateCalendarController', ['$scope', '$http', '$location',
     function ($scope, $http, $location) {
-      
+
       $scope.calendarsActiveMenu = 'active';
 
       $scope.getLoggedUser = function () {
@@ -258,6 +258,17 @@ professionalControllers.controller('SchedulesController', ['$scope', '$http',
           }
         ).success(function (data) {
             $scope.schedules = data;
+
+            _.forEach($scope.schedules, function (schedule) {
+                var time = moment({hour: 0, minute: 0});
+                time.add(schedule.scheduleInMinutes, "minutes");
+                schedule.durationTitle = (time.hours() !== 0 ? time.hours() + 'H' : '') +
+                  (time.minutes() !== 0 ? time.minutes() + 'M' : '');
+
+                schedule.scheduleDateString = new moment(schedule.scheduleDate).format('DD/MM/YYYY') + ' '
+                  + schedule.durationTitle;
+              }
+            );
           }
         );
       }
@@ -267,10 +278,11 @@ professionalControllers.controller('SchedulesController', ['$scope', '$http',
             method: 'DELETE',
             url: '/api/professional/schedule/' + schedule.id
           }
-        ).success(function() {
-          $scope.getSchedules();
-          window.location.reload();
-        });
+        ).success(function () {
+            $scope.getSchedules();
+            window.location.reload();
+          }
+        );
       }
 
       $scope.getLoggedUser();

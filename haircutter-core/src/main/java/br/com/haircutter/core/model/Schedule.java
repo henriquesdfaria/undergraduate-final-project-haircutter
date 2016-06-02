@@ -29,6 +29,15 @@ public class Schedule implements Serializable {
     @Transient
     private ProfessionalService professionalService;
 
+    @Transient
+    private String clientName;
+
+    @Transient
+    private String clientPhone;
+
+    @Transient
+    private String clientEmail;
+
     @Column(name = "username")
     private String username;
 
@@ -49,13 +58,15 @@ public class Schedule implements Serializable {
     private Date creationTime;
 
     public Schedule() {
-
     }
 
-    public Schedule(String establishmentName, Long professionalServiceId, ProfessionalService professionalService, String username, Date scheduleDate, Integer scheduleInMinutes, ScheduleStatusEnum status, Date lastModifiedDate, Date creationTime) {
+    public Schedule(String establishmentName, Long professionalServiceId, ProfessionalService professionalService, String clientName, String clientPhone, String clientEmail, String username, Date scheduleDate, Integer scheduleInMinutes, ScheduleStatusEnum status, Date lastModifiedDate, Date creationTime) {
         this.establishmentName = establishmentName;
         this.professionalServiceId = professionalServiceId;
         this.professionalService = professionalService;
+        this.clientName = clientName;
+        this.clientPhone = clientPhone;
+        this.clientEmail = clientEmail;
         this.username = username;
         this.scheduleDate = scheduleDate;
         this.scheduleInMinutes = scheduleInMinutes;
@@ -94,6 +105,30 @@ public class Schedule implements Serializable {
 
     public void setProfessionalService(ProfessionalService professionalService) {
         this.professionalService = professionalService;
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
+
+    public String getClientPhone() {
+        return clientPhone;
+    }
+
+    public void setClientPhone(String clientPhone) {
+        this.clientPhone = clientPhone;
+    }
+
+    public String getClientEmail() {
+        return clientEmail;
+    }
+
+    public void setClientEmail(String clientEmail) {
+        this.clientEmail = clientEmail;
     }
 
     public String getUsername() {
