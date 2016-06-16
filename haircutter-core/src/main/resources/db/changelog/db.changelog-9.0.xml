@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+   <!-- COMPLAINT TABLE -->
+   <changeSet author="giovanni" id="1">
+   		<createTable tableName="complaint">
+   			<column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+             <column name="description" type="VARCHAR(300)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="establishment_cnpj" type="VARCHAR(14)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="establishment_evaluation_id" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="creation_time" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_date" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+   		</createTable>   		
+   		<rollback>
+            <dropTable tableName="complaint"/>
+        </rollback>
+   </changeSet>
+   
+    <!-- ESTABLISHMENT EVALUATION TABLE -->
+   <changeSet author="giovanni" id="2">
+   		<createTable tableName="establishment_evaluation">
+   			<column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+             <column name="description" type="VARCHAR(300)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="establishment_cnpj" type="VARCHAR(14)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rating" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="establishment_service_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creation_time" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_date" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+   		</createTable>
+   		<rollback>
+             <dropTable tableName="establishment_service"/>
+        </rollback>
+   </changeSet>
+   
+   <!-- ESTABLISHMENT EVALUATION COMENTARY TABLE -->
+   <changeSet author="giovanni" id="3">
+   		<createTable tableName="establishment_evaluation_comentary">
+   			<column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+             <column name="description" type="VARCHAR(300)">
+                <constraints nullable="false"/>              
+            </column>
+              <column name="establishment_evaluation_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creation_time" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_date" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+   		</createTable>  		
+   		<rollback>
+            <dropTable tableName="establishment_evaluation_comentary"/>
+        </rollback>
+   </changeSet>
+   
+   <!-- ADD FOREING KEYS -->
+   <changeSet author="giovanni" id="4">
+   
+   		<!-- COMPLAINT TABLE -->
+   		<addForeignKeyConstraint constraintName="complaint_user_fk"
+                                 referencedTableName="user"
+                                 referencedColumnNames="username"
+                                 baseTableName="complaint"
+                                 baseColumnNames="username" />
+                                 
+        <addForeignKeyConstraint constraintName="complaint_establishment_fk"
+                                 referencedTableName="establishment"
+                                 referencedColumnNames="cnpj"
+                                 baseTableName="complaint"
+                                 baseColumnNames="establishment_cnpj" />
+                                 
+        <addForeignKeyConstraint constraintName="complaint_establishment_evaluation_fk"
+                                 referencedTableName="establishment_evaluation"
+                                 referencedColumnNames="id"
+                                 baseTableName="complaint"
+                                 baseColumnNames="establishment_evaluation_id" />                            
+		
+		<!-- ESTABLISHMENT EVALUATION TABLE -->
+		<addForeignKeyConstraint constraintName="establishment_evaluation_user_fk"
+                                 referencedTableName="user"
+                                 referencedColumnNames="username"
+                                 baseTableName="establishment_evaluation"
+                                 baseColumnNames="username" />
+                                 
+        <addForeignKeyConstraint constraintName="establishment_evaluation_establishment_fk"
+                                 referencedTableName="establishment"
+                                 referencedColumnNames="cnpj"
+                                 baseTableName="establishment_evaluation"
+                                 baseColumnNames="establishment_cnpj" />
+                                 
+        <addForeignKeyConstraint constraintName="establishment_evaluation_establishment_service_fk"
+                                 referencedTableName="establishment_service"
+                                 referencedColumnNames="id"
+                                 baseTableName="establishment_evaluation"
+                                baseColumnNames="establishment_service_id" />                            
+ 		
+ 		 <!-- ESTABLISHMENT EVALUATION COMENTARY TABLE -->
+ 		<addForeignKeyConstraint constraintName="establishment_evaluation_comentary_user_fk"
+                                 referencedTableName="user"
+                                 referencedColumnNames="username"
+                                 baseTableName="establishment_evaluation_comentary"
+                                 baseColumnNames="username" />
+                                 
+        <addForeignKeyConstraint constraintName="establishment_evaluation_comentary_establishment_evaluation_fk"
+                                 referencedTableName="establishment_evaluation"
+                                 referencedColumnNames="id"
+                                 baseTableName="establishment_evaluation_comentary"
+                                 baseColumnNames="establishment_evaluation_id" />                                                
+ 		
+ 		
+   		<rollback>
+            <dropForeignKeyConstraint baseTableName="complaint"
+                                      constraintName="complaint_user_fk"/>
+                                      
+            <dropForeignKeyConstraint baseTableName="complaint"
+                                      constraintName="complaint_establishment_fk"/>
+                                      
+            <dropForeignKeyConstraint baseTableName="complaint"
+                                      constraintName="complaint_establishment_evaluation_fk"/>
+                                      
+			<dropForeignKeyConstraint baseTableName="establishment_service"
+                                      constraintName="establishment_evaluation_user_fk"/>
+                                      
+            <dropForeignKeyConstraint baseTableName="establishment_service"
+                                      constraintName="establishment_evaluation_establishment_fk"/>
+                                      
+            <dropForeignKeyConstraint baseTableName="establishment_service"
+                                      constraintName="establishment_evaluation_establishment_service_fk"/>
+
+			<dropForeignKeyConstraint baseTableName="establishment_evaluation_comentary"
+                                      constraintName="establishment_evaluation_comentary_user_fk"/>
+                                      
+            <dropForeignKeyConstraint baseTableName="establishment_evaluation_comentary"
+                                      constraintName="establishment_evaluation_comentary_establishment_evaluation_fk"/>						
+ 		</rollback>
+   </changeSet>
+</databaseChangeLog>
