@@ -8,7 +8,7 @@
     <div class="row">
       <div class="col-sm-9 page-content col-thin-right">
         <div class="inner inner-box ads-details-wrapper">
-          <h2> {{establishment.name}} - Média: 4,7 <i class="fa fa-star-o"></i></h2>
+          <h2> {{establishment.name}} - Média: {{establishment.ratingMedium}} <i class="fa fa-star-o"></i></h2>
           <span class="info-row">
             <span class="item-location"><i class="fa fa-map-marker"></i>
             {{establishment.address.street}} - {{establishment.address.neighborhood}} - {{establishment.address.city}} - {{establishment.address.state}} - Fone: {{establishment.phone}}
@@ -113,18 +113,12 @@
           <div style="clear:both;padding-bottom: 30px;"></div>
           <h2 class="list-title"><strong>Avaliações e Comentários</strong></h2>
           <div class="well">
-            <ul>
+            <ul ng-repeat="eva in establishment.evaluations">
               <li>
                 <p>
-                  <strong>joaopedro(19:03) (avaliou em: 3 estrelas):</strong>
+                  <strong>{{eva.username}}({{eva.lastModifiedDate}}) (avaliou em: {{eva.rating}} estrelas):</strong>
                 </p>
-                <p>O salão é muito bom mas não usaram os produtos e da redken</p>
-              </li>
-              <li>
-                <p>
-                  <strong>marina(19:03) (avaliou em: 4 estrelas):</strong>
-                </p>
-                <p>Gostei muito</p>
+                <p>{{eva.description}}</p>
               </li>
             </ul>
           </div>

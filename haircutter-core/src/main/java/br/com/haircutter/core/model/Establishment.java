@@ -68,6 +68,12 @@ public class Establishment implements Serializable {
     @Transient
     private List<Schedule> establishmentSchedules;
 
+    @Transient
+    private Integer ratingMedium;
+
+    @Transient
+    private List<EstablishmentEvaluation> evaluations;
+
 	public Establishment() {
 		super();
 	}
@@ -110,6 +116,22 @@ public class Establishment implements Serializable {
 
     public String getDescription() {
         return description;
+    }
+
+    public Integer getRatingMedium() {
+        return ratingMedium;
+    }
+
+    public void setRatingMedium(Integer ratingMedium) {
+        this.ratingMedium = ratingMedium;
+    }
+
+    public List<EstablishmentEvaluation> getEvaluations() {
+        return evaluations;
+    }
+
+    public void setEvaluations(List<EstablishmentEvaluation> evaluations) {
+        this.evaluations = evaluations;
     }
 
     public void setDescription(String description) {

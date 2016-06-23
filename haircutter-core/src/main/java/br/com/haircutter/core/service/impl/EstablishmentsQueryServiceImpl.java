@@ -27,6 +27,9 @@ public class EstablishmentsQueryServiceImpl implements EstablishmentsQueryServic
 
 	@Autowired
 	ProfessionalServiceRepository professionalServiceRepository;
+
+	@Autowired
+	EstablishmentEvaluationRepository establishmentEvaluationRepository;
 	
 	@Autowired
 	ScheduleRepository scheduleRepository;
@@ -59,6 +62,22 @@ public class EstablishmentsQueryServiceImpl implements EstablishmentsQueryServic
 			List<EstablishmentService> establishmentServices;
 			establishmentServices = establishmentServiceRepository.findAllByEstablishmentCnpjAndDeleted(establishment.getCnpj(), false);
 			establishment.setEstablishmentServices(establishmentServices);
+
+			establishment.setEvaluations(establishmentEvaluationRepository.findByEstablishmentCnpj(establishment.getCnpj()));
+
+			Integer rating = 0;
+			Integer count = 0;
+
+			for (EstablishmentEvaluation evaluation : establishment.getEvaluations()) {
+				count++;
+				rating = rating + (evaluation.getRating() != null ? evaluation.getRating() : 1);
+			}
+
+			if (count > 0 && rating > 0) {
+				establishment.setRatingMedium(rating/count);
+			} else {
+				establishment.setRatingMedium(0);
+			}
 		}
 		
 		return establishments;
@@ -100,7 +119,24 @@ public class EstablishmentsQueryServiceImpl implements EstablishmentsQueryServic
 			establishmentSchedules.addAll(schedules);
 		}
 		establishment.setEstablishmentSchedules(establishmentSchedules);
-		
+
+
+		establishment.setEvaluations(establishmentEvaluationRepository.findByEstablishmentCnpj(cnpj));
+
+		Integer rating = 0;
+		Integer count = 0;
+
+		for (EstablishmentEvaluation evaluation : establishment.getEvaluations()) {
+			count++;
+			rating = rating + (evaluation.getRating() != null ? evaluation.getRating() : 1);
+		}
+
+		if (count > 0 && rating > 0) {
+			establishment.setRatingMedium(rating/count);
+		} else {
+			establishment.setRatingMedium(0);
+		}
+
 		return establishment;
 	}
 }
