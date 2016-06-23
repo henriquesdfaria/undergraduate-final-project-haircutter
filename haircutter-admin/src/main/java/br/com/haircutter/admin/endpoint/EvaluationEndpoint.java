@@ -19,8 +19,9 @@ public class EvaluationEndpoint {
 
     public Object evaluate(final EstablishmentEvaluationJson establishmentEvaluationJson) {
 
-        return restTemplate.postForObject(API_URL + "/establishment/evaluate?username="
-                + LoggedUserUtils.getLoggedUserUsername(), establishmentEvaluationJson, Object.class);
+        establishmentEvaluationJson.setUsername(LoggedUserUtils.getLoggedUserUsername());
+
+        return restTemplate.postForObject(API_URL + "/establishment/evaluate", establishmentEvaluationJson, Object.class);
     }
 
 }

@@ -357,6 +357,9 @@ publicControllers.controller('EstablishmentController', ['$scope', '$http', '$lo
           }
         ).success(function (data) {
             $scope.establishment = data;
+            _.forEach($scope.establishment.evaluations, function(evaluation) {
+              evaluation.dateTime = new Date(evaluation.lastModifiedDate).toDateString();
+            });
           }
         );
       };
