@@ -27,7 +27,8 @@ public class ComplaintEndpoint {
     }
 
     public Object create(final ComplaintJson complaintJson) {
-        return restTemplate.postForObject(API_URL + "/complaint?username="
-                + LoggedUserUtils.getLoggedUserUsername(), complaintJson, Object.class);
+        complaintJson.setUsername(LoggedUserUtils.getLoggedUserUsername());
+
+        return restTemplate.postForObject(API_URL + "/complaint", complaintJson, Object.class);
     }
 }
