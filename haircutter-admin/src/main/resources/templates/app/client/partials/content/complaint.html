@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="col-md-9 page-content">
+    <div class="inner-box category-content">
+      <h2 class="title-2">
+        <i class="fa fa-file-text-o"></i>
+        <strong>Denúncia</strong>
+      </h2>
+      <div class="row">
+        <div class="col-sm-12">
+          <form name="complaintForm" ng-submit="complaintForm.$valid && complain(complaint)"
+                class="form-horizontal" novalidate>
+            <fieldset>
+
+              <div class="form-group required">
+                <label class="col-md-4 control-label" for="textarea">O que você deseja denunciar neste estabelecimento?
+                  <sup>*</sup>
+                </label>
+                <div class="col-md-6">
+                  <textarea name="complaint.description" ng-model="complaint.description" ng-trim="false" ng-required="true"
+                            class="form-control" id="textarea"
+                            name="textarea"></textarea>
+                  <div class="text-danger"
+                       ng-show="complaintForm.$submitted || complaintForm.description.$touched">
+                    <p ng-show="complaintForm.description.$error.required">Descrição é um campo
+                      obrigatório.</p>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-8">
+                  <div class="termbox mb10"></div>
+                  <div style="clear:both"></div>
+                  <button type="submit" class="btn btn-success">Enviar</button>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

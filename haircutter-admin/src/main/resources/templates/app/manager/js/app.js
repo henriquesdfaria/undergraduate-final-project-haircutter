@@ -27,6 +27,11 @@ managerApp.config(['$routeProvider',
             controller: 'CreateEstablishmentServiceController'
           }
         )
+        .when('/complaint/:cnpj', {
+            templateUrl: 'manager/partials/complaint-content.html',
+            controller: 'ComplaintController'
+          }
+        )
         .otherwise(
           {redirectTo: '/establishment/services'}
         );

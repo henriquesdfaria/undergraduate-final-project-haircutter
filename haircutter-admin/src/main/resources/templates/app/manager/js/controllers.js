@@ -154,3 +154,42 @@ managerControllers.controller('EstablishmentServiceController',
     }
   ]
 );
+
+
+managerControllers.controller('ComplaintController', ['$scope', '$http', '$routeParams',
+    function ($scope, $http, $routeParams) {
+      $scope.profileActiveMenu = 'active';
+
+      $scope.getLoggedUser = function () {
+        $http({
+            method: 'GET',
+            url: '/api/public/get-logged-user'
+          }
+        ).success(function (data) {
+            $scope.loggedUser = data;
+          }
+        );
+      };
+
+
+      $scope.complain = function (complaint) {
+
+        complaint.establishmentCnpj = $routeParams.cnpj;
+
+        $http({
+            method: 'POST',
+            url: '/api/manager/complaint',
+            data: complaint
+          }
+        ).then(function () {
+          window.location = "/#/establishment/" + $routeParams.cnpj;
+        }, function () {
+          window.location = "/#/establishment/" + $routeParams.cnpj;
+        });
+      };
+
+
+      $scope.getLoggedUser();
+    }
+  ]
+);

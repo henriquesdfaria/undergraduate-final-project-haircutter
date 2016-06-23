@@ -16,6 +16,10 @@ public class ComplaintJson {
     private Date creationTime;
     private Date lastModifiedDate;
 
+    public ComplaintJson() {
+
+    }
+
     public ComplaintJson(Long id, String description, String username, String establishmentCnpj, String status, Long establishmentEvaluationId, Date creationTime, Date lastModifiedDate) {
         this.id = id;
         this.description = description;

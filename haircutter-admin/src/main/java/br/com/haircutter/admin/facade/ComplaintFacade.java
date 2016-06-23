@@ -24,7 +24,7 @@ public class ComplaintFacade {
 		complaintEndpoint.resolve(complaintId);
 	}
 
-	@RequestMapping(value = "/client/complaint", method = RequestMethod.POST)
+	@RequestMapping(value = {"/client/complaint", "/manager/complaint"}, method = RequestMethod.POST)
 	public ResponseEntity<?> create(@RequestBody ComplaintJson complaintJson) {
 
 		return ResponseEntity.ok(complaintEndpoint.create(complaintJson));
