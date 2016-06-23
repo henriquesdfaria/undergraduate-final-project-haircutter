@@ -1,12 +1,10 @@
 package br.com.haircutter.admin.facade;
 
 import br.com.haircutter.admin.endpoint.ComplaintEndpoint;
+import br.com.haircutter.admin.facade.json.ComplaintJson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -24,6 +22,12 @@ public class ComplaintFacade {
 	public void resolve(@PathVariable("complaintId") Long complaintId) {
 
 		complaintEndpoint.resolve(complaintId);
+	}
+
+	@RequestMapping(value = "/client/complaint", method = RequestMethod.POST)
+	public ResponseEntity<?> create(@RequestBody ComplaintJson complaintJson) {
+
+		return ResponseEntity.ok(complaintEndpoint.create(complaintJson));
 	}
 
 }

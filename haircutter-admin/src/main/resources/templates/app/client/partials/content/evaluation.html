@@ -7,18 +7,19 @@
       </h2>
       <div class="row">
         <div class="col-sm-12">
-          <form name="establishmentEvaluationForm" ng-submit="establishmentEvaluationForm.$valid && evaluate()"
+          <form name="establishmentEvaluationForm" ng-submit="establishmentEvaluationForm.$valid &&
+          evaluate(establishmentEvaluation)"
                 class="form-horizontal" novalidate>
             <fieldset>
 
               <div class="form-group required">
-                <label class="col-md-4 control-label" for="evaluationStars">Quantas estrelas você dá para o
+                <label class="col-md-4 control-label" for="rating">Quantas estrelas você dá para o
                   estabelecimento?
                   <sup>*</sup>
                 </label>
                 <div class="col-md-6">
-                  <select id="evaluationStars" name="evaluationStars"
-                          ng-model="establishmentEvaluation.stars" ng-required="true" class="form-control">
+                  <select id="rating" name="rating"
+                          ng-model="establishmentEvaluation.rating" ng-required="true" class="form-control">
                     <option value="" disabled selected>Selecione</option>
                     <option value="0">0</option>
                     <option value="1">1</option>
@@ -28,8 +29,8 @@
                     <option value="5">5</option>
                   </select>
                   <div class="text-danger"
-                       ng-show="establishmentEvaluationForm.$submitted || establishmentEvaluationForm.userProfileAddressState.$touched">
-                    <p ng-show="establishmentEvaluationForm.evaluationStars.$error.required">Selecione uma estrela.</p>
+                       ng-show="establishmentEvaluationForm.$submitted || establishmentEvaluationForm.rating.$touched">
+                    <p ng-show="establishmentEvaluationForm.rating.$error.required">Selecione uma quantidade de estrelas.</p>
                   </div>
                 </div>
               </div>
@@ -41,8 +42,8 @@
                   <sup>*</sup>
                 </label>
                 <div class="col-md-6">
-                  <textarea name="description" ng-model="description" ng-trim="false" ng-required="true"
-                            ng-maxlength="maxlengthDescription" class="form-control" id="textarea"
+                  <textarea name="establishmentEvaluation.description" ng-model="establishmentEvaluation.description" ng-trim="false" ng-required="true"
+                            class="form-control" id="textarea"
                             name="textarea"></textarea>
                   <div class="text-danger"
                        ng-show="establishmentEvaluationForm.$submitted || establishmentEvaluationForm.description.$touched">

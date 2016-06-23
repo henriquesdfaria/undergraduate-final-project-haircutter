@@ -113,8 +113,8 @@ clientControllers.controller('SchedulesController', ['$scope', '$http',
   ]
 );
 
-clientControllers.controller('EstablishmentEvaluationController', ['$scope', '$http',
-    function ($scope, $http) {
+clientControllers.controller('EstablishmentEvaluationController', ['$scope', '$http', '$routeParams',
+    function ($scope, $http, $routeParams) {
       $scope.profileActiveMenu = 'active';
 
       $scope.getLoggedUser = function () {
@@ -129,17 +129,19 @@ clientControllers.controller('EstablishmentEvaluationController', ['$scope', '$h
       };
 
 
-      $scope.evaluate = function () {
+      $scope.evaluate = function (establishmentEvaluation) {
 
-        $scope.establishmentEvaluation.establishmentCnpj = $routeParams.cnpj;
+        establishmentEvaluation.establishmentCnpj = $routeParams.cnpj;
 
         $http({
             method: 'POST',
-            url: '/api/client/establishment/evaluation',
-            data: $scope.establishmentEvaluation
+            url: '/api/client/establishment/evaluate',
+            data: establishmentEvaluation
           }
-        ).success(function (data) {
-
+        ).then(function () {
+          window.location = "/#/establishment/" + $routeParams.cnpj;
+        }, function () {
+          window.location = "/#/establishment/" + $routeParams.cnpj;
         });
       };
 

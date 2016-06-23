@@ -1,5 +1,6 @@
 package br.com.haircutter.admin.endpoint;
 
+import br.com.haircutter.admin.facade.json.ComplaintJson;
 import br.com.haircutter.admin.utils.LoggedUserUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -23,5 +24,10 @@ public class ComplaintEndpoint {
     public void resolve(Long complaintId) {
         restTemplate.put(API_URL + "/complaint/" + complaintId + "?username="
                 + LoggedUserUtils.getLoggedUserUsername(), complaintId);
+    }
+
+    public Object create(final ComplaintJson complaintJson) {
+        return restTemplate.postForObject(API_URL + "/complaint?username="
+                + LoggedUserUtils.getLoggedUserUsername(), complaintJson, Object.class);
     }
 }
