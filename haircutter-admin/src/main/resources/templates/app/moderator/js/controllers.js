@@ -7,6 +7,8 @@ var moderatorControllers = angular.module('moderatorControllers', []);
 moderatorControllers.controller('Controller', ['$scope', '$http', '$location',
   function($scope, $http, $location) {
 
+    $scope.requestsActiveMenu = 'active';
+
     // GET LOGGED USER
     $scope.getLoggedUser = function () {
       $http({
@@ -64,3 +66,46 @@ moderatorControllers.controller('Controller', ['$scope', '$http', '$location',
     $scope.getCreationRequests();
   }
 ]);
+
+moderatorControllers.controller('ComplaintsController', ['$scope', '$http', '$location',
+  function($scope, $http, $location) {
+
+    $scope.complaintsActiveMenu = 'active';
+
+    // GET LOGGED USER
+    $scope.getLoggedUser = function () {
+      $http({
+        method: 'GET',
+        url: '/api/public/get-logged-user',
+      }).success(function(data) {
+        $scope.loggedUser = data;
+      });
+    };
+
+    // GET THE ESTABLISHMENT CREATION REQUESTS
+    $scope.getComplaints = function () {
+      $http({
+        method: 'GET',
+        url: '/api/moderator/complaints',
+      }).success(function(data) {
+        $scope.complaints = data;
+      });
+    };
+
+    // APPROVE CREATION REQUESTS
+    $scope.resolveComplaint = function (complaintId) {
+
+      $http({
+        method: 'PUT',
+        url: '/api/moderator/complaint/' + complaintId + '/resolve',
+      }).success(function() {
+        $scope.getComplaints();
+      });
+
+    };
+
+    $scope.getLoggedUser();
+    $scope.getComplaints();
+  }
+]);
+

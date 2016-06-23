@@ -113,6 +113,41 @@ clientControllers.controller('SchedulesController', ['$scope', '$http',
   ]
 );
 
+clientControllers.controller('EstablishmentEvaluationController', ['$scope', '$http',
+    function ($scope, $http) {
+      $scope.profileActiveMenu = 'active';
+
+      $scope.getLoggedUser = function () {
+        $http({
+            method: 'GET',
+            url: '/api/public/get-logged-user'
+          }
+        ).success(function (data) {
+            $scope.loggedUser = data;
+          }
+        );
+      };
+
+
+      $scope.evaluate = function () {
+
+        $scope.establishmentEvaluation.establishmentCnpj = $routeParams.cnpj;
+
+        $http({
+            method: 'POST',
+            url: '/api/client/establishment/evaluation',
+            data: $scope.establishmentEvaluation
+          }
+        ).success(function (data) {
+
+        });
+      };
+
+
+      $scope.getLoggedUser();
+    }
+  ]
+);
 
 
 

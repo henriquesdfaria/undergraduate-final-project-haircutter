@@ -22,6 +22,10 @@ clientApp.config(['$routeProvider',
           templateUrl: 'client/partials/schedules-content.html',
           controller: 'SchedulesController'
         })
+        .when('/establishment-evaluation/:cnpj', {
+          templateUrl: 'client/partials/evaluation-content.html',
+          controller: 'EstablishmentEvaluationController'
+        })
         .otherwise(
           {redirectTo: '/profile'}
         );

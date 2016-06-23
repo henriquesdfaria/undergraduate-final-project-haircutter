@@ -14,6 +14,10 @@ moderatorApp.config(['$routeProvider',
         templateUrl: 'moderator/partials/content.html',
         controller: 'Controller'
       }).
+    when('/complaints', {
+      templateUrl: 'moderator/partials/complaints-content.html',
+      controller: 'ComplaintsController'
+    }).
       otherwise({
         redirectTo: '/establishment-creation-requests'
       });

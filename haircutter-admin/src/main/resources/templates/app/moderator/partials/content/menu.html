@@ -11,11 +11,18 @@
           </h5>
           <div id="MyAds" class="panel-collapse collapse in">
             <ul class="acc-list">
-              <li class="active">
+              <li ng-class="requestsActiveMenu">
                 <a href="#/establishment-creation-requests">
                   <i class="icon-hourglass"></i>
                   Estabelecimentos
                   <span class="badge">{{establishmentCreationRequests.length}}</span>
+                </a>
+              </li>
+              <li ng-class="complaintsActiveMenu">
+                <a href="#/complaints">
+                  <i class="icon-hourglass"></i>
+                  Denúncias
+                  <span class="badge">{{complaints.length}}</span>
                 </a>
               </li>
             </ul>

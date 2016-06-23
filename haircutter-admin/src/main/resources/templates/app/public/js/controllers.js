@@ -22,7 +22,11 @@ var manager_menu = [{
 var moderator_menu = [{
   name: 'Estabelecimentos',
   link: '/moderator#/establishment-creation-requests'
-}
+},
+  {
+    name: 'Denúncias',
+    link: '/moderator#/complaints'
+  }
 ];
 
 
@@ -358,9 +362,9 @@ publicControllers.controller('EstablishmentController', ['$scope', '$http', '$lo
       };
 
       $scope.saveSchedule = function (schedule) {
-        
+
         schedule.scheduleDate = moment(schedule.date, 'DD/MM/YYYY').toDate();
-        
+
         $http({
             method: 'POST',
             url: '/api/' + $scope.roleUrlPath + '/schedule',

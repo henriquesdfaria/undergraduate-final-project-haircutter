@@ -1,0 +1,65 @@
+<div class="col-sm-9 page-content">
+  <div class="inner-box">
+    <h2 class="title-2">
+      <i class="icon-hourglass"></i>
+      Denúncias
+    </h2>
+    <div class="table-responsive">
+      <table id="addManageTable"
+             class="table table-striped table-bordered add-manage-table table demo footable-loaded footable"
+             data-filter="#filter" data-filter-text-only="true">
+        <thead>
+        <tr>
+          <th data-sort-ignore="true">
+            Detalhes
+          </th>
+          <th data-type="numeric">
+            Usuário
+          </th>
+          <th>
+            Estabelecimento
+          </th>
+          <th>
+            Ação
+          </th>
+        </tr>
+        </thead>
+        <tbody ng-repeat="complaint in complaints">
+        <tr>
+          <td style="width:36%" class="ads-details-td">
+            <div>
+              <p>
+                {{complaint.description}}
+              </p>
+            </div>
+          </td>
+          <td style="width:20%" class="ads-details-td">
+            <div>
+              <p>
+                {{complaint.username}}
+              </p>
+            </div>
+          </td>
+          <td style="width:20%" class="ads-details-td">
+            <div>
+              <p>
+                {{complaint.establishmentCnpj}}
+              </p>
+            </div>
+          </td>
+          <td style="width:8%" class="action-td">
+            <div>
+              <p>
+                <a ng-click="resolveComplaint(complaint.id)" class="btn btn-primary btn-xs">
+                  <i class="fa fa-check"></i>
+                  Resolvido
+                </a>
+              </p>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
