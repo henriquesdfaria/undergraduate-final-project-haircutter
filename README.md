@@ -4,7 +4,7 @@ This project is an application for finding, evaluating and scheduling hair styli
 
 It was developed using tecnologies like Java 8, Spring Boot, AngularJs.
 
-We had a short time for study and development, so we dont have unit tests.
+We had a short time for study and development.
 
 I'll try to adapt this project to Heroku App to show it for you.
 
